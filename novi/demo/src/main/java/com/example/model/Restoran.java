@@ -1,6 +1,8 @@
 package com.example.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,16 +37,22 @@ public class Restoran implements Serializable{
 	@Column(name="restoran_ime", unique=false, nullable=false)
 	private String ime;
 	
-	//@Column(name="restoran_jelovnik", unique=false, nullable=false)
-	@OneToOne(cascade={ CascadeType.ALL }, fetch= FetchType.LAZY)
-	private Jelovnik jelovnik;
+	@Column(name="restoran_ocena", unique=false, nullable=true)
+	private double ocena;
 	
-	@OneToOne(cascade={ CascadeType.ALL }, fetch= FetchType.LAZY)
-	private KartaPica kartaPica;
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="restoran")
+	private Set<Jelo> jelovnik= new HashSet<Jelo>();
 	
-	@Column(name="restoran_menadzer", unique=false, nullable=false)
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="restoran")
+	private Set<Pice> kartaPica= new HashSet<Pice>();
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="restoran")
 	private MenadzerRestorana menadzerRestorana;
-	
+
+	/*	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "restoran_jelo", joinColumns = @JoinColumn(name = "restoran_id"), inverseJoinColumns = @JoinColumn(name = "id"))
+	private Set<Jelo> jelovnik= new HashSet<Jelo>();
+*/
 	public Restoran(){
 		
 	}
@@ -71,21 +80,37 @@ public class Restoran implements Serializable{
 	public void setIme(String ime) {
 		this.ime = ime;
 	}
+	
+	public double getOcena() {
+		return ocena;
+	}
 
-	public Jelovnik getJelovnik() {
+	public void setOcena(double ocena) {
+		this.ocena = ocena;
+	}
+
+	public Set<Jelo> getJelovnik() {
 		return jelovnik;
 	}
 
-	public void setJelovnik(Jelovnik jelovnik) {
+	public void setJelovnik(Set<Jelo> jelovnik) {
 		this.jelovnik = jelovnik;
 	}
 
-	public KartaPica getKartaPica() {
+	public Set<Pice> getKartaPica() {
 		return kartaPica;
 	}
 
-	public void setKartaPica(KartaPica kartaPica) {
+	public void setKartaPica(Set<Pice> kartaPica) {
 		this.kartaPica = kartaPica;
+	}
+
+	public MenadzerRestorana getMenadzerRestorana() {
+		return menadzerRestorana;
+	}
+
+	public void setMenadzerRestorana(MenadzerRestorana menadzerRestorana) {
+		this.menadzerRestorana = menadzerRestorana;
 	}
 	
 	

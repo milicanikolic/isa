@@ -2,11 +2,14 @@ package com.example.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +25,9 @@ public class MenadzerRestorana implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "menadzerRestorana_id", unique = true, nullable = false)
 	private Long id;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	private Restoran restoran;
 
 	@Column(name = "korisnickoIme", unique = true, nullable = false)
 	private String korisnickoIme;
@@ -35,7 +41,7 @@ public class MenadzerRestorana implements Serializable {
 	@Column(name = "prezime", unique = false, nullable = false)
 	private String prezime;
 
-	@Column(name = "email", nullable = false)
+	@Column(name = "email",unique=true, nullable = false)
 	private String email;
 
 	public MenadzerRestorana(){

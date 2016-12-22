@@ -1,27 +1,35 @@
 package com.example.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Konobar {
+@Table(name="konobari")
+public class Konobar implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1110751361472040696L;
 	@Column(name="ime", unique=false, nullable=false)
 	 private String ime;
 	 @Column(name="prezime", unique=false, nullable=false)
 	 private String prezime;
-	 @Column(name="email", unique=false, nullable=false)
+	 @Column(name="email", unique=true, nullable=false)
 	 private String email;
-	 @Column(name="korisnickoIme", unique=false, nullable=false)
+	 @Column(name="korisnickoIme", unique=true, nullable=false)
 	 private String korisnickoIme;
 	 @Column(name="sifra", unique=false, nullable=false)
 	 private String sifra;
-	// private Hashmap<Gost>prijatelji;
+	
 	 @Id
 	 @GeneratedValue(strategy=GenerationType.IDENTITY)
-	 @Column(name="id", unique=true, nullable=false)
+	 @Column(name="id_konobar", unique=true, nullable=false)
 	 private Long id;
 	 
 	 public Konobar() {}
@@ -73,8 +81,6 @@ public class Konobar {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	 
-	 
 	 
 	 
 	 

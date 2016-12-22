@@ -1,26 +1,33 @@
 package com.example.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Gost {
+@Table(name="gosti")
+public class Gost implements Serializable{
 
-
-	 @Column(name="ime", unique=false, nullable=false)
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1666304099366498432L;
+	@Column(name="ime", unique=false, nullable=false)
 	 private String ime;
 	 @Column(name="prezime", unique=false, nullable=false)
 	 private String prezime;
-	 @Column(name="email", unique=false, nullable=false)
+	 @Column(name="email", unique=true, nullable=false)
 	 private String email;
-	 @Column(name="korisnickoIme", unique=false, nullable=false)
+	 @Column(name="korisnickoIme", unique=true, nullable=false)
 	 private String korisnickoIme;
 	 @Column(name="sifra", unique=false, nullable=false)
 	 private String sifra;
-	 //private ArrayList<Gost>prijatelji;
+	 
 	 @Id
 	 @GeneratedValue(strategy=GenerationType.IDENTITY)
 	 @Column(name="id", unique=true, nullable=false)
@@ -69,7 +76,6 @@ public class Gost {
 	 public void setKorisnickoIme(String korisnickoIme) {
 	  this.korisnickoIme = korisnickoIme;
 	 }
-	 
 	 
 	 
 	}

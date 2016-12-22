@@ -1,21 +1,49 @@
 package com.example.model;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 @Entity
-public class Pice {
+@Table(name="pica")
+public class Pice implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 871796990671380670L;
+
 	public enum vrstaPica {
 		ALKOHOLNA, BEZALKOHOLNA, TOPLI_NAPICI, ZESTINA  
 	};
 	
-	@Column(name = "vrstaPica", unique = false, nullable = false)
-	private vrstaPica vrstaPica;
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	private Restoran restoran;
+	
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	private Sanker sanker;
+	
+	@Column(name="vrsta_pica", unique=false, nullable=false)
+	private vrstaPica vrstaP;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="pice_id", unique=true, nullable=false)
+	private Long id;
+	
 	@Column(name = "naziv", unique = true, nullable = false)
 	private String naziv;
-	@Column(name = "opis", unique = false, nullable = false)
+	@Column(name = "opis", unique = false, nullable = true)
 	private String opis;
 	@Column(name = "cena", unique = false, nullable = false)
 	private double cena;
@@ -46,15 +74,38 @@ public class Pice {
 		this.cena = cena;
 	}
 
-	public vrstaPica getVrstaPica() {
-		return vrstaPica;
+	public Restoran getRestoran() {
+		return restoran;
 	}
 
-	public void setVrstaPica(vrstaPica vrstaPica) {
-		this.vrstaPica = vrstaPica;
+	public void setRestoran(Restoran restoran) {
+		this.restoran = restoran;
 	}
-	
-	
+
+	public Sanker getSanker() {
+		return sanker;
+	}
+
+	public void setSanker(Sanker sanker) {
+		this.sanker = sanker;
+	}
+
+	public vrstaPica getVrstaP() {
+		return vrstaP;
+	}
+
+	public void setVrstaP(vrstaPica vrstaP) {
+		this.vrstaP = vrstaP;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	
 	
 }
