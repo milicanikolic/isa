@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css" >
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="Bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="/myCss.css">
+</head>
+<body class="rezervacija1">
+
+ <div class="jumbotron poluProvidanCrni">
+    <h1 style="color:white;">Ime restorana</h1>      
+  </div>
+<div class="container center">
+<div class="row">
+<div class="col-md-4 col-md-offset-4" >
+ <div class="well poluProvidanSivi">
+<form action="/gost/login">
+  <table>
+   <tr>
+    <td>Datum:</td>
+    <td>
+    <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+   
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    
+    </td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+    <tr>
+    <td>Broj sati:</td>
+    <td><input type="number" name="brojSati" class="form-control" /></td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+    <tr>
+    
+    <td>&nbsp;</td>
+    <td><input class="btn btn-success" type="submit" value="Dalje" /></td>
+   </tr>
+  </table>
+ </form>
+ </div>
+</div>
+ </div>
+</div>
+  <script src="Bootstrap/js/bootstrap.min.js" > </script>
+</body>
+</html>

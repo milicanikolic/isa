@@ -25,6 +25,17 @@ public class GostServiceImpl implements GostService{
 		
 		return gostRepository.findAll();
 	}
+
+	@Override
+	public Gost save(Gost id) {
+		
+		return gostRepository.save(id);
+	}
 	
+	@Override
+	 public Gost findByKorisnickoIme(String korisnickoIme) {
+	  Gost g= gostRepository.findByKorisnickoIme(korisnickoIme);
+	 return g;
+	 }
 	
 }

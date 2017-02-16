@@ -8,5 +8,6 @@ public interface GostService {
 	 
 	List<Gost> getAllGost();
 	Gost getGost(Long id);
-	
+	Gost save(Gost id);
+	Gost findByKorisnickoIme(String korisnickoIme);
 }

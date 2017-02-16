@@ -1,0 +1,19 @@
+<div ng-contoller='sviGostiController'>
+
+<h1>kdkskdsakdk</h1>
+<table  class="table table-bordered"  border="1">
+	  <tr>
+	    <th>Date of Creation</th> 
+	    <th>Components</th>
+	  </tr>
+	  <tr ng-repeat="configuration in sviGosti">	
+	   	<td>{{configuration.ime}}</td>
+	    <td>
+		    <div>
+		    
+		    	<button  style="float: right;" style="width:40px;height:28px;" class="btn btn-danger glyphicon glyphicon-trash"  type="submit" ng-click="removeComponent()"></button></br></br>
+		    </div>
+	    </td>
+	  </tr>
+	</table>
+</div>

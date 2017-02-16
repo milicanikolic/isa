@@ -1,8 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='app'>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="js/angular.js"></script>
+<script src="js/angular-route.js"></script>
+
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="Bootstrap/css/bootstrap-theme.min.css">
+
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-aria.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.js"></script>
+    
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.css">
+
+
+
+
 <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css" >
 
 <!-- Optional theme -->
@@ -16,46 +36,25 @@
  
 </style>
 
+
 </head>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
+
 <body style="background: url('Slike/rsz_1restoran.jpg')">
 
+	<div ui-view></div>
 <script src="Bootstrap/js/jQuery.min.js"></script>
   
-<div class="container center">
-<div class="row">
-<div class="col-md-4 col-md-offset-4" >
-  <div class="well">
- <form action="">
-  <table>
-   <tr>
-    <td>Korisnicko ime:</td>
-    <td><input type="text" name="korisnickoIme" class="form-control" /></td>
-   </tr>
-   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-   </tr>
-   <tr>
-    <td>Sifra:</td>
-    <td><input type="password" name="sifra" class="form-control"/></td>
-   </tr>
-    <tr>
-   	<td>&nbsp;</td>
-   	<td>&nbsp;</td>
-   </tr>
-   <tr>
-    <td>&nbsp;</td>
-    <td><input class="btn btn-success" type="submit" value="Uloguj se" /></td>
-    <td><a href="/Registracija.html">Registruj se</a></td>
-   </tr>
-  </table>
- </form>
- </div>  
-</div>
-</div>
-</div>
-  
+
+<script src="kontroleri/app.js"></script>
+
   <!-- Latest compiled and minified JavaScript -->
   <script src="Bootstrap/js/bootstrap.min.js" > </script>
+
+    <script src="kontroleri/registracijaController.js"></script>
+    <script src="kontroleri/loginController.js"></script>
+    <script src="kontroleri/sviGostiController.js"></script>
+    <script src="servisi/sviGostiService.js"></script>
 </body>
 </html>
