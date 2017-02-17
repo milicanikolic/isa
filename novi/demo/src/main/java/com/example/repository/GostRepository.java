@@ -10,6 +10,7 @@ public interface GostRepository extends JpaRepository<Gost, Long>{
 	
 	public List<Gost> findAll();
 	public Gost findById(Long id);
+//	public Gost update(Gost gost,Long id);
 //	public Gost save(Gost id);
 	public Gost findByKorisnickoIme(String korisnickoIme);
 	

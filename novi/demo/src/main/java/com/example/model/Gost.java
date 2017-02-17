@@ -27,6 +27,8 @@ public class Gost implements Serializable{
 	 private String korisnickoIme;
 	 @Column(name="sifra", unique=false, nullable=false)
 	 private String sifra;
+	 @Column(name="aktiviran", unique=false, nullable=false)
+	 private boolean aktiviran=false;
 	 
 	 @Id
 	 @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -76,6 +78,22 @@ public class Gost implements Serializable{
 	 public void setKorisnickoIme(String korisnickoIme) {
 	  this.korisnickoIme = korisnickoIme;
 	 }
+
+	public boolean isAktiviran() {
+		return aktiviran;
+	}
+
+	public void setAktiviran(boolean aktiviran) {
+		this.aktiviran = aktiviran;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	 
 	 
 	}

@@ -37,5 +37,12 @@ public class GostServiceImpl implements GostService{
 	  Gost g= gostRepository.findByKorisnickoIme(korisnickoIme);
 	 return g;
 	 }
+
+	@Override
+	public Gost updateGost(Gost gost,Long id) {
+		gost.setId(id);
+		Gost g= gostRepository.save(gost);
+	return g;
+	}
 	
 }
