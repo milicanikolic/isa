@@ -20,4 +20,12 @@ app.controller('profilKorisnikaController', function ($scope,$window,$rootScope,
         	$window.location.href = '#/izmenaKorisnika';
 		})
 	}
+	$scope.sviRestorani=function(){
+		console.log("uzmi sve restorane");
+		gostService.sviRestorani()
+		.success(function(data){
+			$scope.restorani=data;
+
+		})
+	}
 });

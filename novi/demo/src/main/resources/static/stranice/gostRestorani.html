@@ -1,0 +1,17 @@
+<div ng-include src="'/meni/gostMeni.html'"></div>
+<div class="row row-eq-height" ng-contoller='profilKorisnikaController'  data-ng-init="sviRestorani()">
+ 				<div class="col-md-4" ng-repeat="restoran in restorani">
+					<div class="panel panel-default velicina">
+						<div class="panel-heading"><h1>{{restoran.ime}}</h1>
+							<h2>{{restoran.tipRestorana}}</h2>
+						</div>
+			
+					<div class="panel-body">
+						<form action="/jelovnik.html">
+							<input type="hidden" name="sifra" value="<%=p.getSifra()%>">
+							<input class="img-responsive" type="image" src="Slike/menu.png"/> 
+						</form>
+					</div>
+				</div>
+				</div> 
+</div>
