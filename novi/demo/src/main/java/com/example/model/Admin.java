@@ -12,40 +12,43 @@ import javax.persistence.Table;
 import com.example.enumeracije.VrsteKorisnika;
 
 @Entity
-@Table(name="gosti")
-public class Gost extends Korisnik implements Serializable{
+@Table(name="admin")
+public class Admin extends Korisnik implements Serializable{
 
  /**
   * 
   */
- private static final long serialVersionUID = 1666304099366498432L;
+ private static final long serialVersionUID = 5845498081747537893L;
+
  
-  @Column(name="aktiviran", unique=false, nullable=false)
-  private boolean aktiviran=false;
   
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   @Column(name="id", unique=true, nullable=false)
   private Long id;
   
-  public Gost(){
-    
-  }
+  public Admin(){}
+  
+  
 
- 
- public Gost(String ime, String prezime, String email, String korisnickoIme, String sifra,
+ public Admin(String ime, String prezime, String email, String korisnickoIme, String sifra,
    VrsteKorisnika vrstaKorisnika) {
   super(ime, prezime, email, korisnickoIme, sifra, vrstaKorisnika);
   // TODO Auto-generated constructor stub
  }
 
- public boolean isAktiviran() {
-  return aktiviran;
- }
 
- public void setAktiviran(boolean aktiviran) {
-  this.aktiviran = aktiviran;
+
+ /*public Admin(String ime, String prezime, String email, String korisnickoIme, String sifra, Long id) {
+  super();
+  this.ime = ime;
+  this.prezime = prezime;
+  this.email = email;
+  this.korisnickoIme = korisnickoIme;
+  this.sifra = sifra;
+  this.id=id;
  }
+*/
 
  public Long getId() {
   return id;
@@ -56,4 +59,5 @@ public class Gost extends Korisnik implements Serializable{
  }
   
   
- }
+ 
+}

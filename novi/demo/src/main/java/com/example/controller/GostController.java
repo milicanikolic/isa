@@ -16,147 +16,196 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
-
+import com.example.enumeracije.VrsteKorisnika;
+import com.example.model.Admin;
 import com.example.model.Gost;
+import com.example.model.Korisnik;
+import com.example.model.Radnik;
+import com.example.model.Kuvar.vrstaKuvara;
+import com.example.model.MenadzerRestorana;
+import com.example.service.AdminService;
 import com.example.service.GostService;
+import com.example.service.KorisnikService;
+
 
 @Controller
 @RequestMapping("/gost") 
 public class GostController {
-	
-	@Autowired
-	private GostService gostService;
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@Autowired
-	 private JavaMailSender mailSender;
-	
-	
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Gost>>  uzmiSveGoste(){
-		List<Gost>gosti=  gostService.getAllGost();
-		return new ResponseEntity<List<Gost>>(gosti,HttpStatus.OK);
-		
-	}
-	/*public  getLoggedUser(HttpServletResponse httpServletResponse, @ModelAttribute("korisnickoIme") String kIme, @ModelAttribute("sifra") String sifra) throws IOException {
+ 
+ @Autowired
+ private GostService gostService;
+ private Logger logger = LoggerFactory.getLogger(this.getClass());
+ 
+ @Autowired
+  private JavaMailSender mailSender;
+ 
+ @Autowired
+ private AdminService adminService;
+ 
 
-		logger.info("usao");
-		httpServletResponse.sendRedirect("/profilRestoran.html");
-		List<Gost> sviGosti=gostService.getAllGost();
-		Gost gost=null;
-		boolean dobar=false;
-		
-		for(Gost g:sviGosti){
-			String username=g.getKorisnickoIme();
-			String password=g.getSifra();
-		
-			if(kIme.equals(username) && password.equals(sifra)){
-				dobar=true;
-				gost=g;
-			}
-			
-			
-		}
-		if(dobar){
-			
-			return new ModelAndView("/pocetna.html", "gost" ,gost);
-		}
-		return null;
-	}*/
-	@RequestMapping(value="/registruj",method = RequestMethod.POST)
-	public ResponseEntity<Gost> registruj(@RequestBody Gost gost){
-		
-		List<Gost> sviGosti=gostService.getAllGost();
-		boolean ispravno=true;
-		for(Gost g: sviGosti){
-			if(g.getEmail().equals(gost.getEmail()) || g.getKorisnickoIme().equals(gost.getKorisnickoIme())){
-				ispravno=false;
-				break;
-			}
-		}
-		
-		if(ispravno){
-		
-		Gost sacuvan=gostService.save(gost);
-		
-		SimpleMailMessage mail = new SimpleMailMessage();
-		 mail.setTo(gost.getEmail());
-		 mail.setFrom("restoranisa0@gmail.com");
-		 mail.setSubject("Activation message");
-		 mail.setText("http://localhost:8083/gost/aktiviraj/"+gost.getId());
-		 
-		   
-	        try {
-	        	   mailSender.send(mail);
-	        } catch (MailException ex) {
-	            System.out.println(ex);
-	        }
-		
-		return new ResponseEntity<Gost>(sacuvan,HttpStatus.CREATED);
-		}else{
-			logger.info("VEC POSTOJI");
-			return new ResponseEntity<Gost>(gost,HttpStatus.BAD_GATEWAY);
-			
-		}
-	}
-	
-	@RequestMapping(value = "/aktiviraj/{id}",method = RequestMethod.GET)
-	public void aktiviraj(@PathVariable Long id) throws Exception {
-		Gost gostSaPotvrdom = gostService.getGost(id);
-		gostSaPotvrdom.setAktiviran(true);
-		logger.info("AKTIVIRAAAAAAAAAAAAAN");
-		gostService.updateGost(gostSaPotvrdom, id);
-		
-	}
-	
-	
-	
-	 @RequestMapping(value="/login",method = RequestMethod.POST)
-	  public ResponseEntity<Gost> login(@RequestBody Gost gost){
-	   
-	   String kIme=gost.getKorisnickoIme();
-	   List<Gost> gosti= gostService.getAllGost();
-	   
-	   
-	   	Gost gostt=null;
-		boolean dobar=false;
-		
-		for(Gost g:gosti){
-			String username=g.getKorisnickoIme();
-			String password=g.getSifra();
-		
-			if(gost.getKorisnickoIme().equals(username) && password.equals(gost.getSifra())){
-				dobar=true;
-				gostt=g;
-			}
-			
-			
-		}
-		if(dobar){
-			
-			return new ResponseEntity<Gost>(gostt,HttpStatus.OK);
-		}
-		return null;
-	   
-	   
-	   
-	  
-	   
-	   
-	/*	logger.info("usaoLogin");
-	   Gost logovan=gostService.findByKorisnickoIme(kIme);
-	   if(logovan!=null){
-	    if(logovan.getSifra().equals(gost.getSifra())){
-	     return new ResponseEntity<Gost>(logovan,HttpStatus.CREATED);
-	    }else{//TREBA PROMENITI
-	     return new ResponseEntity<Gost>(logovan,HttpStatus.BAD_REQUEST);
-	    }
-	   }else{//TREBA PROMENITI
-	    return new ResponseEntity<Gost>(logovan,HttpStatus.BAD_REQUEST);
-	   }
-	   */
-	  
-	  }
+ 
+ @Autowired
+ private KorisnikService korisnikService;
+ 
+ 
+ @RequestMapping(method = RequestMethod.GET)
+ public ResponseEntity<List<Gost>>  uzmiSveGoste(){
+  List<Gost>gosti=  gostService.getAllGost();
+  return new ResponseEntity<List<Gost>>(gosti,HttpStatus.OK);
+  
+ }
+ 
+ @RequestMapping(value="/registruj",method = RequestMethod.POST)
+ public ResponseEntity<Gost> registruj(@RequestBody Gost gost){
+  List<Gost> sviGosti=gostService.getAllGost();
+  List<Korisnik> sviKorisnici=korisnikService.getAllKorisnik();
+  boolean ispravno=true;
+  for(Korisnik k: sviKorisnici){
+   if(k.getEmail().equals(gost.getEmail()) || k.getKorisnickoIme().equals(gost.getKorisnickoIme())){
+    ispravno=false;
+    break;
+   }
+  }
+  if(ispravno){
+  
+  Gost sacuvan=gostService.save(gost);
+  korisnikService.sacuvaj(gost);
+  
+  SimpleMailMessage mail = new SimpleMailMessage();
+   mail.setTo(gost.getEmail());
+   mail.setFrom("restoranisa0@gmail.com");
+   mail.setSubject("Activation message");
+   mail.setText("http://localhost:8083/gost/aktiviraj/"+gost.getId());
+   
+         try {
+             mailSender.send(mail);
+         } catch (MailException ex) {
+             System.out.println(ex);
+         }
+  
+  return new ResponseEntity<Gost>(sacuvan,HttpStatus.CREATED);
+  }else{
+   logger.info("VEC POSTOJI");
+   return new ResponseEntity<Gost>(gost,HttpStatus.BAD_GATEWAY);
+   
+  }
+ }
+ 
+ @RequestMapping(value = "/aktiviraj/{id}",method = RequestMethod.GET)
+ public void aktiviraj(@PathVariable Long id) throws Exception {
+  Gost gostSaPotvrdom = gostService.getGost(id);
+  gostSaPotvrdom.setAktiviran(true);
+  logger.info("AKTIVIRAAAAAAAAAAAAAN");
+  gostService.updateGost(gostSaPotvrdom, id);
+  
+ }
+ 
+ 
+ 
+  @RequestMapping(value="/login",method = RequestMethod.POST)
+   public ResponseEntity<Korisnik> login(@RequestBody Korisnik korisnik){
+    
+   //ODMAH DODAJEMO PREDEFINISANOG ADMINA
+   String ime= "Nina";
+   String prezime="Manojlovic";
+   String email="nina@gmail.com";
+   String korisnickoIme="nina";
+   String sifra="nina";
+   VrsteKorisnika vk=VrsteKorisnika.ADMIN;
+   Long id=(long) 1;
+   Admin admin=new Admin(ime, prezime, email, korisnickoIme, sifra,vk);
+   admin.setId(id);
+   adminService.sacuvaj(admin);
+   korisnikService.sacuvaj(admin);
+   //////////////////////////////
+   
+   
+   boolean okej=false;
+   
+   List<Korisnik> sviKorisnici= korisnikService.getAllKorisnik();
+   for(Korisnik kor:sviKorisnici){
+    if(kor.getKorisnickoIme().equals(korisnik.getKorisnickoIme()) && kor.getSifra().equals(korisnik.getSifra())){
+     okej=true;
+     break;
+    }
+   }
+   if(okej){
+    return new ResponseEntity<Korisnik>(korisnik,HttpStatus.OK);
+   }else{
+    return new ResponseEntity<>(null,HttpStatus.OK);
+   }
+   
+ /* boolean radnik=false;
+  boolean go=false;
+  boolean menadzer=false;
+  boolean ponudjac=false;
+  
+   
+     String kIme=gost.getKorisnickoIme();
+     List<Gost> gosti= gostService.getAllGost();
+     List<Radnik> sviRadnici=radnikService.getAllRadnik();
+     List<MenadzerRestorana> sviMenadzeri= menadzerService.getAllMenadzeri();
+     
+     //Proveravam da li se logovani nalazi u nekoj tabeli korisnika,
+     //ako ne, onda takav ne postoji
+     
+     for(Gost gg: gosti){
+      if(gost.getKorisnickoIme().equals(gg.getKorisnickoIme())){
+       go=true;
+       break;
+      }
+     }
+     
+     for(Radnik r:sviRadnici){
+      if(gost.getKorisnickoIme().equals(r.getKorisnickoIme())){
+       radnik=true;
+       break;
+      }
+     }
+     
+     for(MenadzerRestorana men:sviMenadzeri){
+      if()
+     }
+     
+     //Ako ga nismo nasli ni u jednoj tabeli, ne postoji registrovan
+     if(radnik==false && go==false){
+      return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+     }
+     else if(go){
+    
+     Gost gostt=null;
+  boolean dobar=false;
+  
+  for(Gost g:gosti){
+   String username=g.getKorisnickoIme();
+   String password=g.getSifra();
+  
+   if(gost.getKorisnickoIme().equals(username) && password.equals(gost.getSifra())){
+    dobar=true;
+    gostt=g;
+   } 
+  }
+  if(dobar){
+   
+   return new ResponseEntity<Gost>(gostt,HttpStatus.OK);
+  }
+  }else if(radnik){
+   boolean dobar2=false;
+   
+   for(Radnik r:sviRadnici){
+    if(gost.getKorisnickoIme().equals(r.getKorisnickoIme()) && gost.getSifra().equals(r.getSifra())){
+     dobar2=true;
+     break;
+    }
+   }
+   
+   if(dobar2){
+    //////////radnik
+    return new ResponseEntity<Gost>(gost,HttpStatus.OK);
+   }
+  }
+  return null;
+ 
+   */
+   }
 }

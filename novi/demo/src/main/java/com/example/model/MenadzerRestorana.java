@@ -12,90 +12,55 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.example.enumeracije.VrsteKorisnika;
+
 @Entity
 @Table(name = "menadzeriRestorana")
-public class MenadzerRestorana implements Serializable {
+public class MenadzerRestorana extends Korisnik implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -44778047641296369L;
+ /**
+  * 
+  */
+ private static final long serialVersionUID = -44778047641296369L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "menadzerRestorana_id", unique = true, nullable = false)
-	private Long id;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	private Restoran restoran;
+ @Id
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+ @Column(name = "menadzerRestorana_id", unique = true, nullable = false)
+ private Long id;
+ 
+ @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+ private Restoran restoran;
 
-	@Column(name = "korisnickoIme", unique = true, nullable = false)
-	private String korisnickoIme;
 
-	@Column(name = "sifra", unique = false, nullable = false)
-	private String sifra;
+ public MenadzerRestorana(){
+  
+ }
+ 
+ public MenadzerRestorana(String ime, String prezime, String email, String korisnickoIme, String sifra,
+   VrsteKorisnika vrstaKorisnika) {
+  super(ime, prezime, email, korisnickoIme, sifra, vrstaKorisnika);
+  // TODO Auto-generated constructor stub
+ }
 
-	@Column(name = "ime", unique = false, nullable = false)
-	private String ime;
+ public Restoran getRestoran() {
+  return restoran;
+ }
 
-	@Column(name = "prezime", unique = false, nullable = false)
-	private String prezime;
+ public void setRestoran(Restoran restoran) {
+  this.restoran = restoran;
+ }
 
-	@Column(name = "email",unique=true, nullable = false)
-	private String email;
 
-	public MenadzerRestorana(){
-		
-	}
 
-	public Long getId() {
-		return id;
-	}
+ public Long getId() {
+  return id;
+ }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+ public void setId(Long id) {
+  this.id = id;
+ }
 
-	public String getKorisnickoIme() {
-		return korisnickoIme;
-	}
 
-	public void setKorisnickoIme(String korisnickoIme) {
-		this.korisnickoIme = korisnickoIme;
-	}
-
-	public String getSifra() {
-		return sifra;
-	}
-
-	public void setSifra(String sifra) {
-		this.sifra = sifra;
-	}
-
-	public String getIme() {
-		return ime;
-	}
-
-	public void setIme(String ime) {
-		this.ime = ime;
-	}
-
-	public String getPrezime() {
-		return prezime;
-	}
-
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	
+ 
 
 }

@@ -1,7 +1,6 @@
 package com.example.model;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,26 +11,23 @@ import javax.persistence.Table;
 
 import com.example.enumeracije.VrsteKorisnika;
 
+
 @Entity
 @Table(name="radnici")
-public class Radnik implements Serializable{
+public class Radnik extends Korisnik implements Serializable{
  
- @Column(name="ime", unique=false, nullable=false)
-  private String ime;
-  @Column(name="prezime", unique=false, nullable=false)
-  private String prezime;
-  @Column(name="email", unique=true, nullable=false)
-  private String email;
-  @Column(name="korisnickoIme", unique=true, nullable=false)
-  private String korisnickoIme;
-  @Column(name="sifra", unique=false, nullable=false)
-  private String sifra;
+ /**
+  * 
+  */
+ private static final long serialVersionUID = 7909432708390532786L;
 
-  @Column(name="tipKorisnika", unique=false, nullable=false)
-  private VrsteKorisnika tipKorisnika;
+  
+  @Column(name="ulogovanPrviPut", unique=false, nullable=false)
+  private boolean ulogovanPrviPut=true;
+
   
   @Column(name="datumRodjenja", unique=false, nullable=false)
-  private Date datumRodjenja;
+  private String datumRodjenja;
   
   @Column(name="konfekcijskiBroj", unique=false, nullable=false)
   private String konfekcijskiBroj;
@@ -41,60 +37,22 @@ public class Radnik implements Serializable{
   
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-  @Column(name="id_konobar", unique=true, nullable=false)
+  @Column(name="id_radnik", unique=true, nullable=false)
   private Long id;
   
   public Radnik(){}
+  
 
- public String getIme() {
-  return ime;
- }
+ 
+ public Radnik(String ime, String prezime, String email, String korisnickoIme, String sifra,
+  VrsteKorisnika vrstaKorisnika) {
+ super(ime, prezime, email, korisnickoIme, sifra, vrstaKorisnika);
+ // TODO Auto-generated constructor stub
+}
 
- public void setIme(String ime) {
-  this.ime = ime;
- }
 
- public String getPrezime() {
-  return prezime;
- }
 
- public void setPrezime(String prezime) {
-  this.prezime = prezime;
- }
-
- public String getEmail() {
-  return email;
- }
-
- public void setEmail(String email) {
-  this.email = email;
- }
-
- public String getKorisnickoIme() {
-  return korisnickoIme;
- }
-
- public void setKorisnickoIme(String korisnickoIme) {
-  this.korisnickoIme = korisnickoIme;
- }
-
- public String getSifra() {
-  return sifra;
- }
-
- public void setSifra(String sifra) {
-  this.sifra = sifra;
- }
-
- public VrsteKorisnika getTipKorisnika() {
-  return tipKorisnika;
- }
-
- public void setTipKorisnika(VrsteKorisnika tipKorisnika) {
-  this.tipKorisnika = tipKorisnika;
- }
-
- public Long getId() {
+public Long getId() {
   return id;
  }
 
@@ -102,5 +60,38 @@ public class Radnik implements Serializable{
   this.id = id;
  }
 
+public String getDatumRodjenja() {
+ return datumRodjenja;
+}
+
+public void setDatumRodjenja(String datumRodjenja) {
+ this.datumRodjenja = datumRodjenja;
+}
+
+public String getKonfekcijskiBroj() {
+ return konfekcijskiBroj;
+}
+
+public void setKonfekcijskiBroj(String konfekcijskiBroj) {
+ this.konfekcijskiBroj = konfekcijskiBroj;
+}
+
+public int getVelicinaObuce() {
+ return velicinaObuce;
+}
+
+public void setVelicinaObuce(int velicinaObuce) {
+ this.velicinaObuce = velicinaObuce;
+}
+
+public boolean isUlogovanPrviPut() {
+ return ulogovanPrviPut;
+}
+
+public void setUlogovanPrviPut(boolean ulogovanPrviPut) {
+ this.ulogovanPrviPut = ulogovanPrviPut;
+}
+
+ 
   
 }

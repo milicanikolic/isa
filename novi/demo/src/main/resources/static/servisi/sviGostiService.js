@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('sviGostiService',function($http) {
+/*app.service('sviGostiService',function($http) {
 	return {
 		
 		getAll : function(callback) {
@@ -12,4 +12,15 @@ app.service('sviGostiService',function($http) {
 			});
 		}
 	}
-});		
+});		*/
+
+app.factory('sviGostiService',['$http', function($http){
+
+	var nesto={}
+	
+	nesto.getAll=function(){
+		return $http.get('/gost');
+	};
+	
+	return nesto;
+}]);

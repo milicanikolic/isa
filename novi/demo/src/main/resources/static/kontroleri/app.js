@@ -21,4 +21,15 @@ $stateProvider.state('registruj', {
 	templateUrl : 'stranice/Registracija.html',
 	controller : 'registracijaController'
 })
+$stateProvider.state('profilKorisnika', {
+	url : '/profilKorisnika',
+	templateUrl : 'stranice/profilKorisnika.html',
+	controller : 'profilKorisnikaController'
+})
+$stateProvider.state('izmenaKorinika', {
+	url : '/izmenaKorinika',
+	templateUrl : 'stranice/izmenaKorisnika.html',
+	controller : 'izmenaKorinikaController'
+})
+
 });

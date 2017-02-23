@@ -2,11 +2,11 @@
 <div class="row">
 <div class="col-md-5 col-md-offset-4" >
   <div class="well poluProvidanCrni">
- <form action="">
+ <form>
   <table>
    <tr>
     <td>Korisnicko ime:</td>
-    <td><input type="text" name="korisnickoIme" class="form-control" /></td>
+    <td><input type="text" name="korisnickoIme" class="form-control" ng-model="gost.korisnickoIme"/></td>
    </tr>
    <tr>
     <td>&nbsp;</td>
@@ -14,7 +14,7 @@
    </tr>
    <tr>
     <td>Sifra:</td>
-    <td><input type="password" name="sifra" class="form-control"/></td>
+    <td><input type="password" name="sifra" class="form-control" ng-model="gost.sifra"/></td>
    </tr>
     <tr>
    	<td>&nbsp;</td>
@@ -22,12 +22,13 @@
    </tr>
    <tr>
     <td>&nbsp;</td>
-    <td><input class="btn btn-success" type="submit" value="Uloguj se" /></td>
+    <td><a href="#" ng-click="login(gost)" class="btn btn-success" >Uloguj se</a></td>
     <td><a href="#/registruj">Registruj se</a></td>
     <td><a href="/profilRestorana.html">Profil restorana</a></td>
    </tr>
   </table>
  </form>
+ <h1>{{gost}}</h1>
  </div>  
 </div>
 </div>

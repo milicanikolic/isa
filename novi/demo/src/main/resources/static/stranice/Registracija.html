@@ -1,4 +1,6 @@
 
+
+<script type="text/javascript" src="js/provera.js"></script>
 <div class="container center" ng-controller='registracijaController'>
 <div class="row">
 <div class="col-md-4 col-md-offset-4" >
@@ -7,7 +9,7 @@
   <table>
    <tr>
     <td>Ime:</td>
-    <td><input type="text" name="Ime" class="form-control" ng-model="gost.ime" /></td>
+    <td><input type="text" id="ime" name="Ime" class="form-control" ng-model="gost.ime" /></td>
    </tr>
    <tr>
    	<td>&nbsp;</td>
@@ -39,7 +41,15 @@
    </tr>
    <tr>
     <td>Sifra:</td>
-    <td><input type="password" name="sifra" class="form-control" ng-model="gost.sifra"/></td>
+    <td><input type="password" id="sifra"  name="sifra" class="form-control" ng-model="gost.sifra"/></td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+   <tr>
+    <td>Ponvite sifru:</td>
+    <td><input type="password" id="sifra2" name="sifra2" class="form-control" ng-model="sifra2" onkeyup="proveraSifre()"/></td>
    </tr>
    <tr>
    	<td>&nbsp;</td>
@@ -52,7 +62,7 @@
    </tr>
    <tr>
     <td>&nbsp;</td>
-    <td><input class="btn btn-success" type="submit" value="registruje se" ng-click='registruj(gost)' /></td>
+    <td><input id="dugmeRegistruj" class="btn btn-success" type="submit" value="registruje se" ng-click='registruj(gost)' onclick="proveraPraznihPolja()" /></td>
    </tr>
   </table>
  </form>

@@ -1,0 +1,15 @@
+<div ng-controller="probaController">
+            <form class="well">               
+                <input type="text" name="fname" ng-model="fname" placeholder="first name" /> <br/>       
+                <input type="text" name="lname" ng-model="lname" placeholder="last name" />             
+                <br /><br/>               
+                <input type="button" value="add student" ng-click="addStudent()" />
+            </form>
+            <br/>
+            <table class="table">
+                <tr ng-repeat="s in students">
+                    <td>{{ s.FirstName }}</td>
+                    <td>{{ s.LastName }}</td>
+                </tr>
+            </table>
+        </div>

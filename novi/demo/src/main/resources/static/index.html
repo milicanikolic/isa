@@ -28,13 +28,9 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="Bootstrap/css/bootstrap-theme.min.css">
 
-<style type="text/css">
+<link rel="stylesheet" type="text/css" href="/myCss.css">
 
- .center{
-  margin: auto;
-  padding: 70px 0;
- 
-</style>
+<script type="text/javascript" src="js/provera.js"></script>
 
 
 </head>
@@ -45,7 +41,7 @@
 
 	<div ui-view></div>
 <script src="Bootstrap/js/jQuery.min.js"></script>
-  
+ <button onclick="proveraSifre()">nesto</button>
 
 <script src="kontroleri/app.js"></script>
 
@@ -55,6 +51,10 @@
     <script src="kontroleri/registracijaController.js"></script>
     <script src="kontroleri/loginController.js"></script>
     <script src="kontroleri/sviGostiController.js"></script>
+    <script src="kontroleri/profilKorisnikaController.js"></script>
+    <script src="kontroleri/probaController.js"></script>
     <script src="servisi/sviGostiService.js"></script>
+    <script src="servisi/gostService.js"></script>
+    <script src="servisi/loginService.js"></script>
 </body>
 </html>

@@ -1,60 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Profil korisnika</title>
-
-<style>
-
-	.well{
-		background: rgba(255, 255, 255, 0.8)!important;
-	}
-	.podaci {
-		background:none;
-			}
-	.podaci {
-		background: rgba(255, 255, 255, 0.8)!important;
-			}
-	.podaciHeder {
-		background:none;
-			}
-	.podaciHeder {
-		background: rgba(255, 255, 255, 0.8)!important;
-			}
-	.podaciFuter {
-		background:none;
-			}
-	.podaciFuter {
-		background: rgba(255, 255, 255, 0.8)!important;
-			}
-	.panelPrijatelji {
-		background:none;
-			}
-	.panelPrijatelji {
-		background: rgba(255, 255, 255, 0.8)!important;
-			}
-	.panelPretraga {
-		background:none;
-			}
-	.panelPretraga {
-		background: rgba(255, 255, 255, 0.8)!important;
-			}
-			
-</style>
-
-<link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css" >
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="Bootstrap/css/bootstrap-theme.min.css">
-</head>
-<body background="rsz_pozadinaProfil3.jpg">
-<div class="container">
+<div ng-include src="'/meni/gostMeni.html'"></div>
+<div class="container" ng-controller='profilKorisnikaController'>
 	<div class="media">
   		<div class="media-left media-middle">
     	<img src="cicaGlisa.jpg" class="media-object" style="width:100px">
   	</div>
   	<div class="media-body well">
-    	<h2 class="media-heading">Ime i Prezime</h2>
+    	<h2 class="media-heading">{{ime}}</h2>
     	
   	</div>
 	</div>
@@ -65,30 +16,30 @@
 	&nbsp;
 	<div class="row">
 	<div class="col-md-6">
-	<div class="panel panel-default podaci">
-  		<div class="panel-heading podaciHeder">Podaci</div>
+	<div class="panel panel-default poluProvidanBeo">
+  		<div class="panel-heading poluProvidanBeo">Podaci</div>
   		<div class="panel-body">
 			<table>
 				<tr>
 					<td>Ime: </td>
-					<td>Bla bla</td>
+					<td>{{korisnik.ime}}</td>
 				</tr>
 				<tr>
 					<td>Prezime: </td>
-					<td>@@@</td>
+					<td>{{korisnik.prezime}}</td>
 				</tr>
 				<tr>
 					<td>Korisnicko ime: </td>
-					<td>@@@</td>
+					<td>{{korisnik.korisnickoIme}}</td>
 				</tr>
 				<tr>
 					<td>Email: </td>
-					<td>@@@</td>
+					<td>{{korisnik.email}}</td>
 				</tr>
 			</table>
 		</div>
 		<div class="panel-footer podaciFuter">
-			<a href="izmenaPodatakaKorisnik.html" class="btn">
+			<a href="" class="btn" ng-click='izmeni(korisnik.id)'>
 					<span class="glyphicon glyphicon-pencil"></span>
 					Izmeni podatke</a>
 		</div>
@@ -98,11 +49,11 @@
   
   <div class="row">
 		<div class="col-md-6">
-		<div class="panel panel-default panelPretraga">
+		<div class="panel panel-default poluProvidanBeo">
   		<div class="panel-body">
 			<table>
 				<tr>
-					<td>Pretra≈æite prijatelje: </td>
+					<td>Pretraûite prijatelje: </td>
 					<td>
 						<form>
   							<div class="input-group">
@@ -124,7 +75,7 @@
 	
 	<div class="row">
 	<div class="col-md-6">
-	<div class="panel panel-default panelPrijatelji">
+	<div class="panel panel-default poluProvidanBeo">
   	<div class="panel-body">
 	<table class="table table-hover">
     <thead>
@@ -160,9 +111,3 @@
 	
 </div>
   </div>
-
-
-	<!-- Latest compiled and minified JavaScript -->
-  <script src="Bootstrap/js/bootstrap.min.js" > </script>
-</body>
-</html>
