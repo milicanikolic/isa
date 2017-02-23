@@ -1,6 +1,10 @@
 app.factory('gostService',['$http', function($http){
 	var korisnik={};
 	
+	korisnik.uzmiUlogovanog = function () {
+        return $http.get('/gost/uzmiUlogovanog');
+    };
+	
 	korisnik.login = function (gost) {
         return $http.post('/gost/login',gost);
     };

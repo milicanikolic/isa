@@ -2,6 +2,8 @@ package com.example.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,8 @@ public class GostController {
  @Autowired
  private KorisnikService korisnikService;
  
+ @Autowired
+  private HttpSession sesija;
  
  @RequestMapping(method = RequestMethod.GET)
  public ResponseEntity<List<Gost>>  uzmiSveGoste(){
@@ -57,6 +61,9 @@ public class GostController {
  
  @RequestMapping(value="/registruj",method = RequestMethod.POST)
  public ResponseEntity<Gost> registruj(@RequestBody Gost gost){
+	 gost.setVrstaKorisnika(VrsteKorisnika.GOST);
+	 logger.info("backk");
+	 logger.info(gost.getVrstaKorisnika().toString());
   List<Gost> sviGosti=gostService.getAllGost();
   List<Korisnik> sviKorisnici=korisnikService.getAllKorisnik();
   boolean ispravno=true;
@@ -75,7 +82,7 @@ public class GostController {
    mail.setTo(gost.getEmail());
    mail.setFrom("restoranisa0@gmail.com");
    mail.setSubject("Activation message");
-   mail.setText("http://localhost:8083/gost/aktiviraj/"+gost.getId());
+   mail.setText("http://localhost:8088/gost/aktiviraj/"+gost.getId());
    
          try {
              mailSender.send(mail);
@@ -100,13 +107,19 @@ public class GostController {
   
  }
  
+ @RequestMapping(value="/uzmiUlogovanog",method = RequestMethod.GET)
+ public ResponseEntity<Korisnik> uzmiUlogovanog(){
+	 Korisnik kor=(Korisnik) sesija.getAttribute("ulogovani");
+	 return new ResponseEntity<Korisnik>(kor,HttpStatus.OK);
+	 
+ }
  
  
   @RequestMapping(value="/login",method = RequestMethod.POST)
    public ResponseEntity<Korisnik> login(@RequestBody Korisnik korisnik){
     
    //ODMAH DODAJEMO PREDEFINISANOG ADMINA
-   String ime= "Nina";
+ /*  String ime= "Nina";
    String prezime="Manojlovic";
    String email="nina@gmail.com";
    String korisnickoIme="nina";
@@ -116,23 +129,41 @@ public class GostController {
    Admin admin=new Admin(ime, prezime, email, korisnickoIme, sifra,vk);
    admin.setId(id);
    adminService.sacuvaj(admin);
-   korisnikService.sacuvaj(admin);
+   korisnikService.sacuvaj(admin);*/
    //////////////////////////////
    
-   
+   Korisnik ulogovani=null;
    boolean okej=false;
    
    List<Korisnik> sviKorisnici= korisnikService.getAllKorisnik();
    for(Korisnik kor:sviKorisnici){
+	   logger.info(kor.getEmail());
     if(kor.getKorisnickoIme().equals(korisnik.getKorisnickoIme()) && kor.getSifra().equals(korisnik.getSifra())){
+    	logger.info("Ovaj kao ok:   "+kor.getEmail());
      okej=true;
+     ulogovani=kor;
      break;
     }
    }
    if(okej){
-    return new ResponseEntity<Korisnik>(korisnik,HttpStatus.OK);
+	   logger.info("usao u okej"+ulogovani);
+	   Gost gost=null;
+	   boolean aktiviran=false;
+	   if(ulogovani.getVrstaKorisnika().equals(VrsteKorisnika.GOST)){
+		   gost=gostService.findByKorisnickoIme(ulogovani.getKorisnickoIme());
+		   aktiviran=gost.isAktiviran();
+		   if(aktiviran){
+			   sesija.setAttribute("ulogovaniGost", gost);
+		   }
+	   }
+	   if(aktiviran){
+		   sesija.setAttribute("ulogovani", ulogovani);
+	   }else{
+		   return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+	   }
+    return new ResponseEntity<Korisnik>(ulogovani,HttpStatus.OK);
    }else{
-    return new ResponseEntity<>(null,HttpStatus.OK);
+    return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
    }
    
  /* boolean radnik=false;

@@ -28,7 +28,7 @@ public class Korisnik {
   private String korisnickoIme;
   @Column(name="sifra", unique=false, nullable=false)
   private String sifra;
-  @Column(name="vrstaKorisnika", unique=false, nullable=false)
+  @Column(name="vrstaKorisnika", unique=false, nullable=true)
   private VrsteKorisnika vrstaKorisnika;
   
   @Id

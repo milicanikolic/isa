@@ -1,11 +1,11 @@
 <div ng-include src="'/meni/gostMeni.html'"></div>
 <div class="container" ng-controller='profilKorisnikaController'>
-	<div class="media">
+	<div class="media" data-ng-init="uzmiUlogovanog()">
   		<div class="media-left media-middle">
     	<img src="cicaGlisa.jpg" class="media-object" style="width:100px">
   	</div>
   	<div class="media-body well">
-    	<h2 class="media-heading">{{ime}}</h2>
+    	<h2 class="media-heading">{{ulogovani.ime}}</h2>
     	
   	</div>
 	</div>
@@ -22,24 +22,24 @@
 			<table>
 				<tr>
 					<td>Ime: </td>
-					<td>{{korisnik.ime}}</td>
+					<td>{{ulogovani.ime}}</td>
 				</tr>
 				<tr>
 					<td>Prezime: </td>
-					<td>{{korisnik.prezime}}</td>
+					<td>{{ulogovani.prezime}}</td>
 				</tr>
 				<tr>
 					<td>Korisnicko ime: </td>
-					<td>{{korisnik.korisnickoIme}}</td>
+					<td>{{ulogovani.korisnickoIme}}</td>
 				</tr>
 				<tr>
 					<td>Email: </td>
-					<td>{{korisnik.email}}</td>
+					<td>{{ulogovani.email}}</td>
 				</tr>
 			</table>
 		</div>
 		<div class="panel-footer podaciFuter">
-			<a href="" class="btn" ng-click='izmeni(korisnik.id)'>
+			<a href="" class="btn" ng-click='izmeni(ulogovani.id)'>
 					<span class="glyphicon glyphicon-pencil"></span>
 					Izmeni podatke</a>
 		</div>

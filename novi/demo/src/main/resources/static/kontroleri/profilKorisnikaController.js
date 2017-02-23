@@ -3,6 +3,13 @@ app.controller('profilKorisnikaController', function ($scope,$window,$rootScope,
 	$scope.korisnik=$rootScope.korisnik;
 	console.info($rootScope.korisnik);
 	
+	$scope.uzmiUlogovanog=function(){
+		gostService.uzmiUlogovanog()
+		.success(function(data){
+			$scope.ulogovani=data;
+		})
+	}
+	
 	$scope.izmeni=function(id){
 		console.log("id je: "+id);
 		gostService.uzmiGosta(id)

@@ -5,10 +5,18 @@ app.controller('loginController', function ($scope,$rootScope,$window, $http,gos
         //console.log(gost);
 	var ulogovani= gostService.login(gost)
 	.success(function(data){
-		console.log("usao u success");
+		var logovani=data;
+
 		$rootScope.korisnik=data;
-		console.log($rootScope.korisnik);
-		$window.location.href = '#/profilKorisnika';
+		if(logovani!=null){
+			if(logovani.vrstaKorisnika=="GOST"){
+				$window.location.href = '#/profilKorisnika';
+			}if(logovani.vrstaKorisnika=="KONOBAR"){
+				aletr("konobar");
+			}
+		}else{
+			alert("pogresno logovanje");
+		}
 	})
 	 .error(function (error) {
          $scope.status = 'Uneti podaci nisu tacni: ' + error.message;
