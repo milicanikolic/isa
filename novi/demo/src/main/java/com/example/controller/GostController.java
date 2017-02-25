@@ -109,6 +109,7 @@ public class GostController {
  
  @RequestMapping(value="/uzmiUlogovanog",method = RequestMethod.GET)
  public ResponseEntity<Korisnik> uzmiUlogovanog(){
+	 logger.info("uzmi ulogovanog back");
 	 Korisnik kor=(Korisnik) sesija.getAttribute("ulogovani");
 	 return new ResponseEntity<Korisnik>(kor,HttpStatus.OK);
 	 
@@ -119,10 +120,10 @@ public class GostController {
    public ResponseEntity<Korisnik> login(@RequestBody Korisnik korisnik){
     
    //ODMAH DODAJEMO PREDEFINISANOG ADMINA
- /*  String ime= "Nina";
+ /* String ime= "Nina";
    String prezime="Manojlovic";
    String email="nina@gmail.com";
-   String korisnickoIme="nina";
+   String korisnickoIme="nina1";
    String sifra="nina";
    VrsteKorisnika vk=VrsteKorisnika.ADMIN;
    Long id=(long) 1;
@@ -155,12 +156,11 @@ public class GostController {
 		   if(aktiviran){
 			   sesija.setAttribute("ulogovaniGost", gost);
 		   }
+		   else{
+			   return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+		   }
 	   }
-	   if(aktiviran){
-		   sesija.setAttribute("ulogovani", ulogovani);
-	   }else{
-		   return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
-	   }
+	   sesija.setAttribute("ulogovani",ulogovani );
     return new ResponseEntity<Korisnik>(ulogovani,HttpStatus.OK);
    }else{
     return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);

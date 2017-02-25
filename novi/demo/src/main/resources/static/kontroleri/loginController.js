@@ -14,6 +14,9 @@ app.controller('loginController', function ($scope,$rootScope,$window, $http,gos
 			}if(logovani.vrstaKorisnika=="KONOBAR"){
 				aletr("konobar");
 			}
+			if(logovani.vrstaKorisnika=="ADMIN"){
+				$window.location.href = '#/admin';
+			}
 		}else{
 			alert("pogresno logovanje");
 		}

@@ -1,7 +1,6 @@
 app.controller('profilKorisnikaController', function ($scope,$window,$rootScope,gostService, $http) {
-	//alert('profilKorisnikaController');
 	$scope.korisnik=$rootScope.korisnik;
-	console.info($rootScope.korisnik);
+	//console.info($rootScope.korisnik);
 	
 	$scope.uzmiUlogovanog=function(){
 		gostService.uzmiUlogovanog()
@@ -28,4 +27,16 @@ app.controller('profilKorisnikaController', function ($scope,$window,$rootScope,
 
 		})
 	}
+	
+	$scope.prikaziRestoran=function(idRestoran){
+		console.log("prikazi Restoran"+idRestoran);
+		gostService.uzmiRestoran(idRestoran)
+		.success(function(data){
+			$scope.izabraniRestoran=data;
+			console.log($scope.izabraniRestoran);
+			$window.location.href = '#/profilRestorana';
+
+		})
+	}
+	
 });

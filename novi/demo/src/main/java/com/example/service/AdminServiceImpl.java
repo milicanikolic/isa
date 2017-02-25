@@ -32,4 +32,10 @@ public class AdminServiceImpl implements AdminService{
 		return a;
 	}
 
+	@Override
+	public Admin getAdminByKorisnickoIme(String korisnickoIme) {
+		
+		return adminRepository.findByKorisnickoIme(korisnickoIme);
+	}
+
 }

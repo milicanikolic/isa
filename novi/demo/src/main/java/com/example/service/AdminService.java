@@ -9,5 +9,6 @@ public interface AdminService {
 	Admin getAdmin(Long id);
 	List<Admin> getAllAdmin();
 	Admin sacuvaj(Admin admin);
+	Admin getAdminByKorisnickoIme(String korisnickoIme);
 
 }

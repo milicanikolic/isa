@@ -26,15 +26,26 @@ $stateProvider.state('profilKorisnika', {
 	templateUrl : 'stranice/profilKorisnika.html',
 	controller : 'profilKorisnikaController'
 })
-$stateProvider.state('profilKorisnika.restorani', {
+$stateProvider.state('restorani', {
 	url : '/restorani',
-	templateUrl : 'stranice/profilKorisnika.html',
+	templateUrl : 'stranice/gostRestorani.html',
 	controller : 'profilKorisnikaController'
 })
 $stateProvider.state('izmenaKorinika', {
 	url : '/izmenaKorinika',
 	templateUrl : 'stranice/izmenaKorisnika.html',
 	controller : 'izmenaKorinikaController'
+})
+
+$stateProvider.state('admin', {
+	url : '/admin',
+	templateUrl : 'stranice/profilAdmin.html',
+	controller : 'adminController'
+})
+.state('profilRestorana', {
+	url : '/profilRestorana',
+	templateUrl : 'stranice/profilRestorana.html',
+	controller : 'profilKorisnikaController'
 })
 
 });
