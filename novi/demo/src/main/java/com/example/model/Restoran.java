@@ -40,11 +40,7 @@ public class Restoran implements Serializable{
 	@Column(name="restoran_ocena", unique=false, nullable=true)
 	private double ocena;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="restoran")
-	private Set<Jelo> jelovnik= new HashSet<Jelo>();
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="restoran")
-	private Set<Pice> kartaPica= new HashSet<Pice>();
 	
 	
 	/*	@OneToMany(cascade = CascadeType.ALL)
@@ -87,21 +83,7 @@ public class Restoran implements Serializable{
 		this.ocena = ocena;
 	}
 
-	public Set<Jelo> getJelovnik() {
-		return jelovnik;
-	}
 
-	public void setJelovnik(Set<Jelo> jelovnik) {
-		this.jelovnik = jelovnik;
-	}
-
-	public Set<Pice> getKartaPica() {
-		return kartaPica;
-	}
-
-	public void setKartaPica(Set<Pice> kartaPica) {
-		this.kartaPica = kartaPica;
-	}
 
 
 	

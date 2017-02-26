@@ -3,7 +3,6 @@ app.controller('registracijaController', function ($scope, $http,$window,gostSer
 
 	$scope.registruj = function(gost){
 		$scope.tip=0;
-		console.log("kurac moj "+gost);
         var reg=gostService.registruj(gost)
         .success(function(data){
         	var registrovan=data;

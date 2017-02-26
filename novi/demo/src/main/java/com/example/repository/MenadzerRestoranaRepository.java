@@ -10,5 +10,6 @@ public interface MenadzerRestoranaRepository extends JpaRepository<MenadzerResto
 	
 	MenadzerRestorana findById(Long id);
 	List<MenadzerRestorana> findAll();
+	MenadzerRestorana findByKorisnickoIme(String korisnickoIme);
 
 }

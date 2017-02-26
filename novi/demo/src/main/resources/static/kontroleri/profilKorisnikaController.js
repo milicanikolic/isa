@@ -30,7 +30,7 @@ app.controller('profilKorisnikaController', function ($scope,$window,$rootScope,
 	
 	$scope.prikaziRestoran=function(idRestoran){
 		console.log("prikazi Restoran"+idRestoran);
-		gostService.uzmiRestoran(idRestoran)
+		gostService.postaviRestoran(idRestoran)
 		.success(function(data){
 			$scope.izabraniRestoran=data;
 			console.log($scope.izabraniRestoran);

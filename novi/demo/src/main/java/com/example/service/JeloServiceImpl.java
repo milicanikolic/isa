@@ -31,5 +31,11 @@ public class JeloServiceImpl implements JeloService{
 		Jelo j= jeloRepository.save(jelo);
 		return j;
 	}
+	
+	 @Override
+	 public void izbrisi(Jelo jelo) {
+	  jeloRepository.delete(jelo);
+	  
+	 }
 
 }

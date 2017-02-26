@@ -32,4 +32,10 @@ public class KorisnikServiceImpl implements KorisnikService{
 		return k;
 	}
 
+	@Override
+	public Korisnik getKorisnikByKorisnickoIme(String korisnickoIme) {
+		
+		return korisnikRepository.findByKorisnickoIme(korisnickoIme);
+	}
+
 }

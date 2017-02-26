@@ -14,5 +14,6 @@ public interface PiceRepository extends JpaRepository<Pice, Long>{
 	Pice findById(Long id);
 	List<Pice> findAll();
 	Pice save(Pice pice);
+	void delete(Pice pice);
 	
 }

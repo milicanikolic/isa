@@ -1,19 +1,17 @@
-<div class="container" ng-contoller='profilKorisnikaController'>
+<div class="container" ng-contoller='restoranController'  data-ng-init="uzmiRestoran()">
   <div class="jumbotron">
-    <h1>{{izabraniRestoran.ime}}</h1>      
-    <p>{{izabraniRestoran.tipRestorana}}</p>
+    <h1>{{jedanRestoran.ime}}</h1>      
+    <p>{{jedanRestoran.tipRestorana}}</p>
   </div>
 
 <div class="row row-eq-height" >
  				<div class="col-md-4">
 					<div class="panel panel-default velicina">
-						<div class="panel-heading">Jelovnik</div>
+						<div class="panel-heading">Jelovnik </div>
 			
 					<div class="panel-body">
-						<form action="/jelovnik.html">
-							<input type="hidden" name="sifra" value="<%=p.getSifra()%>">
-							<input class="img-responsive" type="image" src="Slike/menu.png"/> 
-						</form>
+	
+							<input class="img-responsive" type="image" src="Slike/menu.png" ng-click='prikaziJelovnik(jedanRestoran.id)'/> 
 					</div>
 				</div>
 				</div>    
@@ -22,22 +20,32 @@
 						<div class="panel-heading">Karta pića</div>
 			
 					<div class="panel-body">
-						<form action="/kartaPica.html">
-							<input type="hidden" name="sifra" value="<%=p.getSifra()%>">
-							<input class="img-responsive" type="image" src="Slike/pice.png"/> 
-						</form>
+						
+							<input class="img-responsive" type="image" ng-click="prikazPica()" src="Slike/pice.png"/> 
 					</div>
 				</div>
 				</div>  
-				<div class="col-md-4">
+				<div class="col-md-4" ng-show="gost">
 					<div class="panel panel-default velicina">
 						<div class="panel-heading">Rezerviši sto</div>
 			
 					<div class="panel-body">
-						<form action="/rezervacija1.html">
+				
 							<input class="img-responsive" type="image" src="Slike/sto.jpg"/> 
-						</form>
+				
 					</div>
 				</div>
 				</div>  
+				
+				<div class="col-md-4" ng-show="MR">
+					<div class="panel panel-default velicina">
+						<div class="panel-heading">Konfiguracija stolova</div>
+			
+					<div class="panel-body">
+				
+							<input class="img-responsive" type="image" src="Slike/sto.jpg"/> 
+				
+					</div>
+				</div>
+				</div> 
 </div>

@@ -4,6 +4,5 @@ app.controller('sviGostiController', function ($scope, $http,sviGostiService,$lo
 	sviGostiService.getAll(function(data) {
     			$scope.sviGosti = data;
     			console.info(data);
-    			$location.path('/login');
     		});
 });

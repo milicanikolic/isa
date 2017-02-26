@@ -29,8 +29,8 @@ public class MenadzerRestorana extends Korisnik implements Serializable {
  @Column(name = "menadzerRestorana_id", unique = true, nullable = false)
  private Long id;
  
- @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
- private Restoran restoran;
+ @OneToOne(cascade = CascadeType.ALL)
+public Restoran restoran;
 
 
  public MenadzerRestorana(){

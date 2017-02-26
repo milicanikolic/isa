@@ -9,10 +9,16 @@ app.controller('loginController', function ($scope,$rootScope,$window, $http,gos
 
 		$rootScope.korisnik=data;
 		if(logovani!=null){
+			console.log(logovani);
 			if(logovani.vrstaKorisnika=="GOST"){
 				$window.location.href = '#/profilKorisnika';
 			}if(logovani.vrstaKorisnika=="KONOBAR"){
 				aletr("konobar");
+			}
+			if(logovani.vrstaKorisnika=="MENADZER_RESTORANA"){
+				console.log("mendzer restoraa");
+				
+				$window.location.href = '#/menadzerRestorana';
 			}
 			if(logovani.vrstaKorisnika=="ADMIN"){
 				$window.location.href = '#/admin';
@@ -23,7 +29,7 @@ app.controller('loginController', function ($scope,$rootScope,$window, $http,gos
 	})
 	 .error(function (error) {
          $scope.status = 'Uneti podaci nisu tacni: ' + error.message;
-         console.log("usao u error");
+         console.log("usao u error   "+ error.message);
      });
 	
     };

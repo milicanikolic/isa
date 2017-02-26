@@ -15,7 +15,7 @@ public class MenadzerRestoranaServiceImpl implements MenadzerRestoranaService{
 	private MenadzerRestoranaRepository menadzerRepository;
 	
 	@Override
-	public MenadzerRestorana getAdmin(Long id) {
+	public MenadzerRestorana getMenadzerRestorana(Long id) {
 		
 		return menadzerRepository.findById(id);
 	}
@@ -30,6 +30,12 @@ public class MenadzerRestoranaServiceImpl implements MenadzerRestoranaService{
 	public MenadzerRestorana sacuvaj(MenadzerRestorana menadzer) {
 		MenadzerRestorana m= menadzerRepository.save(menadzer);
 		return m;
+	}
+
+	@Override
+	public MenadzerRestorana getMenadzerByKorisnickoIme(String korisnickoIme) {
+		
+		return menadzerRepository.findByKorisnickoIme(korisnickoIme);
 	}
 
 }

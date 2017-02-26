@@ -26,7 +26,7 @@ public class Pice implements Serializable{
 		ALKOHOLNA, BEZALKOHOLNA, TOPLI_NAPICI, ZESTINA  
 	};
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Restoran restoran;
 	
 	

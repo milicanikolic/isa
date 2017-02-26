@@ -11,4 +11,5 @@ public interface JeloRepository extends JpaRepository<Jelo, Long>{
 
 	Jelo findById(Long id);
 	List<Jelo> findAll();
+	void delete(Jelo jelo);
 }

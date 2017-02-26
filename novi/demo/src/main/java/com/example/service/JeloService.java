@@ -9,4 +9,5 @@ public interface JeloService {
 	Jelo getJelo(Long id);
 	List<Jelo> getAllJelo();
 	Jelo sacuvaj(Jelo jelo);
+	void izbrisi(Jelo jelo);
 }

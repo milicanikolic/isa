@@ -19,8 +19,9 @@ app.factory('gostService',['$http', function($http){
     	return $http.get('/restoran/uzmiSve');
     }
     
-    korisnik.uzmiRestoran=function(idRestorana){
-    	return $http.get('/restoran/uzmiRestoran/'+idRestorana);
+    korisnik.postaviRestoran=function(idRestorana){
+    	return $http.post('/restoran/postaviRestoran/'+idRestorana);
     }
+    
 	return korisnik;
 }]);

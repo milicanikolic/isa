@@ -1,0 +1,117 @@
+<div class="container" ng-controller="restoranController" ng-init="kartaPica(); uzmiRestoran();">
+  <div class="jumbotron poluProvidanCrni">
+    <h1 style="color:white;">Karta pica</h1>      
+  </div>
+  <div class="col-xs-6">
+	<div class="well poluProvidanBeo">
+	 <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Naziv </th>
+        <th>Opis </th>
+        <th>Cena</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="pice in listaPica">
+        <td>{{pice.naziv}}</td>
+        <td>{{pice.opis}}</td>
+        <td>{{pice.cena}}</td>
+        <td><a ng-show="MR" class="btn btn-default" ng-click='izmeniPice(pice.id)'>
+    		<span class="glyphicon glyphicon-pencil" ></span> Izmeni
+  			</a>
+  		</td>
+  		 <td ><a ng-show="MR"  class="btn btn-default" ng-click="obrisiPice(pice.id)">
+    		<span class="glyphicon glyphicon-trash" ></span> Obrisi
+  			</a>
+  		</td>
+      </tr>
+  
+    </tbody>
+  </table>
+  </div>
+  </div>
+  
+  <div class="col-xs-4 col-md-offset-1" ng-show="izmenaPica">
+ <div class="well poluprovidanBeo">
+<form >
+  <table>
+   <tr>
+    <td>Naziv:</td>
+    <td><input type="text" name="nazivPica" class="form-control" ng-model="trenutnoPice.naziv" value={{trenutnoPice.naziv}}></input></td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+    <tr>
+    <td>Opis:</td>
+    <td><input type="text" name="opisPica" class="form-control" ng-model="trenutnoPice.opis"  value={{trenutnoPice.opis}}></input></td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+    <tr>
+    <td>Cena:</td>
+    <td><input type="text" name="cenaPica" class="form-control" ng-model="trenutnoPice.cena" value={{trenutnoPice.cena}} ></input></td>
+   </tr>
+   
+   <tr>
+    <td>&nbsp;</td>
+    <td><input class="btn btn-success" type="submit" value="SaÄuvaj izmene"  ng-click="izmeniPice2(trenutnoPice)"/></td>
+   </tr>
+  </table>
+ </form>
+ </div>
+</div>
+  
+  <div class="col-xs-4 col-md-offset-1" ng-show="dodavanjePica">
+ <div class="well poluprovidanBeo">
+<form >
+  <table>
+   <tr>
+    <td>Naziv:</td>
+    <td><input type="text" name="nazivPica" class="form-control" ng-model="novoPice.naziv"></input></td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+    <tr>
+    <td>Opis:</td>
+    <td><input type="text" name="opisPica" class="form-control" ng-model="novoPice.opis"></input></td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+    <tr>
+    <td>Cena:</td>
+    <td><input type="text" name="cenaPica" class="form-control" ng-model="novoPice.cena" ></input></td>
+   </tr>
+   <tr>
+   <td>Vrsta pica:</td>
+   	<td>
+   		<select name="vrstaJela" ng-model="novoPice.vrstaP">
+   			<option value="0">Alkoholna</option>
+   			<option value="1">Bezalkoholna</option>
+   			<option value="2"> Topli napici</option>
+   			<option value="3"> Zestina</option>		
+   		</select>
+   	</td>	
+   </tr>
+   
+   <tr>
+    <td>&nbsp;</td>
+    <td><input class="btn btn-success" type="submit" value="SaÄuvaj izmene"  ng-click="dodajPice2(novoPice)"/></td>
+   </tr>
+  </table>
+ </form>
+ </div>
+</div> 
+  
+  <a ng-show="MR" class="btn btn-default" ng-click="dodajPice()">
+    		<span class="glyphicon glyphicon-glass"></span> Dodaj pice
+  			</a> 
+</div>

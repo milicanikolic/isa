@@ -32,7 +32,11 @@ public class PiceServiceImpl implements PiceService{
 		return p;
 	}
 
-	
+	@Override
+	 public void izbrisi(Pice pice) {
+	  piceRepository.delete(pice);
+	  
+	 }
 	
 	
 }

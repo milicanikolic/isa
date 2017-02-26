@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 
 @Entity
 @Table(name="jela")
@@ -25,10 +27,10 @@ public class Jelo implements Serializable{
 		SALATA, KUVANO_JELO, PECENO_JELO
 	};
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne (cascade={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	private Restoran restoran;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch= FetchType.LAZY)
+	@ManyToOne(cascade={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch= FetchType.LAZY)
 	private Kuvar kuvar;
 	
 	@Column(name="vrsta_jela", unique=false, nullable=false)
