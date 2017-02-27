@@ -161,4 +161,8 @@ app.controller('restoranController', function ($scope,$window,$rootScope,restora
 		})
 	}
 	
+	$scope.evidencijaRadnika=function(){
+		$window.location.href = '#/evidencijaRadnika';
+	}
+	
 });

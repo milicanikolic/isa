@@ -26,6 +26,17 @@ $stateProvider.state('profilKorisnika', {
 	templateUrl : 'stranice/profilKorisnika.html',
 	controller : 'profilKorisnikaController'
 })
+.state('profilGosta', {
+	url : '/profilGosta',
+	templateUrl : 'stranice/profilGosta.html',
+	controller : 'profilKorisnikaController'
+})
+.state('prijatelji', {
+	url : '/prijatelji',
+	templateUrl : 'stranice/prijatelji.html',
+	controller : 'profilKorisnikaController'
+})
+
 $stateProvider.state('restorani', {
 	url : '/restorani',
 	templateUrl : 'stranice/gostRestorani.html',
@@ -60,6 +71,12 @@ $stateProvider.state('admin', {
 .state('menadzerRestorana', {
 	url : '/menadzerRestorana',
 	templateUrl : 'stranice/profilRestorana.html',
+	controller : 'restoranController'
+})
+
+.state('evidencijaRadnika', {
+	url : '/evidencijaRadnika',
+	templateUrl : 'stranice/evidencijaRadnika.html',
 	controller : 'restoranController'
 })
 

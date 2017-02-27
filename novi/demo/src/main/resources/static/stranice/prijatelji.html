@@ -1,0 +1,85 @@
+<div ng-include src="'/meni/gostMeni.html'"></div>
+<div class="container" ng-controller='profilKorisnikaController'>
+	<div class="media" data-ng-init="uzmiUlogovanog()">
+  		<div class="media-left media-middle">
+    	<img src="cicaGlisa.jpg" class="media-object" style="width:100px">
+  	</div>
+  	<div class="media-body well">
+    	<h2 class="media-heading">{{ulogovani.ime}}  {{ulogovani.prezime}}</h2>
+    	
+  	</div>
+	</div>
+	
+<a  class="btn btn-default" ng-click="dodavanjePr()">
+    		<span class="glyphicon glyphicon-plus"></span> Dodaj prijatelja
+  			</a>
+	
+	<div class="row">
+		<div class="col-md-6" ng-show="dodavanjeP">
+		<div class="panel panel-default poluProvidanBeo">
+  		<div class="panel-body">
+			<table>
+				<tr>
+					<td>Pretražite prijatelje: </td>
+				</tr>
+				<tr>
+					<td>	
+    							<input type="text" class="form-control" placeholder="Ime" ng-model="pretraga.ime">
+  						
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" class="form-control" placeholder="Prezime" ng-model="pretraga.prezime">
+					</td>
+				</tr>
+				<tr>
+				<td>
+					<a  class="btn btn-default" ng-click="pretrazi(pretraga)">
+    		<span class="glyphicon glyphicon-search"></span> Pretrazi
+  			</a>
+  			<td>
+				</tr>
+			</table>
+			</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+	<div class="col-md-6">
+	<div class="panel panel-default poluProvidanBeo">
+  	<div class="panel-body">
+	<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>PRIJATELJI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      	
+        <td><img alt="Image" src="cicaGlisa.jpg" width="20" height="20"><a href="#">Prijatelj 1</a></td>
+        <td> </td>
+        <td><a  class="btn btn-default">
+    		<span class="glyphicon glyphicon-trash"></span> Obrisi
+  			</a>
+  		</td>
+      </tr>
+       <tr>
+        
+        <td><img alt="Image" src="cicaGlisa.jpg" width="20" height="20"><a href="#">Prijatelj 2</a></td>
+        <td> </td>
+        <td><a  class="btn btn-default">
+    		<span class="glyphicon glyphicon-trash"></span> Obrisi
+  			</a>
+  		</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>
+  </div>
+	</div>
+	
+</div>

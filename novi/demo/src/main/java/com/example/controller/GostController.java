@@ -116,6 +116,33 @@ public class GostController {
  }
  
  
+ @RequestMapping(value="/izmeniGosta/{idStarog}",method = RequestMethod.PUT)
+ public ResponseEntity<Gost> izmeniGosta(@PathVariable Long idStarog, @RequestBody Gost gost){
+ 	 
+   List<Korisnik> sviKorisnici=korisnikService.getAllKorisnik();
+   Korisnik izmenjen=korisnikService.getKorisnik(idStarog);
+   
+   sviKorisnici.remove(izmenjen);
+   
+   boolean ispravno=true;
+   for(Korisnik k: sviKorisnici){
+    if(k.getEmail().equals(gost.getEmail()) || k.getKorisnickoIme().equals(gost.getKorisnickoIme())){
+     ispravno=false;
+     break;
+    }
+   }
+   if(ispravno){
+   gost.setId(idStarog);
+   Gost sacuvan=gostService.save(gost);
+   korisnikService.sacuvaj(gost);
+   return new ResponseEntity<Gost>(sacuvan, HttpStatus.CREATED);
+   }
+   else{
+    return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+   }
+
+ }
+ 
   @RequestMapping(value="/login",method = RequestMethod.POST)
    public ResponseEntity<Korisnik> login(@RequestBody Korisnik korisnik){
     
@@ -165,6 +192,9 @@ public class GostController {
    }else{
     return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
    }
+   
+   
+   
    
  /* boolean radnik=false;
   boolean go=false;

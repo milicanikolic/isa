@@ -15,6 +15,10 @@ app.factory('gostService',['$http', function($http){
     korisnik.uzmiGosta=function(id){
     	return $http.get('/gost/uzmiGosta/'+id);
     }
+    korisnik.izmeniGosta=function(izmenjenGost,id){
+    	return $http.put('/gost/izmeniGosta/'+id,izmenjenGost);
+    }
+    
     korisnik.sviRestorani=function(){
     	return $http.get('/restoran/uzmiSve');
     }

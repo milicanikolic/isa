@@ -1,0 +1,117 @@
+<div ng-include src="'/meni/gostMeni.html'"></div>
+<div class="container" ng-controller='profilKorisnikaController'>
+	<div class="media" data-ng-init="uzmiUlogovanog()">
+  		<div class="media-left media-middle">
+    	<img src="cicaGlisa.jpg" class="media-object" style="width:100px">
+  	</div>
+  	<div class="media-body well">
+    	<h2 class="media-heading">{{ulogovani.ime}}  {{ulogovani.prezime}}</h2>
+    	
+  	</div>
+	</div>
+	
+	&nbsp;
+	&nbsp;
+
+	&nbsp;
+	<div class="row">
+	<div class="col-md-6" class="container center">
+	<div class="panel panel-default poluProvidanBeo">
+  		<div class="panel-heading poluProvidanBeo">Podaci</div>
+  		<div class="panel-body">
+			<table>
+				<tr>
+					<td>Ime: </td>
+					<td>{{ulogovani.ime}}</td>
+				</tr>
+				<tr>
+					<td>Prezime: </td>
+					<td>{{ulogovani.prezime}}</td>
+				</tr>
+				<tr>
+					<td>Korisnicko ime: </td>
+					<td>{{ulogovani.korisnickoIme}}</td>
+				</tr>
+				<tr>
+					<td>Email: </td>
+					<td>{{ulogovani.email}}</td>
+				</tr>
+			</table>
+		</div>
+		<div class="panel-footer podaciFuter">
+			<a href="" class="btn" ng-click='izmeni()'>
+					<span class="glyphicon glyphicon-pencil"></span>
+					Izmeni podatke</a>
+		</div>
+		</div>
+  </div>
+  </div>
+  
+  
+  
+  <div ng-show="izmenaGosta" class="container center" ng-controller='registracijaController'>
+<div class="row">
+<div class="col-md-4 col-md-offset-4" >
+ <div class="well">
+<form >
+  <table class="container center">
+   <tr>
+    <td>Ime:</td>
+    <td><input type="text" id="ime" name="Ime" class="form-control" value={{ulogovani.ime}} ng-model="ulogovani.ime" /></td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+    <tr>
+    <td>Prezime:</td>
+    <td><input type="text" name="prezime" class="form-control" value={{ulogovani.prezime}} ng-model="ulogovani.prezime"/></td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+    <tr>
+    <td>Email adresa:</td>
+    <td><input type="text" name="emailAdresa" class="form-control" value={{ulogovani.email}} ng-model="ulogovani.email"/></td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>   
+   <tr>
+    <td>Korisnicko ime:</td>
+    <td><input type="text" name="korisnickoIme" class="form-control" value={{ulogovani.korisnickoIme}} ng-model="ulogovani.korisnickoIme"/></td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+   <tr>
+    <td>Sifra:</td>
+    <td><input type="password" id="sifra"  name="sifra" class="form-control" value={{ulogovani.sifra}} ng-model="ulogovani.sifra"/></td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+   <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+
+    <tr>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td><input id="dugmeIzmena" class="btn btn-success" type="submit" value="Izmeni" ng-click='izmeniGosta(ulogovani)' onclick="proveraPraznihPolja()" /></td>
+   </tr>
+  </table>
+ </form>
+ </div>
+</div>
+ </div>
+</div>
+  
