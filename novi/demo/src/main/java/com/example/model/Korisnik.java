@@ -11,10 +11,12 @@ import javax.persistence.Table;
 
 
 import com.example.enumeracije.VrsteKorisnika;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="korisnici")
 @Inheritance(strategy=InheritanceType.JOINED)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Korisnik {
 
  

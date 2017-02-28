@@ -11,11 +11,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.enumeracije.StatusZahteva;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
 @Entity
 @Table(name="prijateljstva")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Prijateljstva {
 	
 	 @Id

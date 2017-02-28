@@ -15,10 +15,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 enum TipRestorana{DOMACA_KUHINJA, ITALIJANSKI, KINESKI, VEGAN}
 
 @Entity
 @Table(name = "restorani")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Restoran implements Serializable{
 
 	/**

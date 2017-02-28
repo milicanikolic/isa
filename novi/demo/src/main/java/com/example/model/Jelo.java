@@ -14,9 +14,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table(name="jela")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Jelo implements Serializable{
 	/**
 	 * 

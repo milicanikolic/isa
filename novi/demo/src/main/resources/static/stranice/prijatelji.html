@@ -35,7 +35,7 @@
 				</tr>
 				<tr>
 				<td>
-					<a  class="btn btn-default" ng-click="pretrazi(pretraga)">
+					<a  class="btn btn-default" ng-click="pretrazi(pretraga,ulogovani.id)">
     		<span class="glyphicon glyphicon-search"></span> Pretrazi
   			</a>
   			<td>
@@ -45,6 +45,17 @@
 			</div>
 		</div>
 	</div>
+	
+	<table class="table table-stripped">
+		<tr ng-repeat="rez in rezultatPretrage">
+      	
+        <td><img alt="Image" src="cicaGlisa.jpg" width="20" height="20"></td>
+        <td>{{rez.ime}} {{rez.prezime}} </td>
+        <td><a  class="btn btn-default" ng-click="dodajPrijatelja(rez.id,ulogovani.id)">
+    		<span class="glyphicon glyphicon-friend"></span> Dodaj
+  			</a></td>
+      </tr>
+	</table>
 	
 	<div class="row">
 	<div class="col-md-6">
@@ -57,25 +68,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr ng-repeat="prijatelj in prijatelji">
       	
-        <td><img alt="Image" src="cicaGlisa.jpg" width="20" height="20"><a href="#">Prijatelj 1</a></td>
+        <td><img alt="Image" src="cicaGlisa.jpg" width="20" height="20">{{prijatelj.ime}} {{prijatelj.prezime}}</td>
         <td> </td>
         <td><a  class="btn btn-default">
     		<span class="glyphicon glyphicon-trash"></span> Obrisi
   			</a>
   		</td>
       </tr>
-       <tr>
-        
-        <td><img alt="Image" src="cicaGlisa.jpg" width="20" height="20"><a href="#">Prijatelj 2</a></td>
-        <td> </td>
-        <td><a  class="btn btn-default">
-    		<span class="glyphicon glyphicon-trash"></span> Obrisi
-  			</a>
-  		</td>
-      </tr>
-      
+ 
     </tbody>
   </table>
   </div>

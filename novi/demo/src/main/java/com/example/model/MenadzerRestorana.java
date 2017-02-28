@@ -14,9 +14,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.enumeracije.VrsteKorisnika;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "menadzeriRestorana")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class MenadzerRestorana extends Korisnik implements Serializable {
 
  /**

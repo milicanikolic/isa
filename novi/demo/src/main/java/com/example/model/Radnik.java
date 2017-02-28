@@ -10,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.example.enumeracije.VrsteKorisnika;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @Table(name="radnici")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Radnik extends Korisnik implements Serializable{
  
  /**

@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.enumeracije.StatusZahteva;
 import com.example.enumeracije.VrsteKorisnika;
 import com.example.model.Admin;
 import com.example.model.Gost;
@@ -25,15 +27,20 @@ import com.example.model.Korisnik;
 import com.example.model.Radnik;
 import com.example.model.Kuvar.vrstaKuvara;
 import com.example.model.MenadzerRestorana;
+import com.example.model.Prijateljstva;
 import com.example.service.AdminService;
 import com.example.service.GostService;
 import com.example.service.KorisnikService;
+import com.example.service.PrijateljstvaService;
 
 
 @Controller
 @RequestMapping("/gost") 
 public class GostController {
  
+@Autowired
+private PrijateljstvaService prijateljstvaService;
+
  @Autowired
  private GostService gostService;
  private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -269,4 +276,29 @@ public class GostController {
  
    */
    }
+  @RequestMapping(value="/proveriNotifikacije/{idKorisnik}",method = RequestMethod.GET)
+  public ResponseEntity<List<Gost>> notifikacije(@PathVariable Long idKorisnik){
+  
+  List<Prijateljstva> svaPrijateljstva=prijateljstvaService.getAllPrijateljstva();
+  List<Gost> zahteviOd=new ArrayList<Gost>();
+  if(!svaPrijateljstva.isEmpty()){
+  
+   for(Prijateljstva p:svaPrijateljstva){
+    if(p.getPrimalac().getId()==idKorisnik && p.getStatus().equals(StatusZahteva.NA_CEKANJU)){
+     Gost gost= gostService.getGost(p.getPosiljalac().getId());
+     zahteviOd.add(gost);
+    }
+   }
+   if(zahteviOd.isEmpty()){
+    //nema zahteva za tog korisnika
+    return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+   }else{
+    return new ResponseEntity<List<Gost>>(zahteviOd, HttpStatus.OK);
+   }
+  }else{
+   //tabela prijateljstva je prazna
+   return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+  }
+   
+  }
 }
