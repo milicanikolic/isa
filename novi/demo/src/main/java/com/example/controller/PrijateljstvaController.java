@@ -85,10 +85,10 @@ public class PrijateljstvaController {
 	  List<Gost> njegoviPrijatelji=new ArrayList<Gost>();
 	  for(Prijateljstva pri:prijateljstva){
 	   if( pri.getStatus().equals(StatusZahteva.PRIHVACEN)){
-	    if(pri.getPosiljalac().getId().equals(idPosiljaoca)){
+	    if(pri.getPosiljalac().getId()==(idPosiljaoca)){
 	    Gost g=gostService.getGost(pri.getPrimalac().getId());
 	    njegoviPrijatelji.add(g);
-	   }else if(pri.getPrimalac().getId().equals(idPosiljaoca)){
+	   }else if(pri.getPrimalac().getId()==(idPosiljaoca)){
 		   Gost g=gostService.getGost(pri.getPosiljalac().getId());
 		    njegoviPrijatelji.add(g);
 	   }
@@ -145,20 +145,27 @@ public class PrijateljstvaController {
 	  List<Gost> njegoviPrijatelji=new ArrayList<Gost>();
 	  for(Prijateljstva pri:prijateljstva){
 	   if( pri.getStatus().equals(StatusZahteva.PRIHVACEN)){
-	    if(pri.getPosiljalac().getId().equals(idPosiljaoca) || pri.getPrimalac().getId().equals(idPosiljaoca)){
+	    if(pri.getPosiljalac().getId()==(idPosiljaoca)){
 	     Gost g=gostService.getGost(pri.getPrimalac().getId());
+	     logger.info("gornje dodavanje u prijatelja: "+g.getIme());
 	     njegoviPrijatelji.add(g);
+	   }else if(pri.getPrimalac().getId().equals(idPosiljaoca)){
+		   Gost g=gostService.getGost(pri.getPosiljalac().getId());
+		     njegoviPrijatelji.add(g);
+		     logger.info("donje dodavanje u prijatelja: "+g.getIme());
 	   }
 	  }
 	 }
 	  if(njegoviPrijatelji.size()!=0){
-	  for(Gost g:sviGosti){
-	   for(Gost prijatelj:njegoviPrijatelji)
-	   if(!g.getId().equals(prijatelj.getId())){
-	    oniKojiNisuUPrijateljima.add(g);
+		  oniKojiNisuUPrijateljima=sviGosti;
+	   for(Gost prijatelj:njegoviPrijatelji){
+	   
+		   logger.info(" dodavanje u NEprijatelja: "+prijatelj.getIme());
+	    oniKojiNisuUPrijateljima.remove(prijatelj);
 	   }
-	  }
+
 	  }else{
+		  logger.info("size prijatelja 0");
 	   oniKojiNisuUPrijateljima=sviGosti;
 	  }
 	  

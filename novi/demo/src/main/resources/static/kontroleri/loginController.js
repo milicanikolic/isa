@@ -12,16 +12,18 @@ app.controller('loginController', function ($scope,$rootScope,$window, $http,gos
 			console.log(logovani);
 			if(logovani.vrstaKorisnika=="GOST"){
 				$window.location.href = '#/profilKorisnika';
-			}if(logovani.vrstaKorisnika=="KONOBAR"){
+			}else if(logovani.vrstaKorisnika=="KONOBAR"){
 				aletr("konobar");
 			}
-			if(logovani.vrstaKorisnika=="MENADZER_RESTORANA"){
+			else if(logovani.vrstaKorisnika=="MENADZER_RESTORANA"){
 				console.log("mendzer restoraa");
 				
 				$window.location.href = '#/menadzerRestorana';
 			}
-			if(logovani.vrstaKorisnika=="ADMIN"){
+			else if(logovani.vrstaKorisnika=="ADMIN"){
 				$window.location.href = '#/admin';
+			}else if(logovani.vrstaKorisnika=="PONUDJAC"){
+				$window.location.href = '#/ponudjac';
 			}
 		}else{
 			alert("pogresno logovanje");

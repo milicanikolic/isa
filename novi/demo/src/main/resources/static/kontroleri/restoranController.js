@@ -1,11 +1,13 @@
 app.controller('restoranController', function ($scope,$window,$rootScope,restoranService, $http) {
 	
-
+	$scope.prikazMeni=1;
+	$scope.prikazMeniPonude=1;
 	
 	$scope.uzmiRestoran=function(){	
 		
 		restoranService.uzmiUlogovanog()
 		.success(function(data){
+			$scope.ulogovan=data;
 			var logovani=data;
 			
 			if(logovani.vrstaKorisnika=="GOST"){
@@ -165,4 +167,88 @@ app.controller('restoranController', function ($scope,$window,$rootScope,restora
 		$window.location.href = '#/evidencijaRadnika';
 	}
 	
+	$scope.prikaziDodajR=function(){
+		$scope.prikazMeni=0;
+		$scope.dodavanjeRadnika=1;
+	};
+	$scope.dodajRadnika=function(gost){
+		
+	}
+	$scope.prikaziponudeMeni=function(){
+		$window.location.href = '#/ponude';
+	}
+	
+	$scope.prikaziDodajNamirnicu=function(){
+		
+		$scope.dodavanjeNamirnice=1;
+		$scope.prikazMeniPonude=0;
+		restoranService.uzmiNamirnice()
+		.success(function(data){
+			$scope.sveNamirnice=data;
+		})
+	}
+	
+	$scope.dodajNamirnicu=function(namirnica){
+		console.log("usao u dodaj namirnicu cont");
+		console.log(namirnica);
+		restoranService.dodajNamirnicu(namirnica)
+		.success(function(data){
+			$scope.sveNamirnice=data;
+			$scope.pogresnaNamirnica=0;
+		})
+		.error(function(data){
+			$scope.sveNamirnice=data;
+			$scope.pogresnaNamirnica=1;
+			$scope.namirnica={};
+		})
+	}
+	$scope.dodavanjeNamirnicaKraj=function(){
+		$scope.dodavanjeNamirnice=0;
+		$scope.prikazMeniPonude=1;
+	}
+	
+	$scope.prikaziDodajPonudu=function(){
+		$scope.dodavanjePonude=1;
+		$scope.prikazMeniPonude=0;
+		restoranService.uzmiNamirnice()
+		.success(function(data){
+			$scope.sveNamirnice=data;
+		})
+		
+		restoranService.uzmiUlogovanog()
+		.success(function(data){
+			$scope.ulogovani=data;
+			
+			console.log($scope.ulogovani);
+		})
+	}
+	
+	
+
+    
+    $scope.dodajPonudu=function(ponuda){
+    	
+    	
+    	restoranService.dodajPonudu($scope.ulogovani.id,$scope.nam1,$scope.nam2,$scope.nam3,$scope.datumOd,$scope.datumDo)
+    	.success(function(data){
+    		$scope.dodavanjePonude=0;
+    		$scope.prikazMeniPonude=1;
+		})
+    }
+	$scope.prikaziDodajPonudjaca=function(){
+		$scope.dodavanjePonudjaca=1;
+		$scope.prikazMeniPonude=0;
+		restoranService.uzmiUlogovanog()
+		.success(function(data){
+			$scope.ulogovan=data;
+		})
+	}
+	$scope.dodajPonudjaca=function(ponudjac){
+		restoranService.dodajPonudjaca($scope.ulogovan.id,ponudjac)
+		.success(function(data){
+			$scope.dodavanjePonudjaca=0;
+			$scope.prikazMeniPonude=1;
+			$scope.ponudjac={};
+		})
+	}
 });

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css" >
+
+<link rel="stylesheet" href="Bootstrap/css/bootstrap-theme.min.css">
+</head>
+<body>
+
+<!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+
+<div class="container center ">
+<div class="row">
+<div class="col-md-4 " >
+ <div class="well poluprovidanBeo bootstrap-iso">
+ 	<table>
+ 	<tr>
+ 		<td>
+ 			<div class="panel panel-default">
+  				<div class="panel-body">
+  					<div class="checkbox">
+  					<!-- <label><input type="checkbox" value="">Namirnica1</label> -->
+  						
+  						<label ng-repeat="namirnica in sveNamirnice">
+  						<input
+    type="checkbox"
+    name="selectedFruits[]"
+    value="{{namirnica}}"
+    ng-checked="selection.indexOf(namirnica) > -1"
+    ng-click="toggleSelection(namirnica)"
+  > {{namirnica.ime}}
+</label>
+					</div>
+					<a href="" class="btn btn-success" >Dodaj</a>
+  				</div>
+			</div>
+ 		
+ 		</td>
+ 	</tr>
+ 	
+ 	
+ 	<tr>
+ 	<td>
+	<div class="form-group ">
+      <label class="control-label col-sm-2 requiredField" for="date">
+       Vazi od
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+       <div class="input-group">
+        <div class="input-group-addon">
+         <i class="fa fa-calendar">
+         </i>
+        </div>
+        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+       </div>
+     </div>
+     </td>
+     </tr>
+     
+     <tr>
+     	<td>
+     		
+     		<div class="form-group ">
+      		<label class="control-label col-sm-2 requiredField" for="date2">
+       				Vazi od
+       		<span class="asteriskField">
+        	*
+       		</span>
+      		</label>
+       		<div class="input-group">
+        		<div class="input-group-addon">
+         			<i class="fa fa-calendar">
+         			</i>
+        	</div>
+        	<input class="form-control" id="date2" name="date2" placeholder="MM/DD/YYYY" type="text"/>
+       	</div>
+     	</div>
+     		
+     	</td>
+     	
+     </tr>
+     
+     </table>
+     
+     <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+     
+     
+     <script>
+	$(document).ready(function(){
+		var date_input=$('input[name="date"]'); //our date input has the name "date"
+		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+		date_input.datepicker({
+			format: 'mm/dd/yyyy',
+			orientation:"auto top",
+			container: container,
+			todayHighlight: true,
+			autoclose: true,
+		})
+		
+		var date_input1=$('input[name="date2"]'); //our date input has the name "date"
+		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+		date_input1.datepicker({
+			format: 'mm/dd/yyyy',
+			orientation:"auto top",
+			container: container,
+			todayHighlight: true,
+			autoclose: true,
+		})
+		
+	})
+</script>
+	
+	
+ </div>
+</div>
+
+
+ </div>
+</div>
+  <script src="Bootstrap/js/bootstrap.min.js" > </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+
+	
+	<div class="container center" ng-contoller='restoranController'>
+	 <div class="row">
+	 	<div class="well poluProvidanBeo">
+	 		<p><h2>Evidencija zaposlenih</h2></p>
+	 	</div>
+	 </div>		
+	
+	
+	<div ng-show="prikazMeni" class="row row-eq-height" >
+ 				<div class="col-md-4">
+					<div class="panel panel-default velicina poluProvidanBeo">
+						<div class="panel-heading" style="text-align: center;">Dodaj radnika</div>
+			
+					<div class="panel-body">
+						
+							<input style="margin: auto;" class="img-responsive"  type="image" src="Slike/rsz_dodajradni.png" ng-click="prikaziDodajR()"/> 
+					
+					</div>
+				</div>
+				</div>    
+				<div class="col-md-4">
+					<div class="panel panel-default velicina poluProvidanBeo" >
+						<div class="panel-heading" style="text-align: center;">Raspored rada</div>
+			
+					<div class="panel-body">
+						
+						
+							<input style="margin: auto;" class="img-responsive" type="image" src="Slike/rsz_kalendar.png"/> 
+					
+					</div>
+				</div>
+				</div>  
+				<div class="col-md-4">
+					<div class="panel panel-default velicina poluprovidanBeo">
+						<div class="panel-heading" style="text-align: center;">Dodela reona</div>
+			
+					<div class="panel-body">
+				
+							<input style="margin: auto;" class="img-responsive" type="image" src="Slike/sto.jpg"/> 
+						
+					</div>
+				</div>
+				</div>  
+</div>
+	
+
+ <div class="container center" ng-controller='restoranController'>
+<div class="row" ng-show="dodavanjeRadnika">
+<div class="col-md-4 col-md-offset-4" >
+ <div class="well poluProvidanBeo">
+<form >
+  <table>
+   <tr>
+    <td>Ime:</td>
+    <td><input type="text" name="Ime" class="form-control" ng-model="gost.ime" /></td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+   </tr>
+    <tr>
+    <td>Prezime:</td>
+    <td><input type="text" name="prezime"  class="form-control" ng-model="gost.prezime"/></td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+   </tr>
+    <tr>
+    <td>Email adresa:</td>
+    <td><input type="email" name="emailAdresa"  class="form-control" ng-model="gost.email"/></td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+   </tr>  
+   <tr>
+    <td>Korisnicko ime:</td>
+    <td><input type="text" name="korisnickoIme" class="form-control" ng-model="gost.korisnickoIme"/></td>
+   </tr>
+   <tr> 
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+   </tr>
+   <tr>
+    <td>Sifra:</td>
+    <td><input type="password" name="sifra" class="form-control" ng-model="gost.sifra"/></td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+   </tr>
+   <tr>
+    <tr>
+    <td>Tip radnika:</td>
+    <td>
+     <select class="form-control" name="tipRadnika" ng-model="gost.vrstaKorisnika">
+      <option value="1">Konobar</option>
+      <option value="2">Sanker</option>
+      <option value="3">Kuvar</option>
+     </select>
+    </td>
+   </tr>
+   <tr>
+   </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td><input class="btn btn-success" type="submit" value="Dodaj" ng-click='dodajRadnika(gost)' /></td>
+   </tr>
+  </table>
+ </form>
+ </div>
+</div>
+ </div>
+</div>
+
+</div>

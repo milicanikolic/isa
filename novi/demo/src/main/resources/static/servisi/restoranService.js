@@ -48,5 +48,22 @@ app.factory('restoranService',['$http', function($http){
     restoran.dodajPice=function(novoPice,idRestorana){
     	return $http.post('/restoran/dodajPice/'+idRestorana,novoPice);
     }
+    
+    restoran.uzmiNamirnice=function(){
+    	return $http.get('/namirnica/prikaziNamirnice');
+    }
+    
+    restoran.dodajNamirnicu=function(namirnica){
+    	return $http.post('namirnica/dodajNamirnicu',namirnica);
+    }
+    
+    restoran.dodajPonudu=function(id,nam1,nam2,nam3,datumOd,datumDo){
+    	return $http.post('ponuda/dodajPonuduMenadzera/'+id+'/'+nam1+'/'+nam2+'/'+nam3+'/'+datumOd+'/'+datumDo);
+    }
+    
+    restoran.dodajPonudjaca=function(id, ponudjac){
+    	return $http.post('ponudjac/dodajPonudjaca/'+id,ponudjac);
+    }
+    
 	return restoran;
 }]);

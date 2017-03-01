@@ -1,5 +1,5 @@
 function proveraPraznihPoljaLogin() {
-		var dugme=document.getElementById("dugmeLogin");
+	/*	var dugme=document.getElementById("dugmeLogin");
 		var kIme=document.getElementById("imelogin").value;
 		var sifra=document.getElementById("sifralogin").value;
 		
@@ -37,7 +37,7 @@ function proveraPraznihPoljaLogin() {
 	        	dugme.disabled=false;
 	        	return true;
 	        }
-		
+		*/
 	}
 	
 	

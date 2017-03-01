@@ -152,7 +152,7 @@ private PrijateljstvaService prijateljstvaService;
  
   @RequestMapping(value="/login",method = RequestMethod.POST)
    public ResponseEntity<Korisnik> login(@RequestBody Korisnik korisnik){
-    
+    logger.info("usao u login");
    //ODMAH DODAJEMO PREDEFINISANOG ADMINA
  /* String ime= "Nina";
    String prezime="Manojlovic";

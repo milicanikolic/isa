@@ -76,8 +76,22 @@ $stateProvider.state('admin', {
 
 .state('evidencijaRadnika', {
 	url : '/evidencijaRadnika',
-	templateUrl : 'stranice/evidencijaRadnika.html',
+	templateUrl : 'stranice/evidencijaZaposlenih.html',
 	controller : 'restoranController'
 })
-
+.state('ponude', {
+	url : '/ponude',
+	templateUrl : 'stranice/ponude.html',
+	controller : 'restoranController'
+})
+.state('ponudjac', {
+	url : '/ponudjac',
+	templateUrl : 'stranice/profilPonudjac.html',
+	controller : 'ponudjacController'
+})
+.state('prikazIstorijePonuda', {
+	url : '/prikazIstorijePonuda',
+	templateUrl : 'stranice/istorijaPonuda.html',
+	controller : 'ponudjacController'
+})
 });

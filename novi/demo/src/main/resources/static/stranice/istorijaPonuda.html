@@ -1,0 +1,27 @@
+<div class="container center" ng-controller="ponudjacController" ng-init='uzmiIstoriju()'>
+	<div class="jumbotron">
+		<h2>Poslate ponude</h2>
+	</div>
+		<div class="row">
+			<div class="col-xs-4">
+				<div class="well poluProvidanBeo" ng-repeat="jedan in istorija">
+					<div class="panel panel-default">
+					<div class="panel-heading">{{ulogovan.menadzerRestorana.restoran.ime}}</div>
+  						<div class="panel-body">
+  							<table class="table table-stripped">
+  								<tr>
+  									<td>Rok isporuke: </td>
+  									<td>{{jedan.rokIsporuke}}</td>
+  								</tr>
+  								<tr>
+  									<td>Cena: </td>
+  									<td> {{jedan.cena}}</td>
+  								</tr>
+  							</table>
+  						</div>
+  						<div class="panel-footer">{{jedan.status}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

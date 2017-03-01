@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name="korisnici")
 @Inheritance(strategy=InheritanceType.JOINED)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Korisnik {
+public class Korisnik implements Serializable{
 
  
  @Column(name="ime", unique=false, nullable=false)

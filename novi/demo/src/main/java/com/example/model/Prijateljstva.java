@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="prijateljstva")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Prijateljstva {
+public class Prijateljstva implements Serializable{
 	
 	 @Id
 	 @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,7 +36,7 @@ public class Prijateljstva {
 	 @Column(name="status", unique=false, nullable=false)
 	 private StatusZahteva status;
 
-	 Prijateljstva(){}
+	 public Prijateljstva(){}
 	 
 	 
 
