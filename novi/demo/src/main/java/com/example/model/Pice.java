@@ -1,6 +1,8 @@
 package com.example.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,9 +11,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.example.enumeracije.StatusPica;
+import com.example.enumeracije.VrstaPica;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -25,19 +30,19 @@ public class Pice implements Serializable{
 	 */
 	private static final long serialVersionUID = 871796990671380670L;
 
-	public enum vrstaPica {
-		ALKOHOLNA, BEZALKOHOLNA, TOPLI_NAPICI, ZESTINA  
-	};
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Restoran restoran;
 	
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	private Sanker sanker;
+	@Column(name = "statusPica", unique = true, nullable = true)
+	 private  StatusPica statusPica;
+	 
+	 @ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="picaNaNarudzbini")
+	 private Set<GostNarudzbina> naNarudzbinama=new HashSet<GostNarudzbina>();
 	
 	@Column(name="vrsta_pica", unique=false, nullable=false)
-	private vrstaPica vrstaP;
+	private VrstaPica vrstaP;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -85,19 +90,11 @@ public class Pice implements Serializable{
 		this.restoran = restoran;
 	}
 
-	public Sanker getSanker() {
-		return sanker;
-	}
-
-	public void setSanker(Sanker sanker) {
-		this.sanker = sanker;
-	}
-
-	public vrstaPica getVrstaP() {
+	public VrstaPica getVrstaP() {
 		return vrstaP;
 	}
 
-	public void setVrstaP(vrstaPica vrstaP) {
+	public void setVrstaP(VrstaPica vrstaP) {
 		this.vrstaP = vrstaP;
 	}
 
@@ -107,6 +104,22 @@ public class Pice implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public StatusPica getStatusPica() {
+		return statusPica;
+	}
+
+	public void setStatusPica(StatusPica statusPica) {
+		this.statusPica = statusPica;
+	}
+
+	public Set<GostNarudzbina> getNaNarudzbinama() {
+		return naNarudzbinama;
+	}
+
+	public void setNaNarudzbinama(Set<GostNarudzbina> naNarudzbinama) {
+		this.naNarudzbinama = naNarudzbinama;
 	}
 
 	

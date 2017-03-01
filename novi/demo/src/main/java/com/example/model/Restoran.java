@@ -43,7 +43,19 @@ public class Restoran implements Serializable{
 	@Column(name="restoran_ocena", unique=false, nullable=true)
 	private double ocena;
 	
-	
+	@Column(name="brojOcenaRes", unique=false, nullable=false)
+	 private int brojOcenaRes;
+	 
+	 
+	 @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="restoran")
+	 private Set<Sto> stoloviURestoranu= new HashSet<Sto>();
+	 
+	 //za rastojanje
+	/*  @Column(name="lat", unique=false, nullable=false)
+	  private double latitude;
+	  @Column(name="lon", unique=false, nullable=false)
+	  private double longitude;
+	*/
 	
 	
 	/*	@OneToMany(cascade = CascadeType.ALL)
@@ -84,6 +96,22 @@ public class Restoran implements Serializable{
 
 	public void setOcena(double ocena) {
 		this.ocena = ocena;
+	}
+
+	public int getBrojOcenaRes() {
+		return brojOcenaRes;
+	}
+
+	public void setBrojOcenaRes(int brojOcenaRes) {
+		this.brojOcenaRes = brojOcenaRes;
+	}
+
+	public Set<Sto> getStoloviURestoranu() {
+		return stoloviURestoranu;
+	}
+
+	public void setStoloviURestoranu(Set<Sto> stoloviURestoranu) {
+		this.stoloviURestoranu = stoloviURestoranu;
 	}
 
 

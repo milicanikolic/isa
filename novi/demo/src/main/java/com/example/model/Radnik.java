@@ -1,12 +1,18 @@
 package com.example.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.example.enumeracije.VrsteKorisnika;
@@ -24,6 +30,18 @@ public class Radnik extends Korisnik implements Serializable{
  private static final long serialVersionUID = 7909432708390532786L;
 
   
+ @ManyToMany(cascade=CascadeType.ALL, fetch= FetchType.LAZY)
+ private Set<Sto> sluziStolove=new HashSet<Sto>();
+ 
+ @ManyToOne(cascade=CascadeType.ALL, fetch= FetchType.LAZY)
+ private Restoran restoran;
+ 
+ @Column(name="ocenaKonobara", unique=false, nullable=true)
+ private double ocenaKonobara;
+ 
+ @Column(name="brojOcenaKonobara", unique=false, nullable=true)
+ private int brojOcenaKonobar;
+ 
   @Column(name="ulogovanPrviPut", unique=false, nullable=false)
   private boolean ulogovanPrviPut=true;
 
@@ -92,6 +110,54 @@ public boolean isUlogovanPrviPut() {
 
 public void setUlogovanPrviPut(boolean ulogovanPrviPut) {
  this.ulogovanPrviPut = ulogovanPrviPut;
+}
+
+
+
+public Set<Sto> getSluziStolove() {
+	return sluziStolove;
+}
+
+
+
+public void setSluziStolove(Set<Sto> sluziStolove) {
+	this.sluziStolove = sluziStolove;
+}
+
+
+
+public Restoran getRestoran() {
+	return restoran;
+}
+
+
+
+public void setRestoran(Restoran restoran) {
+	this.restoran = restoran;
+}
+
+
+
+public double getOcenaKonobara() {
+	return ocenaKonobara;
+}
+
+
+
+public void setOcenaKonobara(double ocenaKonobara) {
+	this.ocenaKonobara = ocenaKonobara;
+}
+
+
+
+public int getBrojOcenaKonobar() {
+	return brojOcenaKonobar;
+}
+
+
+
+public void setBrojOcenaKonobar(int brojOcenaKonobar) {
+	this.brojOcenaKonobar = brojOcenaKonobar;
 }
 
  

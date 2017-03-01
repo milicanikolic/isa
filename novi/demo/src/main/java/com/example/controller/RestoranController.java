@@ -71,7 +71,8 @@ private HttpSession sesija;
  @RequestMapping(value="/dodaj",method = RequestMethod.POST)
  public ResponseEntity<Restoran> dodajRestoran(@RequestBody Restoran restoran){
   
-  
+  restoran.setBrojOcenaRes(0);
+  restoran.setOcena(0.0);
   
   restoranService.sacuvaj(restoran);
  
@@ -133,6 +134,8 @@ private HttpSession sesija;
  public ResponseEntity<Restoran> izmeniRestoran(@PathVariable Long id, @RequestBody Restoran restoran){
   Restoran restoranZaIzmenu= restoranService.getRestoran(id);
   restoran.setId(restoranZaIzmenu.getId());
+  restoran.setBrojOcenaRes(restoranZaIzmenu.getBrojOcenaRes());
+  restoran.setOcena(restoranZaIzmenu.getOcena());
   restoranService.sacuvaj(restoran);
  
  return new ResponseEntity<Restoran>(restoran,HttpStatus.CREATED);
@@ -158,6 +161,8 @@ private HttpSession sesija;
   }
   if(ispravno){
    Jelo jeloZaIzmenu=jeloService.getJelo(idJelo);
+   jelo.setOcena(jeloZaIzmenu.getOcena());
+   jelo.setBrojOcenaJelo(jeloZaIzmenu.getBrojOcenaJelo());
    jelo.setId(jeloZaIzmenu.getId());
    jeloService.sacuvaj(jelo);
    
@@ -347,6 +352,8 @@ private HttpSession sesija;
   Restoran trenutniRestoran=restoranService.getRestoran(idRestorana);
   List<Jelo> svaJela=jeloService.getAllJelo();
   List<Jelo> jelaURestoranu=new ArrayList<Jelo>();
+  jelo.setBrojOcenaJelo(0);
+  jelo.setOcena(0.0);
   boolean okej=true;
   
   if(trenutniRestoran!=null){

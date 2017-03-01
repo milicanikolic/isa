@@ -1,6 +1,8 @@
 package com.example.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,11 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
+import com.example.enumeracije.StatusJela;
+import com.example.enumeracije.VrstaJela;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -26,18 +31,23 @@ public class Jelo implements Serializable{
 	 */
 	private static final long serialVersionUID = 6888982385440601177L;
 
-	public enum vrstaJela {
-		SALATA, KUVANO_JELO, PECENO_JELO
-	};
 	
 	@ManyToOne (cascade={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	private Restoran restoran;
 	
-	@ManyToOne(cascade={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch= FetchType.LAZY)
-	private Kuvar kuvar;
+	@Column(name = "brojOcenaJelo", unique = false, nullable = false)
+	 private int brojOcenaJelo;
+	@Column(name = "statusJela", unique = true, nullable = true)
+	 private StatusJela statusJela;
+	 
+	 
+	 
+	 @ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="jelaNaNarudzbini")
+	 private Set<GostNarudzbina> naNarudzbinama=new HashSet<GostNarudzbina>();
+
 	
 	@Column(name="vrsta_jela", unique=false, nullable=false)
-	private vrstaJela vrstaJela;
+	private VrstaJela vrstaJela;
 	@Column(name = "naziv", unique = true, nullable = false)
 	private String naziv;
 	@Column(name = "opis", unique = false, nullable = true)
@@ -93,21 +103,15 @@ public class Jelo implements Serializable{
 		this.id = id;
 	}
 
-	public vrstaJela getVrstaJela() {
+	public VrstaJela getVrstaJela() {
 		return vrstaJela;
 	}
 
-	public void setVrstaJela(vrstaJela vrstaJela) {
+	public void setVrstaJela(VrstaJela vrstaJela) {
 		this.vrstaJela = vrstaJela;
 	}
 
-	public Kuvar getKuvar() {
-		return kuvar;
-	}
 
-	public void setKuvar(Kuvar kuvar) {
-		this.kuvar = kuvar;
-	}
 
 	public Restoran getRestoran() {
 		return restoran;
@@ -115,6 +119,30 @@ public class Jelo implements Serializable{
 
 	public void setRestoran(Restoran restoran) {
 		this.restoran = restoran;
+	}
+
+	public int getBrojOcenaJelo() {
+		return brojOcenaJelo;
+	}
+
+	public void setBrojOcenaJelo(int brojOcenaJelo) {
+		this.brojOcenaJelo = brojOcenaJelo;
+	}
+
+	public StatusJela getStatusJela() {
+		return statusJela;
+	}
+
+	public void setStatusJela(StatusJela statusJela) {
+		this.statusJela = statusJela;
+	}
+
+	public Set<GostNarudzbina> getNaNarudzbinama() {
+		return naNarudzbinama;
+	}
+
+	public void setNaNarudzbinama(Set<GostNarudzbina> naNarudzbinama) {
+		this.naNarudzbinama = naNarudzbinama;
 	}
 	
 }

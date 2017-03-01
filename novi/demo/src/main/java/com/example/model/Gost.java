@@ -1,12 +1,17 @@
 package com.example.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.enumeracije.VrsteKorisnika;
@@ -21,6 +26,9 @@ public class Gost extends Korisnik implements Serializable{
   * 
   */
  private static final long serialVersionUID = 1666304099366498432L;
+ 
+ @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="gostNarucio")
+ private Set<GostNarudzbina> narudzbine= new HashSet<GostNarudzbina>();
  
   @Column(name="aktiviran", unique=false, nullable=false)
   private boolean aktiviran=false;
@@ -56,6 +64,17 @@ public class Gost extends Korisnik implements Serializable{
  public void setId(Long id) {
   this.id = id;
  }
+
+
+public Set<GostNarudzbina> getNarudzbine() {
+	return narudzbine;
+}
+
+
+public void setNarudzbine(Set<GostNarudzbina> narudzbine) {
+	this.narudzbine = narudzbine;
+}
+ 
   
   
  }
