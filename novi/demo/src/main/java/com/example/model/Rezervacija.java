@@ -2,6 +2,7 @@ package com.example.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Time;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.enumeracije.StatusRezervacije;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -32,23 +34,28 @@ public class Rezervacija implements Serializable{
 	  private Long id;
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch= FetchType.LAZY)
+	@JsonIgnore
 	private Gost gost;
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch= FetchType.LAZY)
+	@JsonIgnore
 	private Restoran restoran;
 	
 	@Column(name="datumVreme", unique=false, nullable=false)
-	private Date datumVreme;
+	private Date datum;
 	
 	@Column(name="vremeTrajanja", unique=false, nullable=false)
 	private int vremeTrajanja;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch= FetchType.LAZY)
+	@JsonIgnore
 	private Sto rezervisanSto;
 	
 	@Column(name="statusRez", unique=false, nullable=false)
 	private StatusRezervacije statusRez;
 	
+	@Column(name="vremeRez", unique=false, nullable=false)
+	private String vreme;
 	
 
 	public int getVremeTrajanja() {
@@ -89,12 +96,12 @@ public class Rezervacija implements Serializable{
 		this.restoran = restoran;
 	}
 
-	public Date getDatumVreme() {
-		return datumVreme;
+	public Date getDatum() {
+		return datum;
 	}
 
-	public void setDatumVreme(Date datumVreme) {
-		this.datumVreme = datumVreme;
+	public void setDatum(Date datumVreme) {
+		this.datum = datumVreme;
 	}
 
 	public Sto getRezervisanSto() {
@@ -114,7 +121,15 @@ public class Rezervacija implements Serializable{
 	public void setStatusRez(StatusRezervacije statusRez) {
 		this.statusRez = statusRez;
 	}
-	
+
+	public String getVreme() {
+		return vreme;
+	}
+
+	public void setVreme(String vreme) {
+		this.vreme = vreme;
+	}
+
 	
 
 }

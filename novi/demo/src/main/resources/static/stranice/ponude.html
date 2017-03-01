@@ -11,6 +11,7 @@
 	 <div class="row">
 	 	<div class="well poluProvidanBeo">
 	 		<p><h2>Ponude</h2></p>
+	 		<p><a ng-click="prikaziDodajPonudu()" href="" class="btn dodajPotvrdi">Dodaj novu ponudu</a></p>
 	 	</div>
 	 </div>		
 	
@@ -18,11 +19,11 @@
 	<div ng-show="prikazMeniPonude" class="row row-eq-height" >
  				<div class="col-md-4">
 					<div class="panel panel-default velicina poluProvidanBeo">
-						<div class="panel-heading" style="text-align: center;">Dodaj ponudu</div>
+						<div class="panel-heading" style="text-align: center;">Pregled ponuda</div>
 			
 					<div class="panel-body">
 						
-							<input style="margin: auto;" class="img-responsive"  type="image" src="Slike/rsz_dodajradni.png" ng-click="prikaziDodajPonudu()"/> 
+							<input style="margin: auto;" class="img-responsive"  type="image" src="Slike/lupa.jpg" /> 
 					
 					</div>
 				</div>
@@ -34,7 +35,7 @@
 					<div class="panel-body">
 						
 						
-							<input style="margin: auto;" class="img-responsive" type="image" src="Slike/rsz_kalendar.png" ng-click="prikaziDodajPonudjaca()"/> 
+							<input style="margin: auto;" class="img-responsive" type="image" src="Slike/rsz_editworker.png" ng-click="prikaziDodajPonudjaca()"/> 
 					
 					</div>
 				</div>
@@ -45,7 +46,7 @@
 			
 					<div class="panel-body">
 				
-							<input style="margin: auto;" class="img-responsive" type="image" src="Slike/sto.jpg" ng-click="prikaziDodajNamirnicu()"/> 
+							<input style="margin: auto;" class="img-responsive" type="image" src="Slike/rsz_aa.png" ng-click="prikaziDodajNamirnicu()"/> 
 						
 					</div>
 				</div>
@@ -69,7 +70,7 @@
    </tr>
    <tr>
     <td>&nbsp;</td>
-    <td><input class="btn btn-success" type="submit" value="Dodaj" ng-click="dodajNamirnicu(namirnica)"/></td>
+    <td><input class="btn dodajPotvrdi" type="submit" value="Dodaj" ng-click="dodajNamirnicu(namirnica)"/></td>
    </tr>
   </table>
  </form>
@@ -92,7 +93,7 @@
 
  </div>
  
- <a href="" class="btn" ng-click="dodavanjeNamirnicaKraj()">Kraj</a>
+ <a href="" class="btn dodajPotvrdi" ng-click="dodavanjeNamirnicaKraj()">Kraj</a>
 </div>
 
 
@@ -110,35 +111,35 @@
 <div ng-show="dodavanjePonude" class="container center ">
 <div class="row">
 <div class="col-md-4 " >
- <div class="well poluprovidanBeo bootstrap-iso">
+ <div class="well bootstrap-iso poluProvidanBeo">
  	<table>
  	<tr>
  		<td>
- 			<div class="panel panel-default">
-  				<div class="panel-body">
+ 		<div class="panel panel-default">
+  			<div class="panel-body poluProvidanBeo">
 
   						
 Namirnica 1:<span>&nbsp;</span> <select class="form-control" name="tipRadnika" ng-model="nam1">
       <option ng-repeat="namirnica in sveNamirnice" value={{namirnica.id}} >{{namirnica.ime}}</option>
 
      </select>
-					</div>
+			</div>
 					
-					<div >
+				<div>
   						
 Namirnica 2:<span>&nbsp;</span> <select class="form-control" name="tipRadnika"  ng-model="nam2">
       <option ng-repeat="namirnica in sveNamirnice" value={{namirnica.id}}>{{namirnica.ime}}</option>
      </select>
 					</div>
 					
-					<div >
+					<div>
   						
  Namirnica 3:<span>&nbsp;</span> <select class="form-control" name="tipRadnika" ng-model="nam3">
       <option ng-repeat="namirnica in sveNamirnice" value={{namirnica.id}}>{{namirnica.ime}}</option>
      </select>
 					
 			</div>
- 		
+ 		</div>
  		</td>
  	</tr>
  	
@@ -168,7 +169,7 @@ Namirnica 2:<span>&nbsp;</span> <select class="form-control" name="tipRadnika"  
      		
      		<div class="form-group ">
       		<label class="control-label col-sm-2 requiredField" for="date2">
-       				Vazi od
+       				Vazi do
        		<span class="asteriskField">
         	*
        		</span>
@@ -187,9 +188,7 @@ Namirnica 2:<span>&nbsp;</span> <select class="form-control" name="tipRadnika"  
      </tr>
      
      <tr>
-     </div>	
-					<a href="" class="btn btn-success"  ng-click="dodajPonudu()">Dodaj</a>
-  				</div>
+       <td colspan="2" align="right"><a href="" class="btn dodajPotvrdi"  ng-click="dodajPonudu()">Dodaj</a></td>			
      </tr>
      
      </table>
@@ -285,7 +284,7 @@ Namirnica 2:<span>&nbsp;</span> <select class="form-control" name="tipRadnika"  
    <tr>
     <td>&nbsp;</td>
     <td>
-    	<a href="" class="btn" ng-click='dodajPonudjaca(ponudjac)'>Dodaj</a>
+    	<a href="" class="btn dodajPotvrdi" ng-click='dodajPonudjaca(ponudjac)'>Dodaj</a>
     </td>
    </tr>
   </table>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css" >
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="Bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="/myCss.css">
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key= AIzaSyAYuvRcV9mq9Wuhve9eP_Nr_D4c8tEwtFg "></script>
+<!--  <script src="https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAYuvRcV9mq9Wuhve9eP_Nr_D4c8tEwtFg"></script> -->
+
+<script src="//code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+var map;
+var markers = []; 
+
+$(function () {
+    initialize();
+});
+
+
+function initialize() {
+	
+	navigator.geolocation.getCurrentPosition(function(location) {
+		//console.log(location.coords.latitude);
+		//console.log(location.coords.longitude);
+		//console.log(location.coords.accuracy);
+	});
+	
+	
+	var geocoder = new google.maps.Geocoder();
+	var address = "new york";
+
+	geocoder.geocode( { 'address': address}, function(results, status) {
+
+	if (status == google.maps.GeocoderStatus.OK) {
+	    var latitude = results[0].geometry.location.lat;
+	    var longitude = results[0].geometry.location.lng;
+	    console.log(latitude);
+	    console.log(longitude);
+	    //alert(latitude, longitude);
+	    } 
+	}); 
+	
+	
+	
+	
+	
+    var options = {
+        mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.TERRAIN],
+            style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+        }
+    }
+
+    map = new google.maps.Map(document.getElementById('map'));
+    map.setZoom(0);
+    map.setCenter(new google.maps.LatLng(45.269087780500726, 19.830322265625));
+    
+    map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+
+   addMarker(new google.maps.LatLng(45.0502402697946, 19.84130859375), "Ruma");
+addMarker(new google.maps.LatLng(45.236217535866025, 19.40185546875), "Backa");
+}
+
+function addMarker(latlng, myTitle) {
+var	icon= String.fromCharCode(markers.length + 65);
+markers.push(new google.maps.Marker({
+ position: latlng,
+ map: map,
+ title: myTitle,
+ icon: 'http://maps.google.com/mapfiles/marker'+icon+'.png'
+    }));
+}
+
+
+function distance(lat1, lon1, lat2, lon2) {
+	var radlat1 = Math.PI * lat1/180
+	var radlat2 = Math.PI * lat2/180
+	var theta = lon1-lon2
+	var radtheta = Math.PI * theta/180
+	var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+	dist = Math.acos(dist)
+	dist = dist * 180/Math.PI
+	dist = dist * 60 * 1.1515
+	dist = dist * 1.609344
+	
+	return dist
+}
+
+
+
+ 
+</script>
+
+
+</head>
+<body>
+
+
+ <div id="map_wrap" align="center">
+    <div id="map" ></div>
+</div>
+
+ <script src="Bootstrap/js/bootstrap.min.js" > </script>
+</body>
+</html>

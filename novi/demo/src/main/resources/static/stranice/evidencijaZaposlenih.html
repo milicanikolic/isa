@@ -1,118 +1,148 @@
-
-	
-	<div class="container center" ng-contoller='restoranController'>
-	 <div class="row">
-	 	<div class="well poluProvidanBeo">
-	 		<p><h2>Evidencija zaposlenih</h2></p>
-	 	</div>
-	 </div>		
-	
-	
-	<div ng-show="prikazMeni" class="row row-eq-height" >
- 				<div class="col-md-4">
-					<div class="panel panel-default velicina poluProvidanBeo">
-						<div class="panel-heading" style="text-align: center;">Dodaj radnika</div>
-			
-					<div class="panel-body">
-						
-							<input style="margin: auto;" class="img-responsive"  type="image" src="Slike/rsz_dodajradni.png" ng-click="prikaziDodajR()"/> 
-					
-					</div>
-				</div>
-				</div>    
-				<div class="col-md-4">
-					<div class="panel panel-default velicina poluProvidanBeo" >
-						<div class="panel-heading" style="text-align: center;">Raspored rada</div>
-			
-					<div class="panel-body">
-						
-						
-							<input style="margin: auto;" class="img-responsive" type="image" src="Slike/rsz_kalendar.png"/> 
-					
-					</div>
-				</div>
-				</div>  
-				<div class="col-md-4">
-					<div class="panel panel-default velicina poluprovidanBeo">
-						<div class="panel-heading" style="text-align: center;">Dodela reona</div>
-			
-					<div class="panel-body">
-				
-							<input style="margin: auto;" class="img-responsive" type="image" src="Slike/sto.jpg"/> 
-						
-					</div>
-				</div>
-				</div>  
+<div ng-include src="'/meni/meniOstali.html'"></div>
+ 
+ <div class="container center" ng-contoller='restoranController' ng-init="uzmiRestoran()">
+  <div class="row">
+   <div class="well poluProvidanBeo">
+    <p><h2>Evidencija zaposlenih</h2></p>
+   </div>
+  </div>  
+ 
+ 
+ <div ng-show="prikazMeni" class="row row-eq-height" >
+     <div class="col-md-4">
+     <div class="panel panel-default velicina poluProvidanBeo">
+      <div class="panel-heading" style="text-align: center;">Dodaj radnika</div>
+   
+     <div class="panel-body">
+      
+       <input style="margin: auto;" class="img-responsive"  type="image" src="Slike/rsz_editworker.png" ng-click="prikaziDodajR()"/> 
+     
+     </div>
+    </div>
+    </div>    
+    <div class="col-md-4">
+     <div class="panel panel-default velicina poluProvidanBeo" >
+      <div class="panel-heading" style="text-align: center;">Raspored rada</div>
+   
+     <div class="panel-body">
+      
+      
+       <input style="margin: auto;" class="img-responsive" type="image" src="Slike/rsz_kalendar2.jpg"/> 
+     
+     </div>
+    </div>
+    </div>  
+    <div class="col-md-4">
+     <div class="panel panel-default velicina poluprovidanBeo">
+      <div class="panel-heading" style="text-align: center;">Dodela smena</div>
+   
+     <div class="panel-body">
+    
+       <input style="margin: auto;" class="img-responsive" type="image" src="Slike/rsz_editworker.png"/> 
+      
+     </div>
+    </div>
+    </div>  
 </div>
-	
+ 
 
- <div class="container center" ng-controller='restoranController'>
+ 
+<div class="container center" ng-controller='restoranController'>
 <div class="row" ng-show="dodavanjeRadnika">
 <div class="col-md-4 col-md-offset-4" >
- <div class="well poluProvidanBeo">
+ <div class="well poluProvidanCrni">
 <form >
   <table>
    <tr>
-    <td>Ime:</td>
+    <td style="color:white;">Ime:</td>
     <td><input type="text" name="Ime" class="form-control" ng-model="gost.ime" /></td>
    </tr>
    <tr>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
    </tr>
     <tr>
-    <td>Prezime:</td>
+    <td style="color:white;">Prezime:</td>
     <td><input type="text" name="prezime"  class="form-control" ng-model="gost.prezime"/></td>
    </tr>
    <tr>
     <td>&nbsp;</td>
+   </tr>
+   <tr>
+     <td style="color:white;">Datum rodjenja:</td>
+     <td><input class="form-control" ng-model="gost.datumRodjenja" type="date" placeholder="DD-MM-YYYY" /></td>
+   </tr>
+   <tr>
     <td>&nbsp;</td>
    </tr>
     <tr>
-    <td>Email adresa:</td>
+    <td style="color:white;">Email adresa:</td>
     <td><input type="email" name="emailAdresa"  class="form-control" ng-model="gost.email"/></td>
    </tr>
    <tr>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
    </tr>  
    <tr>
-    <td>Korisnicko ime:</td>
+    <td style="color:white;">Korisnicko ime:</td>
     <td><input type="text" name="korisnickoIme" class="form-control" ng-model="gost.korisnickoIme"/></td>
    </tr>
-   <tr> 
    <tr>
-    <td>&nbsp;</td>
     <td>&nbsp;</td>
    </tr>
    <tr>
-    <td>Sifra:</td>
+    <td style="color:white;">Sifra:</td>
     <td><input type="password" name="sifra" class="form-control" ng-model="gost.sifra"/></td>
    </tr>
    <tr>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
    </tr>
    <tr>
     <tr>
-    <td>Tip radnika:</td>
+    <td style="color:white;">Tip radnika:</td>
     <td>
      <select class="form-control" name="tipRadnika" ng-model="gost.vrstaKorisnika">
       <option value="1">Konobar</option>
       <option value="2">Sanker</option>
-      <option value="3">Kuvar</option>
+      <option value="3">Kuvar za salate</option>
+      <option value="4">Kuvar za pecena jela</option>
+      <option value="5">Kuvar za kuvana jela</option>
      </select>
     </td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+   </tr>
+   <tr>
+     <td style="color:white;">Izaberite konfekcijski broj</td>
+     <td>
+      <select class="form-control" name="tipRadnika" ng-model="gost.konfekcijskiBroj">
+         <option value="s">S</option>
+         <option value="m">M</option>
+         <option value="l">L</option>
+         <option value="xl">XL</option>
+           </select>
+     
+     </td>
    </tr>
    <tr>
    </tr>
     <tr>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
+   </tr>
+    <tr>
+     <td style="color:white;">Izaberite velicinu obuce:</td>
+     <td>
+      <select class="form-control" name="tipRadnika" ng-model="gost.velicinaObuce">
+         <option value="36">36</option>
+         <option value="37">37</option>
+         <option value="38">38</option>
+         <option value="39">39</option>
+         <option value="40">40</option>
+     </select>
+     </td>
    </tr>
    <tr>
     <td>&nbsp;</td>
-    <td><input class="btn btn-success" type="submit" value="Dodaj" ng-click='dodajRadnika(gost)' /></td>
+    <td><input class="btn dodajPotvrdi" type="submit" value="Dodaj" ng-click='dodajRadnika(gost)' /></td>
    </tr>
   </table>
  </form>
@@ -120,5 +150,6 @@
 </div>
  </div>
 </div>
+ 
 
 </div>

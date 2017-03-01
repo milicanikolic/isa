@@ -107,11 +107,9 @@ private StoService stoService;
 		
 		 Sto sto=new Sto();
 		 sto.setBrojStola(i);
-		 if(i<3){
-			sto.setSlobodan(false);	
-		 }else{
-			 sto.setSlobodan(true);	
-		 }
+		
+		sto.setSlobodan(true);	
+		 
 		 
 		 sto.setAktivan(true);
 		 if(i<=14){

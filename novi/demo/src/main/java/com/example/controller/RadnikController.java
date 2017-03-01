@@ -20,10 +20,13 @@ import com.example.enumeracije.VrstaJela;
 import com.example.enumeracije.VrsteKorisnika;
 import com.example.model.GostNarudzbina;
 import com.example.model.Jelo;
+import com.example.model.MenadzerRestorana;
 import com.example.model.Pice;
 import com.example.model.Radnik;
+import com.example.model.Restoran;
 import com.example.service.JeloService;
 import com.example.service.KorisnikService;
+import com.example.service.MenadzerRestoranaService;
 import com.example.service.NarudzbinaService;
 import com.example.service.PiceService;
 import com.example.service.RadnikService;
@@ -49,34 +52,39 @@ public class RadnikController {
 	
 	@Autowired
 	private JeloService jeloService;
-		
+	@Autowired
+	 private MenadzerRestoranaService menadzerService;
 	
-	 @RequestMapping(value="/dodajRadnika/",method = RequestMethod.POST)
-	 public ResponseEntity<Radnik> dodajRadnika(@RequestBody Radnik radnik){
-	  
-	  List<Radnik> sviRadnici= radnikService.getAllRadnik();
-	  boolean ispravan=true;
-	  
-	  for(Radnik r: sviRadnici){
-	   if(r.getKorisnickoIme().equals(radnik.getKorisnickoIme()) || r.getEmail().equals(radnik.getEmail())){
-	    ispravan= false;
+	 @RequestMapping(value="/dodajRadnika/{idMenadzer}",method = RequestMethod.POST)
+	  public ResponseEntity<Radnik> dodajRadnika(@RequestBody Radnik radnik, @PathVariable Long idMenadzer){
+	   
+	   
+	   MenadzerRestorana men=menadzerService.getMenadzerRestorana(idMenadzer);
+	   Restoran restoran=men.getRestoran();
+	   List<Radnik> sviRadnici= radnikService.getAllRadnik();
+	   boolean ispravan=true;
+	   
+	   for(Radnik r: sviRadnici){
+	    if(r.getKorisnickoIme().equals(radnik.getKorisnickoIme()) || r.getEmail().equals(radnik.getEmail())){
+	     ispravan= false;
+	    }
 	   }
-	  }
-	  if(ispravan){
-	   radnik.setUlogovanPrviPut(true);
-	   if(radnik.getVrstaKorisnika().equals(VrsteKorisnika.KONOBAR)){
-		  radnik.setBrojOcenaKonobar(0);
-		  radnik.setOcenaKonobara(0.0);
+	   if(ispravan){
+	    radnik.setUlogovanPrviPut(true);
+	    radnik.setRestoran(restoran);
+	    if(radnik.getVrstaKorisnika().equals(VrsteKorisnika.KONOBAR)){
+	    radnik.setBrojOcenaKonobar(0);
+	    radnik.setOcenaKonobara(0.0);
+	    }
+	    
+	    korisnikService.sacuvaj(radnik);
+	    radnikService.save(radnik);
+	    return new ResponseEntity<Radnik>(radnik,HttpStatus.CREATED);
+	   }else{
+	    return new ResponseEntity<Radnik>(radnik,HttpStatus.BAD_REQUEST);
 	   }
 	   
-	   korisnikService.sacuvaj(radnik);
-	   radnikService.save(radnik);
-	   return new ResponseEntity<Radnik>(radnik,HttpStatus.CREATED);
-	  }else{
-	   return new ResponseEntity<Radnik>(radnik,HttpStatus.BAD_REQUEST);
 	  }
-	  
-	 }
 	 
 	 @RequestMapping(value="/resetujSifruRadnik/{idPonudjac}/{sifra}",method = RequestMethod.POST)
 	 public void resetujSifru( @PathVariable Long idRadnik,@PathVariable String sifra){
@@ -92,36 +100,39 @@ public class RadnikController {
 	
 	
 	
-	@RequestMapping(value="/izmeniRadnika/{id}",method = RequestMethod.PUT)
-	public ResponseEntity<Radnik> izmeniRadnika(@PathVariable Long id,@RequestBody Radnik radnik){
-		
-		Radnik radnikZaIzmenu=radnikService.getRadnik(id);
-		
-		
-		List<Radnik> sviRadnici= radnikService.getAllRadnik();
-		sviRadnici.remove(radnikZaIzmenu);
-		boolean ispravan=true;
-		
-		for(Radnik r: sviRadnici){
-			if(r.getKorisnickoIme().equals(radnik.getKorisnickoIme()) || r.getEmail().equals(radnik.getEmail())){
-				ispravan= false;
-			}
-		}
-		if(ispravan){
-			
-			radnik.setId(radnikZaIzmenu.getId());
-			if(radnik.getVrstaKorisnika().equals(VrsteKorisnika.KONOBAR)){
-				radnik.setOcenaKonobara(radnikZaIzmenu.getOcenaKonobara());
-				radnik.setBrojOcenaKonobar(radnikZaIzmenu.getBrojOcenaKonobar());
-			}
-			korisnikService.sacuvaj(radnik);
-			radnikService.save(radnik);
-		return new ResponseEntity<Radnik>(radnik,HttpStatus.CREATED);
-		}
-		else {
-			return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
-		}
-	}
+	 @RequestMapping(value="/izmeniRadnika/{id}",method = RequestMethod.PUT)
+	 public ResponseEntity<Radnik> izmeniRadnika(@PathVariable Long id,@RequestBody Radnik radnik){
+	  
+	  Radnik radnikZaIzmenu=radnikService.getRadnik(id);
+	  Radnik rad=radnikService.getRadnik(radnik.getId());
+	  
+	  List<Radnik> sviRadnici= radnikService.getAllRadnik();
+	  sviRadnici.remove(rad);
+	  boolean ispravan=true;
+	  
+	  for(Radnik r: sviRadnici){
+	   if(r.getKorisnickoIme().equals(radnik.getKorisnickoIme()) || r.getEmail().equals(radnik.getEmail())){
+	    ispravan= false;
+	   }
+	  }
+	  if(ispravan){
+	   
+	   radnik.setId(radnikZaIzmenu.getId());
+	   radnik.setDatumRodjenja(rad.getDatumRodjenja());
+	   radnik.setKonfekcijskiBroj(rad.getKonfekcijskiBroj());
+	   radnik.setVelicinaObuce(radnik.getVelicinaObuce());
+	   if(radnik.getVrstaKorisnika().equals(VrsteKorisnika.KONOBAR)){
+	    radnik.setOcenaKonobara(radnikZaIzmenu.getOcenaKonobara());
+	    radnik.setBrojOcenaKonobar(radnikZaIzmenu.getBrojOcenaKonobar());
+	   }
+	   korisnikService.sacuvaj(radnik);
+	   radnikService.save(radnik);
+	  return new ResponseEntity<Radnik>(radnik,HttpStatus.CREATED);
+	  }
+	  else {
+	   return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+	  }
+	 }
 	
 	@RequestMapping(value="/dodajNarudzbinu/{idKonobara}",method = RequestMethod.POST)
 	public ResponseEntity<List<GostNarudzbina>> dodajNarudzbinu(@RequestBody GostNarudzbina narudzbina, @PathVariable Long idKonobara){

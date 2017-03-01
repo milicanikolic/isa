@@ -24,8 +24,8 @@ app.controller('restoranController', function ($scope,$window,$rootScope,restora
 					
 					restoranService.izmiStolove($scope.jedanRestoran.id)
 					.success(function(data){
-						$scope.sviStolovi=data;
-						console.log($scope.sviStolovi);
+						//$scope.sviStolovi=data;
+						//console.log($scope.sviStolovi);
 					})
 					
 					
@@ -184,7 +184,11 @@ app.controller('restoranController', function ($scope,$window,$rootScope,restora
 		$scope.dodavanjeRadnika=1;
 	};
 	$scope.dodajRadnika=function(gost){
-		
+		console.log(gost);
+		restoranService.dodajRadnika($scope.ulogovan.id,gost)
+		.success(function(data){
+			console.log("dodaj radnika");
+		})
 	}
 	$scope.prikaziponudeMeni=function(){
 		$window.location.href = '#/ponude';
@@ -268,11 +272,21 @@ app.controller('restoranController', function ($scope,$window,$rootScope,restora
 		$window.location.href = '#/rezervacijaStola';
 	}
 	
-	$scope.pritisnuto=function(id){
-		console.log("pritisnutoooo: "+id);
+	$scope.pritisnuto=function(idSto){
+		restoranService.rezervisi2($scope.ulogovan.id,$scope.jedanRestoran.id,$scope.datum,$scope.vreme,$scope.trajanje,idSto)
+		.success(function(data){
+			$scope.istorija=data;
+			console.log("reazerviso");
+			console.log($scope.istorija);
+		})
 	}
 	$scope.rezervisi1=function(){
 		$scope.izborDatuma=0;
 		$scope.prikazRasporeda=1;
+		restoranService.rezervisi1($scope.jedanRestoran.id,$scope.datum,$scope.vreme,$scope.trajanje)
+		.success(function(data){
+			$scope.sviStolovi=data;
+			console.log($scope.sviStolovi);
+		})
 	}
 });

@@ -1,0 +1,132 @@
+<div class="container center" ng-controller="radnikController" ng-init="initRadnika()">
+	 <div class="row">
+	 	<div class="well poluProvidanCrni">
+	 		<p><h2 style="color:white;">{{ulogovan.vrstaKorisnika}} </h2></p>
+	 		<p><button data-toggle="collapse" data-target="#prikaziPodatke" class="btn dodajPotvrdi">Prikaži podatke</button></p>
+	 		<div id="prikaziPodatke" class="collapse">
+	 			<p style="color:white;">Ime: <b>{{ulogovan.ime}}</b></p>
+	 			<p style="color:white;">Prezime: <b>{{ulogovan.prezime}}</b></p>
+	 			<p style="color:white;">Email: <b>{{ulogovan.email}}</b></p>
+	 			<p style="color:white;">Korisnicko ime: <b>{{ulogovan.korisnickoIme}}</b></p>
+	 		</div>
+	 	</div>
+	 </div>		
+	
+	
+	<div ng-show="radnikOpcije" class="row row-eq-height" >
+ 				<div class="col-md-4">
+					<div class="panel panel-default velicina poluProvidanCrni">
+						<div class="panel-heading" style="text-align: center;">Izmeni podatke</div>
+			
+					<div class="panel-body">
+						<form >
+							
+							<input style="margin: auto;" class="img-responsive"  type="image" src="Slike/rsz_editworker.png" ng-click="prikaziIzmenaRadnika()"/> 
+						</form>
+					</div>
+				</div>
+				</div>    
+				<div class="col-md-4">
+					<div class="panel panel-default velicina poluProvidanCrni" >
+						<div class="panel-heading" style="text-align: center;">Porudzbine</div>
+			
+					<div class="panel-body">
+						<form >
+							
+							<input style="margin: auto;" class="img-responsive" type="image" src="Slike/rsz_ponudee.jpg"/> 
+						</form>
+					</div>
+				</div>
+				</div> 
+				
+				   
+				<div class="col-md-4">
+					<div class="panel panel-default velicina poluProvidanBeo" >
+						<div class="panel-heading" style="text-align: center;">Kalendar rada</div>
+			
+					<div class="panel-body">
+						<form>
+							
+							<input style="margin: auto;" class="img-responsive" type="image" src="Slike/rsz_kalendar2.jpg" ng-click="prikaziKalendar()"/> 
+						</form>
+					</div>
+				</div>
+				</div>
+				
+				<!-- SAMO ZA KONOBARE -->
+				<div class="col-md-4">
+					<div class="panel panel-default velicina poluProvidanCrni" >
+						<div class="panel-heading" style="text-align: center;">Moj reon</div>
+			
+					<div class="panel-body">
+						<form>
+							
+							<input style="margin: auto;" class="img-responsive" type="image" src="Slike/rsz_stoconf.jpg"/> 
+						</form>
+					</div>
+				</div>
+				</div>
+</div>
+	
+<div ng-show="menjanjeRadnika">
+<div class="container center" >
+<div class="row" >
+<div class="col-md-4 col-md-offset-4" >
+ <div class="well poluProvidanCrni">
+<form >
+  <table>
+   <tr>
+    <td style="color:white;">Ime:</td>
+    <td><input type="text" name="Ime" class="form-control" ng-model="ulogovan.ime" value="ulogovan.ime" /></td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+   </tr>
+    <tr>
+    <td style="color:white;">Prezime:</td>
+    <td><input type="text" name="prezime"  class="form-control" ng-model="ulogovan.prezime" value="ulogova.prezime"/></td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+   </tr>
+    <tr>
+    <td style="color:white;">Email adresa:</td>
+    <td><input type="email" name="emailAdresa"  class="form-control" ng-model="ulogova.email" value="ulogovan.email"/></td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+   </tr>  
+   <tr>
+    <td style="color:white;">Korisnicko ime:</td>
+    <td><input type="text" name="korisnickoIme" class="form-control" ng-model="ulogovan.korisnickoIme" value="ulogovan.korisnickoIme"/></td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+   </tr>
+   <tr>
+    <td style="color:white;">Sifra:</td>
+    <td><input type="password" name="sifra" class="form-control" ng-model="ulogovan.sifra" value="ulogovan.sifra"/></td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+   </tr>
+    
+   
+   <tr>
+    <td>&nbsp;</td>
+    <td><input class="btn dodajPotvrdi" type="submit" value="Dodaj" ng-click='izmenaRadnika(ulogovan)' /></td>
+   </tr>
+  </table>
+ </form>
+ </div>
+</div>
+ </div>
+</div>
+
+
+
+
+</div>
+
+
+</div>

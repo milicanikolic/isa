@@ -68,6 +68,15 @@ app.factory('restoranService',['$http', function($http){
     restoran.izmiStolove=function(id){
     	return $http.get('restoran/uzmiStolove/'+id);
     }
+    restoran.rezervisi1=function(id,datum,vreme,trajanje){
+    	return $http.get('gost/prikazStolova/'+id+'/'+datum+'/'+vreme+'/'+trajanje);
+    }
+    restoran.rezervisi2=function(idG,idR,datum,vreme,trajanje,idS){
+    	return $http.post('gost/rezervisi/'+idG+'/'+idR+'/'+datum+'/'+vreme+'/'+trajanje+'/'+idS);
+    }
+    restoran.dodajRadnika=function(id,gost){
+    	return $http.post('radnik/dodajRadnika/'+id,gost);
+    }
     
 	return restoran;
 }]);

@@ -52,5 +52,9 @@ app.factory('gostService',['$http', function($http){
     	return $http.get('prijatelji/prikaziSve/'+id);
     }
     
+    korisnik.uzmiIstoriju=function(id){
+    	return $http.get('gost/uzmiRezervacijeKorisnik/'+id);
+    }
+    
 	return korisnik;
 }]);

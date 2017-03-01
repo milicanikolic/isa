@@ -33,4 +33,19 @@
 
   <h1>I S T O R I J A    R E Z E R V A C I J A</h1>
   
+  <table class="table table-stripped">
+  	<tr>
+  		<th>Ime restorana</th>
+  		<th>Datum</th>
+  		<th>Vreme trajanja</th>
+  		<th>Broj stola</th>
+  	</tr>
+  	<tr ng-repeat="rez in istorija">
+  		<td>{{rez.restoran.ime}}</td>
+  		<td>{{rez.datum}}</td>
+  		<td>{{rez.vremeTrajanja}}</td>
+  		<td>{{rez.rezervisanSto.brojStola}}</td>
+  	</tr>
+  </table>
+  
   </div>

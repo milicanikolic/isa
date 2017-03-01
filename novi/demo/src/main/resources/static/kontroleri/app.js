@@ -99,4 +99,23 @@ $stateProvider.state('admin', {
 	templateUrl : 'stranice/rasporedStolova.html',
 	controller : 'restoranController'
 })
+.state('izlogujSe', {
+	url : '/izlogujSe',
+	templateUrl : 'stranice/login.html',
+	controller : function($http){
+		return $http.get('/gost/logOut');
+	}
+})
+
+.state('radnik', {
+	url : '/radnik',
+	templateUrl : 'stranice/pocetnaRadnik.html',
+	controller : 'radnikController'
+})
+.state('kalendar', {
+	url : '/kalendar',
+	templateUrl : 'stranice/kalendar.html',
+	controller : 'radnikController'
+})
+
 });

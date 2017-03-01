@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Minutes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.support.DelegatePerTargetObjectIntroductionInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.enumeracije.StatusNarudzbine;
 import com.example.enumeracije.StatusRezervacije;
+import com.example.enumeracije.StatusSto;
 import com.example.enumeracije.StatusZahteva;
 import com.example.enumeracije.VrsteKorisnika;
 import com.example.model.Gost;
@@ -38,23 +41,27 @@ import com.example.model.Prijateljstva;
 import com.example.model.Radnik;
 import com.example.model.Restoran;
 import com.example.model.Rezervacija;
+import com.example.model.Sto;
 import com.example.service.AdminService;
 import com.example.service.GostService;
 import com.example.service.JeloService;
 import com.example.service.KorisnikService;
 import com.example.service.NarudzbinaService;
-import com.example.service.PiceService;
 import com.example.service.PonudjacService;
 import com.example.service.PrijateljstvaService;
 import com.example.service.RadnikService;
 import com.example.service.RestoranService;
 import com.example.service.RezervacijaService;
+import com.example.service.StoService;
 
 
 @Controller
 @RequestMapping("/gost") 
 public class GostController {
  
+	@Autowired
+	private StoService stoService;
+	
 	@Autowired
 	 private PonudjacService ponudjacService;	
 @Autowired
@@ -337,50 +344,68 @@ private PrijateljstvaService prijateljstvaService;
   }
   
   
-  @RequestMapping(value="/rezervisi",method = RequestMethod.POST)
-  public ResponseEntity<Rezervacija> rezervisi(){//@RequestBody Rezervacija rez, @PathVariable String datum, @PathVariable String vreme) {
+  @RequestMapping(value="/rezervisi/{idGosta}/{idRestorana}/{datum}/{vreme}/{vremeTrajanja}/{idStola}",method = RequestMethod.POST)
+  public ResponseEntity<List<Rezervacija>> rezervisi(@PathVariable Long idGosta,@PathVariable Long idRestorana, @PathVariable String datum, @PathVariable String vreme, @PathVariable String vremeTrajanja, @PathVariable Long idStola) {
    
-/*String[] deloviDatuma=datum.split("/");
-String dan=deloviDatuma[0];
-String mesec=deloviDatuma[1];
-String godina=deloviDatuma[2];*/
+Rezervacija nova=new Rezervacija();
+
+Gost gostR=gostService.getGost(idGosta);
+
+nova.setGost(gostR);
+
+Restoran resR=restoranService.getRestoran(idRestorana);
+
+nova.setRestoran(resR);
    
+//SimpleDateFormat zaVreme = new SimpleDateFormat("HH:mm");
 
-String datum="02/10/2010";
-String vreme="17";
 
-SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+
+SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 try {
- 
+ //long ms = zaVreme.parse(vreme).getTime();
+ //Time sqlTime = new Time(ms);
  java.util.Date datRez = sdf.parse(datum);
- Calendar cal = Calendar.getInstance();  
-       cal.setTime(datRez);  
-       cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(vreme));  
-       cal.set(Calendar.MINUTE, 0);  
-       java.util.Date datRezNovi =  cal.getTime();
-    java.sql.Date sqlDate = new java.sql.Date(datRezNovi.getTime());
+    java.sql.Date sqlDate = new java.sql.Date(datRez.getTime());
     
-    logger.info("vremeeeeeeeJAVA " + datRezNovi);
-    logger.info("vremeeeeeeeSTRING " + datum);
-    logger.info("vremeeeeeeSQL " + sqlDate);
-  //  rez.setDatumVreme(sqlDate);
+    nova.setDatum(sqlDate);
+    nova.setVreme(vreme);
 } catch (ParseException e) {
  // TODO Auto-generated catch block
  e.printStackTrace();
  return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
 }
+nova.setVremeTrajanja(Integer.parseInt(vremeTrajanja));  
+Sto stoR=stoService.getSto(idStola);
+nova.setRezervisanSto(stoR);
+   nova.setStatusRez(StatusRezervacije.AKTIVNA);
+rezervacijaService.sacuvaj(nova);
    
-   //rez.setStatusRez(StatusRezervacije.AKTIVNA);
-   //Rezervacija sacuvana=rezervacijaService.sacuvaj(rez);
-  // return new ResponseEntity<Rezervacija>(sacuvana,HttpStatus.CREATED);
-return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+   List<Rezervacija> sve=rezervacijaService.getAllRezervacije();
+   List<Rezervacija> sveGosta=new ArrayList<Rezervacija>();
+   
+   for(Rezervacija r:sve) {
+    if(r.getGost().getId()==idGosta) {
+     sveGosta.add(r);
+    }
+   }
+   
+   
+   
+   
+   
+   
+   
+   return new ResponseEntity<List<Rezervacija>>(sveGosta,HttpStatus.CREATED);
+
   }
   
   @RequestMapping(value="/otkaziRezervaciju",method = RequestMethod.POST)
   public ResponseEntity<Rezervacija> otkaziRezervaciju(@PathVariable Long idRez) {
    Rezervacija zaBrisanje=rezervacijaService.getRezervacija(idRez);
    
-  if(Minutes.minutesBetween(new DateTime(zaBrisanje.getDatumVreme()), new DateTime())
+  if(Minutes.minutesBetween(new DateTime(zaBrisanje.getDatum()), new DateTime())
            .isGreaterThan(Minutes.minutes(30))) {
 zaBrisanje.setStatusRez(StatusRezervacije.NEAKTIVNA);
    zaBrisanje.setId(idRez);
@@ -556,4 +581,113 @@ zaBrisanje.setStatusRez(StatusRezervacije.NEAKTIVNA);
    return null;
   }
   
+  @RequestMapping(value="/prikazStolova/{idRestorana}/{datum}/{vreme}/{vremeTrajanja}",method = RequestMethod.GET)
+  public ResponseEntity<List<Sto>> prikazStolova(@PathVariable Long idRestorana,@PathVariable String datum,@PathVariable String vreme,@PathVariable String vremeTrajanja){
+   
+	  logger.info(datum);
+	  logger.info(vreme);
+	  logger.info(vremeTrajanja);
+	  
+   List<Sto> sviStolovi=stoService.findAll();
+   List<Sto> stoloviRestorana=new ArrayList<Sto>();
+   List<Rezervacija> sveRezervacije = rezervacijaService.getAllRezervacije();
+   List<Rezervacija> rezervacijeUTomRestoranu=new ArrayList<Rezervacija>();
+   List<Sto> konacna=new ArrayList<Sto>();
+   for(Sto jedan:sviStolovi) {
+    if(jedan.getRestoran().getId()==idRestorana) {
+     stoloviRestorana.add(jedan);
+    }
+   }
+   
+   for(Rezervacija rez:sveRezervacije) {
+    if(rez.getRestoran().getId()==idRestorana) {
+     rezervacijeUTomRestoranu.add(rez);
+    }
+   }
+   
+   List<Rezervacija> togDana=new ArrayList<Rezervacija>();
+   
+   SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+   //SimpleDateFormat zaVreme = new SimpleDateFormat("HH:mm");
+   java.sql.Date sqlDate;
+   //java.sql.Time sqlTime;
+   try {
+   logger.info("uso u traj");
+   java.util.Date datRez = sdf.parse(datum);
+      sqlDate = new java.sql.Date(datRez.getTime());
+      //long ms = zaVreme.parse(vreme).getTime();
+   //sqlTime = new Time(ms);
+   
+   }
+   catch(ParseException e) {
+	   logger.info("uso u kec");
+    e.printStackTrace();
+    return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+   }
+   
+   
+   for(Sto s:stoloviRestorana) {
+   for(Rezervacija rez:rezervacijeUTomRestoranu) {
+    if(rez.getDatum().compareTo(sqlDate)==0){
+    logger.info("isti datumi");
+     String vreme1S=rez.getVreme();
+     String[] deloviVremena1=vreme1S.split(":");
+     
+    
+     String[] deloviVremena2=vreme.split(":");
+     
+     int pocetakMoje=Integer.parseInt(deloviVremena2[0]);
+     int krajnjeMoje=Integer.parseInt(deloviVremena2[0])+Integer.parseInt(vremeTrajanja);
+     int pocetakPostojeca=Integer.parseInt(deloviVremena1[0]);
+     int krajnjePostojeca=Integer.parseInt(deloviVremena1[0])+rez.getVremeTrajanja();
+     
+     
+    
+
+logger.info("pocetakTvog" + pocetakMoje);
+logger.info("krajTvog" + krajnjeMoje);
+logger.info("pocetakPostojece" + pocetakPostojeca);
+
+logger.info("krajPostojece" + krajnjePostojeca);
+         
+	if ((pocetakMoje <= krajnjePostojeca) && (pocetakPostojeca <= krajnjeMoje))
+         {
+        	 logger.info("isti vreme");
+          if(rez.getRezervisanSto().getId()==s.getId()) {
+        	  logger.info("isti sto");
+           s.setSlobodan(false);
+           s.setStatus(StatusSto.ZAUZET);
+          }
+         }
+           
+     }
+    
+   }
+   konacna.add(s);
+ }
+   
+  
+   return new ResponseEntity<List<Sto>>(konacna, HttpStatus.OK);
+  }
+  
+  @RequestMapping(value="/uzmiRezervacijeKorisnik/{idGosta}",method = RequestMethod.GET)
+  public ResponseEntity<List<Rezervacija>> uzmiRezervacijeKorisnik(@PathVariable Long idGosta) {
+  
+   List<Rezervacija> sve=rezervacijaService.getAllRezervacije();
+    List<Rezervacija> sveGosta=new ArrayList<Rezervacija>();
+    
+    for(Rezervacija r:sve) {
+     if(r.getGost().getId()==idGosta) {
+      sveGosta.add(r);
+     }
+    }
+  
+    return new ResponseEntity<List<Rezervacija>>(sveGosta,HttpStatus.CREATED);    
+  }
+  
+  @RequestMapping(value="/logOut",method=RequestMethod.GET)
+  public void logOut(){
+	  sesija.invalidate();
+	  logger.info("izlogovao");
+  }
 }

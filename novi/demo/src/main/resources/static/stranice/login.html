@@ -1,5 +1,13 @@
 <script type="text/javascript" src="js/proveraLogin.js"></script>
 <div class="container center" ng-controller='loginController'>
+<div class="row" ng-show="pogresnoLogovanje">
+	<div class="col-md-5 col-md-offset-4" >
+		<div class="alert alert-danger" role="alert">
+ 			Neispravni podaci/neaktivan nalog!</a>
+		</div>
+	</div>
+</div>
+
 <div class="row">
 <div class="col-md-5 col-md-offset-4" >
   <div class="well poluProvidanSivi">
@@ -35,33 +43,7 @@
 </div>
 
 
-<div ng-show="prvoLogovanje" class="container center">
-<div class="row">
- <div class="col-xs-3">
-  <div class="well poluProvidanBeo">
-   <h3>Pri prvom logovanju, morate izmeniti šifru.</h3>
-  </div>
- </div>
-</div>
-<div class="row">
-<div class="col-xs-3">
- <div class="well poluProvidanBeo">
-  <table>
-   <tr>
-    <td>Unesite novu šifru: </td>
-    <td><input type="password" name="sifra" ng-model="novaSifra" class="form-control" /></td>
-   </tr>
-   <tr>
-    <td>&nbsp;</td>
-   </tr>
-   <tr>
-    <td><a href="" class="btn dodajPotvrdi" ng-click="promenaPrveSifre()">Izmeni šifru!</a></td>
-   </tr>
-  </table>
- </div>
-</div>
-</div>
-</div>
+
 
 
 </div>

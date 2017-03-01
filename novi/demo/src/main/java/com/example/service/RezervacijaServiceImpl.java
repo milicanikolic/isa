@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,11 @@ public class RezervacijaServiceImpl implements RezervacijaService{
 	public Rezervacija getRezervacija(Long id) {
 		// TODO Auto-generated method stub
 		return rezervacijaRepository.findById(id);
+	}
+
+	@Override
+	public List<Rezervacija> getAllRezervacije() {
+		return rezervacijaRepository.findAll();
 	}
 
 }

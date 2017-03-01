@@ -4,34 +4,43 @@
   display: -ms-flexbox;
   display:         flex;
 }
-body {
-    background-color: yellow;
-}
+
 .kartaPica{
-	 background-image: url("/Slike/drinks3.jpg");
-	 background-repeat: no-repeat;
-	 background-size: cover;
-	
+  background-image: url("/Slike/drinks3.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+ 
 }
 .jelovnik{
-	 background-image: url("/Slike/hrana.jpg");
-	 background-repeat: no-repeat;
-	 background-size: cover;
-	
+  background-image: url("/Slike/hrana.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+ 
 }
 .rezervacija1{
-	 background-image: url("/Slike/rezervacija1.jpg");
-	 background-repeat: no-repeat;
-	 background-size: cover;
-	
+  background-image: url("/Slike/rezervacija1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+ 
 }
 .poluProvidanSivi{
-	background: rgba(245, 245, 245, 0.4);
+ background: rgba(245, 245, 245, 0.4);
 }
 .poluProvidanBeo{
-	 background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .poluProvidanCrni{
-	background: rgba(0, 0, 0, 0.5);
+ background: rgba(0, 0, 0, 0.5);
+}
+
+.dodajPotvrdi{
+ background-color: rgb(204, 255, 204);
+}
+
+.izbrisiOdbij{
+ background-color: rgb(255, 153, 102);
+}
+.izmeniRegistruj{
+ background-color: rgb(102, 153, 255);
 }

@@ -5,6 +5,7 @@ app.controller('loginController', function ($scope,$rootScope,$window, $http,gos
         //console.log(gost);
 	var ulogovani= gostService.login(gost)
 	.success(function(data){
+		$scope.pogresnoLogovanje=0;
 		var logovani=data;
 
 		$rootScope.korisnik=data;
@@ -13,18 +14,19 @@ app.controller('loginController', function ($scope,$rootScope,$window, $http,gos
 			if(logovani.vrstaKorisnika=="GOST"){
 				$window.location.href = '#/profilKorisnika';
 			}else if(logovani.vrstaKorisnika=="KONOBAR"){
-				
+				console.log("usao u konobar");
+				$window.location.href = '#/radnik';
 			}
 			else if(logovani.vrstaKorisnika=="SANKER"){
-				aletr("konobar");
+				$window.location.href = '#/radnik';
 			}
 			else if(logovani.vrstaKorisnika=="KUVAR_ZA_SALATE"){
-				aletr("konobar");
+				$window.location.href = '#/radnik';
 			}
 			else if(logovani.vrstaKorisnika=="KUVAR_ZA_PECENA_JELA"){
-				aletr("konobar");
+				$window.location.href = '#/radnik';
 			}else if(logovani.vrstaKorisnika=="KUVAR_ZA_KUVANA_JELA"){
-				aletr("konobar");
+				$window.location.href = '#/radnik';
 			}
 			else if(logovani.vrstaKorisnika=="MENADZER_RESTORANA"){
 				console.log("mendzer restoraa");
@@ -41,8 +43,8 @@ app.controller('loginController', function ($scope,$rootScope,$window, $http,gos
 		}
 	})
 	 .error(function (error) {
-         $scope.status = 'Uneti podaci nisu tacni: ' + error.message;
-         console.log("usao u error   "+ error.message);
+         $rootScope.pogresnoLogovanje=1;
+         console.log("errooooor");
      });
 	
     };

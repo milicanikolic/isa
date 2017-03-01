@@ -22,6 +22,10 @@ app.controller('profilKorisnikaController', function ($scope,$window,$rootScope,
 			$scope.zahteviZaPrijateljstvo();
 			$scope.uzmiPrijatelje();
 		})
+		gostService.uzmiIstoriju($scope.ulogovani.id)
+		.success(function(data){
+			$scope.istorija=data;
+		})
 	};
 	
 	$scope.izmeni=function(){
