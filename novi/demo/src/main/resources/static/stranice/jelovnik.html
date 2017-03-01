@@ -1,3 +1,4 @@
+<div ng-if="!gost" ng-include src="'/meni/meniOstali.html'"></div>
 <script type="text/javascript" src="js/proveraJelo.js"></script>
 <script type="text/javascript" src="js/proveraJelaIzmena.js"></script>
 <div class="container" ng-controller='restoranController' ng-init="jelovnik(); uzmiRestoran();">
@@ -19,12 +20,8 @@
         <td>{{jelo.opis}}</td>
         <td>{{jelo.cena}}</td>
        
-    <td><a ng-show="MR" class="btn btn-default" ng-click="izmeniJelo(jelo.id)">
+    <td><a ng-show="MR" class="btn izmeniRezervisi" ng-click="izmeniJelo(jelo.id)">
       <span class="glyphicon glyphicon-pencil"></span> Izmeni
-     </a>
-    </td>
-     <td><a ng-show="MR" class="btn btn-default" ng-click="obrisiJelo(jelo.id)">
-      <span class="glyphicon glyphicon-trash"></span> Obrisi
      </a>
     </td>
       </tr>
@@ -60,7 +57,7 @@
    
    <tr>
     <td>&nbsp;</td>
-    <td><input class="btn btn-success" type="submit" id="izmeniJelo" value="SaĂ„ÂŤuvaj izmene" onclick="proveraPraznihPoljaJelaIzmena()" ng-click="izmeniJelo2(trenutnoJelo)"/></td>
+    <td><input class="btn dodajPotvrdi" type="submit" id="izmeniJelo" value="SaÄ‚â€žĂ‚Ĺ¤uvaj izmene" onclick="proveraPraznihPoljaJelaIzmena()" ng-click="izmeniJelo2(trenutnoJelo)"/></td>
    </tr>
   </table>
  </form>

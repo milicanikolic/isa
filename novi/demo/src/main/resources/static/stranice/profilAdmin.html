@@ -4,30 +4,33 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
  <div class="container center" ng-controller='adminController'>
   <div class="row" data-ng-init="uzmiUlogovanog()">
-   <div class="well poluProvidanBeo">
-     <p><h2>Ulogovan administrator</h2></p>
-    <p>{{admin.ime}} {{admin.prezime}}</p>
+   <div class="well poluProvidanCrni">
+     <p><h2 style="color:white;">Ulogovan administrator</h2></p>
+    <p style="color:white;">{{admin.ime}} {{admin.prezime}}</p>
    </div>
   </div>
   
   <div class="row" ng-controller='adminController'>
    <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-default poluProvidanBeo">
+    <div class="panel panel-default poluProvidanCrni">
        <div class="panel-body">
-        <button data-toggle="collapse" data-target="#registrujRestoran" class="btn btn-success">Registruj restoran</button>
+        <button data-toggle="collapse" data-target="#registrujRestoran" class="btn dodajPotvrdi">Registruj restoran</button>
        <div id="registrujRestoran" class="collapse">
         <div style="width: 400" class="well poluProvidanBeo">
         <form action="" >
            <table>
             <tr>
-             <td>Ime: </td>
+             <td style="color:white;">Ime: </td>
              <td><input type="text"  id="imeRestorana" name="imeRestorana" class="form-control" ng-model='restoran.ime' onkeyup="proveraPraznihPoljaRestoran()"/><span id="imeRestoranaError"></span></td>
              
             </tr> 
             <tr>
-             <td>Tip restorana: </td>
+            	<td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+             <td style="color:white;">Tip restorana: </td>
              <td>
-              <select id="tipRestorana" name="izabraniTip" ng-model='restoran.tipRestorana' onkeyup="proveraPraznihPoljaRestoran()">
+              <select class="form-control" id="tipRestorana" name="izabraniTip" ng-model='restoran.tipRestorana' onkeyup="proveraPraznihPoljaRestoran()">
                <option value=0>Domaca kuhinja</option>
                <option value=1>Italijanski</option>
                <option value=2>Kineski</option>
@@ -37,7 +40,7 @@
              </td>
             </tr>
             <tr>
-             <td colspan="2" align="right"><button type="submit" id="dodajRestoran" class="btn btn-success" onclick="proveraPraznihPoljaRestoran()" ng-click="dodajRestoran(restoran)">Registruj restoran</button></td>
+             <td colspan="2" align="right"><button type="submit" id="dodajRestoran" class="btn dodajPotvrdi" onclick="proveraPraznihPoljaRestoran()" ng-click="dodajRestoran(restoran)">Registruj restoran</button></td>
             </tr>
            </table>
            </form>
@@ -50,43 +53,61 @@
   
   <div class="row">
    <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-default poluProvidanBeo">
+    <div class="panel panel-default poluProvidanCrni">
        <div class="panel-body">
-        <button data-toggle="collapse" data-target="#registrujMenadzera" class="btn btn-success">Registruj menadzera restorana</button>
+        <button data-toggle="collapse" data-target="#registrujMenadzera" class="btn dodajPotvrdi">Registruj menadzera restorana</button>
        <div id="registrujMenadzera" class="collapse">
         <div style="width: 400" class="well poluProvidanBeo">
            <table>
             <tr>
-             <td>Ime: </td>
+             <td style="color:white;">Ime: </td>
              <td><input type="text" id="imeMenadzera" name="imeMenadzera" class="form-control" ng-model="menadzerRestorana.ime" onkeyup="proveraPraznihPoljaMenadzer()"/><span id="imeMenadzeraError"></span></td>
             </tr> 
             <tr>
-             <td>Prezime: </td>
+            	<td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+             <td style="color:white;">Prezime: </td>
              <td><input type="text" id="prezimeMenadzera" name="prezimeMenadzera" class="form-control" ng-model="menadzerRestorana.prezime"onkeyup="proveraPraznihPoljaMenadzer()"/><span id="prezimeMenadzeraError"></span></td>
             </tr>
             <tr>
-             <td>KorisniÄŤko ime: </td>
+            	<td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+             <td style="color:white;">Korisnièko ime: </td>
              <td><input type="text" id="kImeMenadzera " name="korisnickoImeMenadzera" class="form-control" ng-model="menadzerRestorana.korisnickoIme"onkeyup="proveraPraznihPoljaMenadzer()"/><span id="kImeMenadzeraError"></span></td>
             </tr>
             <tr>
-             <td>Ĺ ifra: </td>
+            	<td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+             <td style="color:white;">Šifra: </td>
              <td><input type="text" id="sifraMenadzera" name="sifraMenadzera" class="form-control" ng-model="menadzerRestorana.sifra"onkeyup="proveraPraznihPoljaMenadzer()"/><span id="sifraMenadzeraError"></span></td>
             </tr>
             <tr>
-             <td>Email: </td>
+            	<td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+             <td style="color:white;">Email: </td>
              <td><input type="text" id="emailMenadzera" name="emailMenadzera" class="form-control" ng-model="menadzerRestorana.email" onkeyup="proveraPraznihPoljaMenadzer()"/><span id="emailMenadzeraError"></span></td>
             </tr>
             <tr>
-             <td>Izaberite restoran: </td>
+            	<td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+             <td style="color:white;">Izaberite restoran: </td>
              <td>
-              <select id="ponudjeniRestorani" name="izabraniRestoran" ng-model="imeRestorana" onkeyup="proveraPraznihPoljaMenadzer()">
+              <select class="form-control" id="ponudjeniRestorani" name="izabraniRestoran" ng-model="imeRestorana" onkeyup="proveraPraznihPoljaMenadzer()">
                <option ng-repeat="restoran in restorani" value={{restoran.id}}>{{restoran.ime}}</option> 
             </select>
             <span id="ponudjeniRestoraniError"></span>
              </td>
             </tr>
             <tr>
-             <td colspan="2" align="right"><a href="" id="dodajMenadzera" class="btn btn-success" onclick="proveraPraznihPoljaMenadzer()" ng-click="regMenadzerRestorana(menadzerRestorana,imeRestorana)">Registruj menadzera</a></td>
+            	<td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+             <td colspan="2" align="right"><a href="" id="dodajMenadzera" class="btn dodajPotvrdi" onclick="proveraPraznihPoljaMenadzer()" ng-click="regMenadzerRestorana(menadzerRestorana,imeRestorana)">Registruj menadzera</a></td>
             </tr>
            </table>
            
@@ -103,7 +124,7 @@
    <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default poluProvidanBeo">
        <div class="panel-body">
-        <button data-toggle="collapse" data-target="#registrujAdmina" class="btn btn-success">Registruj menadzera sistema</button>
+        <button data-toggle="collapse" data-target="#registrujAdmina" class="btn dodajPotvrdi">Registruj menadzera sistema</button>
        <div id="registrujAdmina" class="collapse">
         <div style="width: 400" class="well poluProvidanBeo">
            <table>
@@ -112,23 +133,38 @@
              <td><input type="text" id="imeAdmina" name="imeAdmin" class="form-control" ng-model='noviAdmin.ime' onkeyup="proveraPraznihPoljaAdmin()"/><span id="imeAdminaError"></span></td>
             </tr> 
             <tr>
+            	<td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
              <td>Prezime: </td>
              <td><input type="text" id="prezimeAdmina" name="prezimeAdmin" class="form-control" ng-model='noviAdmin.prezime' onkeyup="proveraPraznihPoljaAdmin()"/><span id="prezimeAdminaError"></span></td>
             </tr>
             <tr>
-             <td>KorisniÄŤko ime: </td>
+            	<td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+             <td>Korisnièko ime: </td>
              <td><input type="text" id="kImeAdmina" name="korisnickoImeAdmin" class="form-control" ng-model='noviAdmin.korisnickoIme' onkeyup="proveraPraznihPoljaAdmin()"/><span id="kImeAdminaError"></span></td>
             </tr>
             <tr>
-             <td>Ĺ ifra: </td>
+            	<td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+             <td>Šifra: </td>
              <td><input type="text" id="sifraAdmina" name="sifraAdmin" class="form-control" ng-model='noviAdmin.sifra' onkeyup="proveraPraznihPoljaAdmin()"/><span id="sifraAdminaError"></span></td>
+            </tr>
+            <tr>
+            	<td colspan="2">&nbsp;</td>
             </tr>
             <tr>
              <td>Email: </td>
              <td><input type="text" if="emailAdmina" name="emailAdmin" class="form-control" ng-model='noviAdmin.email' onkeyup="proveraPraznihPoljaAdmin()"/><span id="emailAdminaError"></span></td>
             </tr>
             <tr>
-             <td colspan="2" align="right"><a href="" id="dodajAdmina" class="btn btn-success" onclick="proveraPraznihPoljaAdmin()" ng-click="dodajAdmina(noviAdmin)">Registruj administratora</a></td>
+            	<td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+             <td colspan="2" align="right"><a href="" id="dodajAdmina" class="btn dodajPotvrdi" onclick="proveraPraznihPoljaAdmin()" ng-click="dodajAdmina(noviAdmin)">Registruj administratora</a></td>
             </tr>
            </table>
            

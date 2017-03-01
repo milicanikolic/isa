@@ -1,5 +1,3 @@
-
-
 <script type="text/javascript" src="js/proveraRegistracija.js"></script>
 <!--  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -27,11 +25,11 @@
 <div class="container center" ng-controller='registracijaController'>
 <div class="row">
 <div class="col-md-4 col-md-offset-4" >
- <div class="well">
+ <div class="well poluProvidanCrni">
 <form enctype="multipart/form-data">
   <table>
    <tr>
-    <td>Ime:</td>
+    <td style="color:white;">Ime:</td>
     <td><input type="text" id="ime" name="Ime" class="form-control" ng-model="gost.ime" onkeyup="proveraPraznihPoljaReg()"/><span id="imeError"></span></td>
    </tr>
    <tr>
@@ -39,7 +37,7 @@
     <td>&nbsp;</td>
    </tr>
     <tr>
-    <td>Prezime:</td>
+    <td style="color:white;">Prezime:</td>
     <td><input type="text" id="prezime" name="prezime" class="form-control" ng-model="gost.prezime" onkeyup="proveraPraznihPoljaReg()"/><span id="prezimeError"></span></td>
    </tr>
    <tr>
@@ -47,7 +45,7 @@
     <td>&nbsp;</td>
    </tr>
     <tr>
-    <td>Email adresa:</td>
+    <td style="color:white;">Email adresa:</td>
     <td><input type="text" id="email" name="emailAdresa" class="form-control" ng-model="gost.email" onkeyup="proveraPraznihPoljaReg()"/><span id="emailError"></span></td>
    </tr>
    <tr>
@@ -55,7 +53,7 @@
     <td>&nbsp;</td>
    </tr>   
    <tr>
-    <td>Korisnicko ime:</td>
+    <td style="color:white;">Korisnicko ime:</td>
     <td><input type="text" id="korisnickoIme" name="korisnickoIme" class="form-control" ng-model="gost.korisnickoIme" onkeyup="proveraPraznihPoljaReg()"/><span id="korisnickoImeError"></span></td>
    </tr>
    <tr>
@@ -63,7 +61,7 @@
     <td>&nbsp;</td>
    </tr>
    <tr>
-    <td>Sifra:</td>
+    <td style="color:white;">Sifra:</td>
     <td><input type="password"  id="sifra"  name="sifra" class="form-control" ng-model="gost.sifra" onkeyup="proveraPraznihPoljaReg()"/><span id="sifra1Error"></span></td>
    </tr>
    <tr>
@@ -71,7 +69,7 @@
     <td>&nbsp;</td>
    </tr>
    <tr>
-    <td>Ponovite sifru:</td>
+    <td style="color:white;">Ponovite sifru:</td>
    
     <td><input type="password" id="sifra2" name="sifra2" class="form-control" ng-model="sifra2"  onkeyup="proveraPraznihPoljaReg() "/><span id="sifra2Error"></span></td>
     
@@ -81,13 +79,9 @@
     <td>&nbsp;</td>
    </tr>
 
-    <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-   </tr>
    <tr>
     <td>&nbsp;</td>
-    <td><input id="dugmeRegistruj" class="btn btn-success" type="submit" value="Registruj se" onclick="proveraPraznihPoljaReg()" ng-click='registruj(gost)' /></td>
+    <td align="right"><input id="dugmeRegistruj" class="btn izmeniRegistruj" type="submit" value="Registruj se" onclick="proveraPraznihPoljaReg()" ng-click='registruj(gost)' /></td>
    </tr>
   </table>
  </form>

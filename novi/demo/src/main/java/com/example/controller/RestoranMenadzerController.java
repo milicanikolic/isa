@@ -1,8 +1,11 @@
 package com.example.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,13 +16,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.enumeracije.Smena;
 import com.example.enumeracije.StatusRezervacije;
 import com.example.enumeracije.StatusSto;
 import com.example.model.MenadzerRestorana;
+import com.example.model.Radnik;
+import com.example.model.Raspored;
 import com.example.model.Reon;
 import com.example.model.Restoran;
 import com.example.model.Rezervacija;
 import com.example.model.Sto;
+import com.example.service.MenadzerRestoranaService;
+import com.example.service.RadnikService;
+import com.example.service.RasporedService;
 import com.example.service.ReonService;
 import com.example.service.StoService;
 
@@ -32,6 +41,13 @@ public class RestoranMenadzerController {
 	 private ReonService reonService;
 	 @Autowired
 	 private StoService stoService;
+	 
+	 @Autowired
+	 private RasporedService rasporedService;
+	 @Autowired
+	 private MenadzerRestoranaService menadzerService;
+	 @Autowired
+	 private RadnikService radnikService;
 	 
 	 @RequestMapping(value="/dodajSto/{id}",method = RequestMethod.POST)
 	 public ResponseEntity<Sto> dodajSto(@PathVariable Long idReona, @RequestBody Sto sto, @RequestBody MenadzerRestorana mr){
@@ -87,7 +103,51 @@ public class RestoranMenadzerController {
 			 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		 }
 	 }
-	 
+	 @RequestMapping(value="/dodajSmenu/{idMen}/{idRadnika}/{smena}/{datum}/{idReona}",method = RequestMethod.POST)
+	  public ResponseEntity<List<Radnik>> dodajSmenu(@PathVariable Long idMen, @PathVariable Long idRadnika, @PathVariable String smena, @PathVariable String datum, @PathVariable Long idReona){
+	   
+	   Raspored r=new Raspored();
+	   if(smena.equals(Smena.PRVA)) {
+	    r.setSmena(Smena.PRVA);
+	   } else {
+	    r.setSmena(Smena.DRUGA);
+	   }
+	   
+	   SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	   try {
+	    java.util.Date datRez = sdf.parse(datum);
+	       java.sql.Date sqlDate = new java.sql.Date(datRez.getTime());
+	       r.setDatum(sqlDate);
+	   }
+	   catch(ParseException e) {
+	    e.printStackTrace();
+	    return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+	   }
+	   
+	   Reon reon=reonService.getReon(idReona);
+	   r.setReon(reon);
+	   
+	   Radnik rad=radnikService.getRadnik(idRadnika);
+	   r.setKonobar(rad);
+	   
+	   rasporedService.sacuvaj(r);
+	   
+	   List<Radnik> svi=radnikService.getAllRadnik();
+	   List<Radnik> togMen=new ArrayList<Radnik>();
+	   
+	   MenadzerRestorana mr=menadzerService.getMenadzerRestorana(idMen);
+	   Restoran uKomJe=mr.getRestoran();
+	   
+	   for(Radnik jedan: svi) {
+	    if(jedan.getRestoran().equals(uKomJe)) {
+	     togMen.add(jedan);
+	    }
+	   }
+	   
+	   return new ResponseEntity<List<Radnik>>(togMen,HttpStatus.OK);
+	   
+	   
+	  }
 	 
 	
 }

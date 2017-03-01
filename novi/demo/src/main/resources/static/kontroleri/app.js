@@ -118,4 +118,10 @@ $stateProvider.state('admin', {
 	controller : 'radnikController'
 })
 
+.state('pregledPorudzbina', {
+	url : '/pregledPorudzbina',
+	templateUrl : 'stranice/pregledPorudzbina.html',
+	controller : 'radnikController'
+})
+
 });

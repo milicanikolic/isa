@@ -62,7 +62,7 @@ public class AdminController {
 	public ResponseEntity<Admin> uzmiAdminaPoKorisnickomImenu(@PathVariable String korisnickoIme){
 logger.info("uzao uzmi admin back    "+korisnickoIme);
 		Admin admin= adminService.getAdminByKorisnickoIme(korisnickoIme);
-		logger.info("KURAC MOJ SE ODUSEVIO: "+admin.getEmail());
+		logger.info(" SE ODUSEVIO: "+admin.getEmail());
 		return new ResponseEntity<Admin>(admin,HttpStatus.CREATED);
 	}
 

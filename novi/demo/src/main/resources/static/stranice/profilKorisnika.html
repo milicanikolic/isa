@@ -1,34 +1,34 @@
 <div ng-include src="'/meni/gostMeni.html'"></div>
 <div class="container" ng-controller='profilKorisnikaController'>
-	<div class="media" data-ng-init="uzmiUlogovanog()">
-  		<div class="media-left media-middle">
-    	<img src="cicaGlisa.jpg" class="media-object" style="width:100px">
-  	</div>
-  	<div class="media-body well">
-    	<h2 class="media-heading">{{ulogovani.ime}}  {{ulogovani.prezime}}</h2>
-    	
-  	</div>
-	</div>
-	
-	&nbsp;
-	&nbsp;
+ <div class="media" data-ng-init="uzmiUlogovanog()">
+    <div class="media-left media-middle">
+     <img src="cicaGlisa.jpg" class="media-object" style="width:100px">
+   </div>
+   <div class="media-body well poluProvidanCrni">
+     <h2 style="color:white;" class="media-heading">{{ulogovani.ime}}  {{ulogovani.prezime}}</h2>
+     
+   </div>
+ </div>
+ 
+ &nbsp;
+ &nbsp;
 
-	&nbsp;
-	<div ng-show="imaZahteva" class="alert alert-success" role="alert">
+ &nbsp;
+ <div ng-show="imaZahteva" class="alert alert-success" role="alert">
  Imate nove<a href="" class="alert-link" ng-click=prikaziZahteve()>zahteve za prijateljstvo</a>
 </div>
 
 <table class="table table-stripped" ng-show="prikaziPrijatelje">
-	<tr ng-repeat="zahtev in zahtevi">
-		<td>{{zahtev.ime}}</td>
-		<td>{{zahtev.prezime}}</td>
-		<td><a  class="btn btn-default" ng-click="prihvatiPrijatelja(zahtev.id)">
-    		<span class="glyphicon glyphicon-ok"></span> Prihvati
-  			</a>
-  			<a  class="btn btn-default" ng-click="odbijPrijatelja(zahtev.id)">
-    		<span class="glyphicon glyphicon-trash"></span> Odbij
-  			</a></td>
-	</tr>
+ <tr ng-repeat="zahtev in zahtevi">
+  <td>{{zahtev.ime}}</td>
+  <td>{{zahtev.prezime}}</td>
+  <td><a  class="btn dodajPotvrdi" ng-click="prihvatiPrijatelja(zahtev.id)">
+      <span class="glyphicon glyphicon-ok"></span> Prihvati
+     </a>
+     <a  class="btn izbrisiOdbij" ng-click="odbijPrijatelja(zahtev.id)">
+      <span class="glyphicon glyphicon-trash"></span> Odbij
+     </a></td>
+ </tr>
 </table>
 
   <h1>I S T O R I J A    R E Z E R V A C I J A</h1>

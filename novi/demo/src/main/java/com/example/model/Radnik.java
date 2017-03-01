@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.enumeracije.VrsteKorisnika;
@@ -29,7 +30,8 @@ public class Radnik extends Korisnik implements Serializable{
   */
  private static final long serialVersionUID = 7909432708390532786L;
 
-  
+ @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="konobar" )
+ private Set<Raspored> raspored=new HashSet<Raspored>();
  @ManyToMany(cascade=CascadeType.ALL, fetch= FetchType.LAZY)
  private Set<Sto> sluziStolove=new HashSet<Sto>();
  
@@ -158,6 +160,18 @@ public int getBrojOcenaKonobar() {
 
 public void setBrojOcenaKonobar(int brojOcenaKonobar) {
 	this.brojOcenaKonobar = brojOcenaKonobar;
+}
+
+
+
+public Set<Raspored> getRaspored() {
+	return raspored;
+}
+
+
+
+public void setRaspored(Set<Raspored> raspored) {
+	this.raspored = raspored;
 }
 
  

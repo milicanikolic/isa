@@ -1,3 +1,4 @@
+<div ng-if ng-include src="'/meni/meniOstali.html'"></div>
 <script type="text/javascript" src="js/proveraPica.js"></script>
 <script type="text/javascript" src="js/proveraPicaIzmena.js"></script>
 <div class="container" ng-controller="restoranController" ng-init="kartaPica(); uzmiRestoran();">
@@ -19,12 +20,8 @@
         <td>{{pice.naziv}}</td>
         <td>{{pice.opis}}</td>
         <td>{{pice.cena}}</td>
-        <td><a ng-show="MR" class="btn btn-default" ng-click='izmeniPice(pice.id)'>
+        <td><a ng-show="MR" class="btn izmeniRegistruj" ng-click='izmeniPice(pice.id)'>
       <span class="glyphicon glyphicon-pencil" ></span> Izmeni
-     </a>
-    </td>
-     <td ><a ng-show="MR"  class="btn btn-default" ng-click="obrisiPice(pice.id)">
-      <span class="glyphicon glyphicon-trash" ></span> Obrisi
      </a>
     </td>
       </tr>
@@ -61,7 +58,7 @@
    
    <tr>
     <td>&nbsp;</td>
-    <td><input class="btn btn-success" id="izmeniPice" type="submit" value="SaĂ„ÂŤuvaj izmene"  onclick="proveraPraznihPoljaPiceIzmena()" ng-click="izmeniPice2(trenutnoPice)"/></td>
+    <td><input class="btn btn-success" id="izmeniPice" type="submit" value="SaÄ‚â€žĂ‚Ĺ¤uvaj izmene"  onclick="proveraPraznihPoljaPiceIzmena()" ng-click="izmeniPice2(trenutnoPice)"/></td>
    </tr>
   </table>
  </form>
@@ -95,7 +92,7 @@
    <tr>
    <td>Vrsta pica:</td>
     <td>
-     <select name="vrstaJela" id= "vrstaPica" ng-model="novoPice.vrstaP" onkeyup="proveraPraznihPoljaPice()">
+     <select class="form-control" name="vrstaJela" id= "vrstaPica" ng-model="novoPice.vrstaP" onkeyup="proveraPraznihPoljaPice()">
       <option value="0">Alkoholna</option>
       <option value="1">Bezalkoholna</option>
       <option value="2"> Topli napici</option>
@@ -107,7 +104,7 @@
    
    <tr>
     <td>&nbsp;</td>
-    <td><input class="btn btn-success" id="dodajPice" type="submit" value="Dodaj piće"  onclick="proveraPraznihPoljaPice()" ng-click="dodajPice2(novoPice)"/></td>
+    <td><input class="btn dodajPotvrdi" id="dodajPice" type="submit" value="Dodaj piće"  onclick="proveraPraznihPoljaPice()" ng-click="dodajPice2(novoPice)"/></td>
     
    </tr>
   </table>
@@ -115,7 +112,7 @@
  </div>
 </div> 
   
-  <a ng-show="MR" class="btn btn-default" ng-click="dodajPice()">
+  <a ng-show="MR" class="btn dodajPotvrdi" ng-click="dodajPice()">
       <span class="glyphicon glyphicon-glass"></span> Dodaj pice
      </a> 
 </div>

@@ -1,51 +1,51 @@
 <div class="container center" ng-controller="ponudjacController" ng-init="initPonudjac()">
 	 <div class="row">
-	 	<div class="well poluProvidanBeo">
-	 		<p><h2>Ponudjac</h2></p>
-	 		<p><button data-toggle="collapse" data-target="#prikaziPodatke" class="btn btn-success">Prikaži podatke</button></p>
+	 	<div class="well poluProvidanCrni">
+	 		<p><h2 style="color:white;">Ponudjac</h2></p>
+	 		<p><button data-toggle="collapse" data-target="#prikaziPodatke" class="btn potvrdiDodaj">Prikaži podatke</button></p>
 	 		<div id="prikaziPodatke" class="collapse">
-	 			<p>Ime:<span>&nbsp;</span> {{ulogovan.ime}}</p>
-	 			<p>Prezime: <span>&nbsp;</span>{{ulogovan.prezime}}</p>
-	 			<p>Email: <span>&nbsp;</span>{{ulogovan.email}}</p>
-	 			<p>Korisnicko ime: <span>&nbsp;</span>{{ulogovan.korisnickoIme}}</p>
+	 			<p style="color:white;">Ime:<span>&nbsp;</span> {{ulogovan.ime}}</p>
+	 			<p style="color:white;">Prezime: <span>&nbsp;</span>{{ulogovan.prezime}}</p>
+	 			<p style="color:white;">Email: <span>&nbsp;</span>{{ulogovan.email}}</p>
+	 			<p style="color:white;">Korisnicko ime: <span>&nbsp;</span>{{ulogovan.korisnickoIme}}</p>
 	 		</div>
 	 	</div>
 	 </div>		
 	
 	
 	<div class="row row-eq-height" ng-show="ponudjacMeni" >
- 				<div class="col-md-4 col-md-offset-2">
-					<div class="panel panel-default velicina poluProvidanBeo">
+ 				<div class="col-md-4 ">
+					<div class="panel panel-default velicina poluProvidanCrni">
 						<div class="panel-heading" style="text-align: center;">Izmeni podatke</div>
 			
 					<div class="panel-body">
 					
-							<input style="margin: auto;" class="img-responsive"  type="image" src="Slike/edit2.png" ng-click="prikaziMenjanje()"/> 
+							<input style="margin: auto;" class="img-responsive"  type="image" src="Slike/rsz_editworker.png" ng-click="prikaziMenjanje()"/> 
 					
 					</div>
 				</div>
 				</div>    
 				
 				
-				<div class="col-md-4 col-md-offset-2">
-					<div class="panel panel-default velicina poluProvidanBeo">
+				<div class="col-md-4">
+					<div class="panel panel-default velicina poluProvidanCrni">
 						<div class="panel-heading" style="text-align: center;">Prikazi ponude menadzera</div>
 			
 					<div class="panel-body">
 					
-							<input style="margin: auto;" class="img-responsive"  type="image" src="Slike/edit2.png" ng-click="otvoriAktivne()"/> 
+							<input style="margin: auto;" class="img-responsive"  type="image" src="Slike/rsz_ponudee.jpg" ng-click="otvoriAktivne()"/> 
 					
 					</div>
 				</div>
 				</div>  
 				
-				<div class="col-md-4 col-md-offset-2">
-					<div class="panel panel-default velicina poluProvidanBeo">
+				<div class="col-md-4">
+					<div class="panel panel-default velicina poluProvidanCrni">
 						<div class="panel-heading" style="text-align: center;">Prikaz istorije ponuda</div>
 			
 					<div class="panel-body">
 					
-							<input style="margin: auto;" class="img-responsive"  type="image" src="Slike/edit2.png" ng-click="prikazIstorije()"/> 
+							<input style="margin: auto;" class="img-responsive"  type="image" src="Slike/lupa.jpg" ng-click="prikazIstorije()"/> 
 					
 					</div>
 				</div>
@@ -57,12 +57,12 @@
 <div class="container center" ng-show="menjanjePonudjaca">
 <div class="row">
 <div class="col-md-4 col-md-offset-4" >
- <div class="well poluProvidanBeo">
+ <div class="well poluProvidanCrni">
  <h2 ng-show="greskaIzmenaPonudjaca;">Email i korisnicko ime moraju da budu jedinstveni</h2>
 <form >
   <table>
    <tr>
-    <td>Ime:</td>
+    <td style="color:white;">Ime:</td>
     <td><input type="text" name="Ime" class="form-control" ng-model="ulogovan.ime"  value={{ulogovan.ime}}/></td>
    </tr>
    <tr>
@@ -70,7 +70,7 @@
    	<td>&nbsp;</td>
    </tr>
     <tr>
-    <td>Prezime:</td>
+    <td style="color:white;">Prezime:</td>
     <td><input type="text" name="prezime"  class="form-control" ng-model="ulogovan.prezime" value={{ulogovan.prezime}}/></td>
    </tr>
    <tr>
@@ -78,7 +78,7 @@
    	<td>&nbsp;</td>
    </tr>
     <tr>
-    <td>Email adresa:</td>
+    <td style="color:white;">Email adresa:</td>
     <td><input type="email" name="emailAdresa"  class="form-control" ng-model="ulogovan.email" value={{ulogovan.email}}/></td>
    </tr>
    <tr>
@@ -86,7 +86,7 @@
    	<td>&nbsp;</td>
    </tr>  
    <tr>
-    <td>Korisnicko ime:</td>
+    <td style="color:white;">Korisnicko ime:</td>
     <td><input type="text" name="korisnickoIme" class="form-control" ng-model="ulogovan.korisnickoIme" value={{ulogovan.korisnickoIme}}/></td>
    </tr>
    <tr> 
@@ -95,7 +95,7 @@
    	<td>&nbsp;</td>
    </tr>
    <tr>
-    <td>Sifra:</td>
+    <td style="color:white;">Sifra:</td>
     <td><input type="password" name="sifra" class="form-control" ng-model="ulogovan.sifra" {{ulogovan.sifra}}/></td>
    </tr>
    <tr>
@@ -103,12 +103,9 @@
    	<td>&nbsp;</td>
    </tr>
    <tr>
-   	<tr>
-   </tr>
-   <tr>
     <td>&nbsp;</td>
     <td>
-    	<a href="" class="btn" ng-click='izmeniPonudjaca(ulogovan)'>Izmeni</a>
+    	<a href="" class="btn izmeniRegistruj" ng-click='izmeniPonudjaca(ulogovan)'>Izmeni</a>
     </td>
    </tr>
   </table>
@@ -121,7 +118,7 @@
 
 
 <div class="container center" ng-show="prikazPonuda">
-	<div class="jumbotron">
+	<div class="jumbotron poluProvidanBeo">
 		<h2>Aktivne ponude</h2>
 	</div>
 		<div class="row">
@@ -149,7 +146,7 @@
 							</tr>
 						</table>
 						</div>
-						<div class="panel-footer"><a class="btn btn-success" href="" ng-click="prikaziDodavanjePonudeP(ponuda.id)">Dodaj ponudu</a></div>
+						<div class="panel-footer"><a class="btn dodajPotvrdi" href="" ng-click="prikaziDodavanjePonudeP(ponuda.id)">Dodaj ponudu</a></div>
 					</div>
 				</div>
 			</div>
@@ -159,7 +156,7 @@
 <div class="container center" ng-show="dodavanjePonudePonudjac">
 	<div class="row">
 		<div class="col-xs-4">
-			<div class="well">
+			<div class="well poluProvidanBeo">
 			<div class="input-group">
 			<form class="form-horizontal"></form>
 				<div class="form-group">
@@ -176,7 +173,7 @@
 						<input id="cena" class="form-control" type="text" name="cena" ng-model="ponudaP.cena" />
 				</div>
 				<div class="form-group">	
-					<a  class="btn btn-success" href="" ng-click="dodajPonuduP(ponudaP)">Dodaj ponudu</a>
+					<a  class="btn dodajPotvrdi" href="" ng-click="dodajPonuduP(ponudaP)">Dodaj ponudu</a>
 				</div>	
 				</div>
 			</div>

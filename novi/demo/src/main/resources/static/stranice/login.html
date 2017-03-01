@@ -10,11 +10,11 @@
 
 <div class="row">
 <div class="col-md-5 col-md-offset-4" >
-  <div class="well poluProvidanSivi">
+  <div class="well poluProvidanCrni">
  <form>
   <table>
    <tr>
-    <td>Korisnicko ime:</td>
+    <td style="color:white;">Korisnicko ime:</td>
     <td><input type="text" id="imelogin" name="korisnickoIme"  class="form-control"  ng-model="gost.korisnickoIme" onkeyup="proveraPraznihPoljaLogin()"/></td>
    <td> <span id="imeloginError"></span></td>
    </tr>
@@ -23,7 +23,7 @@
     <td>&nbsp;</td>
    </tr>
    <tr>
-    <td>Sifra:</td>
+    <td style="color:white;">Sifra:</td>
     <td><input type="password"  id="sifralogin" name="sifra"  class="form-control"  ng-model="gost.sifra" onkeyup="proveraPraznihPoljaLogin()"/></td>
    <td> <span id="sifraloginError"></span></td>
    </tr>
@@ -33,7 +33,7 @@
    </tr>
    <tr>
     <td>&nbsp;</td>
-    <td><a href="#"  id="dugmeLogin" onclick="proveraPraznihPoljaLogin()" ng-click="login(gost)" class="btn dodajPotvrdi" >Uloguj se</a></td>
+    <td style="color:white;"><a href="#"  id="dugmeLogin" onclick="proveraPraznihPoljaLogin()" ng-click="login(gost)" class="btn dodajPotvrdi" >Uloguj se</a></td>
     <td align="right"><a class="btn izmeniRegistruj" href="#/registruj">Registruj se</a></td>
    </tr>
   </table>
