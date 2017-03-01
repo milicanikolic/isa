@@ -1,7 +1,9 @@
 package com.example.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,17 +18,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.enumeracije.StatusSto;
+import com.example.enumeracije.TipReona;
 import com.example.enumeracije.VrsteKorisnika;
 import com.example.model.Jelo;
 import com.example.model.Korisnik;
 import com.example.model.MenadzerRestorana;
 import com.example.model.Pice;
 import com.example.model.Restoran;
+import com.example.model.Sto;
 import com.example.service.JeloService;
 import com.example.service.KorisnikService;
 import com.example.service.MenadzerRestoranaService;
 import com.example.service.PiceService;
 import com.example.service.RestoranService;
+import com.example.service.StoService;
 
 
 @Controller
@@ -38,6 +44,10 @@ public class RestoranController {
 	
 @Autowired
 private HttpSession sesija;
+
+@Autowired
+private StoService stoService;
+
  @Autowired
  private RestoranService restoranService;
  
@@ -68,9 +78,56 @@ private HttpSession sesija;
 	 List<Restoran> restorani=restoranService.getAllRestoran();
 	 return new ResponseEntity<List<Restoran>>(restorani,HttpStatus.OK);
  }
+ 
+ @RequestMapping(value="/uzmiStolove/{idRestorana}",method = RequestMethod.GET)
+ public ResponseEntity<List<Sto>> uzmiStolove(@PathVariable Long idRestorana){
+	 List<Sto> stolovi=new ArrayList<Sto>();
+	 List<Sto> sviStolovi=stoService.findAll();
+	
+	
+		 logger.info("size je "+sviStolovi.size());
+	 
+	 
+	 for(Sto s: sviStolovi){
+		 logger.info("sto: "+s.getBrojStola()+"  "+s.getRestoran().getId());
+		 if(s.getRestoran().getId()==idRestorana){
+			 stolovi.add(s);
+		 }
+	 }
+	 
+	 return new ResponseEntity<List<Sto>>(stolovi,HttpStatus.OK);
+ }
+ 
  @RequestMapping(value="/dodaj",method = RequestMethod.POST)
  public ResponseEntity<Restoran> dodajRestoran(@RequestBody Restoran restoran){
   
+	 
+	 Set<Sto> stolovi=new HashSet<Sto>();
+	 for(int i=0; i<30; i++){
+		
+		 Sto sto=new Sto();
+		 sto.setBrojStola(i);
+		 if(i<3){
+			sto.setSlobodan(false);	
+		 }else{
+			 sto.setSlobodan(true);	
+		 }
+		 
+		 sto.setAktivan(true);
+		 if(i<=14){
+			 sto.setTipReona(TipReona.PUSACKI_DEO);
+		 }else{
+			 sto.setTipReona(TipReona.NEPUSACKI_DEO);
+		 }
+		 sto.setStatus(StatusSto.SLOBODAN);
+		 sto.setRestoran(restoran);
+		 stoService.sacuvaj(sto);
+		 stolovi.add(sto);
+		 
+	 }
+	 restoran.setStoloviURestoranu(stolovi);
+	 
+	 
   restoran.setBrojOcenaRes(0);
   restoran.setOcena(0.0);
   

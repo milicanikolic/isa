@@ -2,7 +2,7 @@
 <div class="container center" ng-controller='loginController'>
 <div class="row">
 <div class="col-md-5 col-md-offset-4" >
-  <div class="well poluProvidanCrni">
+  <div class="well poluProvidanSivi">
  <form>
   <table>
    <tr>
@@ -25,14 +25,45 @@
    </tr>
    <tr>
     <td>&nbsp;</td>
-    <td><a href="#" id="dugmeLogin" onclick="proveraPraznihPoljaLogin()" ng-click="login(gost)" class="btn btn-success" >Uloguj se</a></td>
-    <td><a href="#/registruj">Registruj se</a></td>
-    <td><a href="/profilRestorana.html">Profil restorana</a></td>
+    <td><a href="#"  id="dugmeLogin" onclick="proveraPraznihPoljaLogin()" ng-click="login(gost)" class="btn dodajPotvrdi" >Uloguj se</a></td>
+    <td align="right"><a class="btn izmeniRegistruj" href="#/registruj">Registruj se</a></td>
    </tr>
   </table>
  </form>
- <h1>{{gost}}</h1>
  </div>  
 </div>
 </div>
+
+
+<div ng-show="prvoLogovanje" class="container center">
+<div class="row">
+ <div class="col-xs-3">
+  <div class="well poluProvidanBeo">
+   <h3>Pri prvom logovanju, morate izmeniti šifru.</h3>
+  </div>
+ </div>
 </div>
+<div class="row">
+<div class="col-xs-3">
+ <div class="well poluProvidanBeo">
+  <table>
+   <tr>
+    <td>Unesite novu šifru: </td>
+    <td><input type="password" name="sifra" ng-model="novaSifra" class="form-control" /></td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+   </tr>
+   <tr>
+    <td><a href="" class="btn dodajPotvrdi" ng-click="promenaPrveSifre()">Izmeni šifru!</a></td>
+   </tr>
+  </table>
+ </div>
+</div>
+</div>
+</div>
+
+
+</div>
+
+

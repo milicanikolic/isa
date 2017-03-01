@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 enum TipRestorana{DOMACA_KUHINJA, ITALIJANSKI, KINESKI, VEGAN}
@@ -48,6 +49,7 @@ public class Restoran implements Serializable{
 	 
 	 
 	 @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="restoran")
+	 @JsonIgnore
 	 private Set<Sto> stoloviURestoranu= new HashSet<Sto>();
 	 
 	 //za rastojanje

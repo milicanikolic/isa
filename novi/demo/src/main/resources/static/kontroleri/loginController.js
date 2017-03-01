@@ -13,6 +13,17 @@ app.controller('loginController', function ($scope,$rootScope,$window, $http,gos
 			if(logovani.vrstaKorisnika=="GOST"){
 				$window.location.href = '#/profilKorisnika';
 			}else if(logovani.vrstaKorisnika=="KONOBAR"){
+				
+			}
+			else if(logovani.vrstaKorisnika=="SANKER"){
+				aletr("konobar");
+			}
+			else if(logovani.vrstaKorisnika=="KUVAR_ZA_SALATE"){
+				aletr("konobar");
+			}
+			else if(logovani.vrstaKorisnika=="KUVAR_ZA_PECENA_JELA"){
+				aletr("konobar");
+			}else if(logovani.vrstaKorisnika=="KUVAR_ZA_KUVANA_JELA"){
 				aletr("konobar");
 			}
 			else if(logovani.vrstaKorisnika=="MENADZER_RESTORANA"){

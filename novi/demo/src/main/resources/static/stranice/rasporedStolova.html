@@ -1,0 +1,302 @@
+<div class="container" ng-controller='restoranController' ng-init="uzmiRestoran()">
+
+
+<!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+
+<div ng-show="izborDatuma" class="container center ">
+<div class="row">
+<div class="col-md-4 " >
+ <div class="well poluprovidanBeo bootstrap-iso">
+ 	<table>
+ 	<tr>
+ 	<td>
+	<div class="form-group ">
+      <label class="control-label col-sm-2 requiredField" for="date">
+       Izaberite datum:
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+       <div class="input-group">
+        <div class="input-group-addon">
+         <i class="fa fa-calendar">
+         </i>
+        </div>
+        <input class="form-control" id="date" name="date" placeholder="DD-MM-YYYY" type="text" ng-model="datum"/>
+       </div>
+     </div>
+     </td>
+     </tr>
+     
+     
+     <tr>
+     	<td>
+     		<label> Izaberite vreme: </label>
+     		
+     	</td>
+     	
+     	<td>
+     	<select class="form control" id="vreme" ng-model="vreme">
+  <option value="12:00">12</option>
+  <option value="13:00">13</option>
+  <option value="14:00">14</option>
+  <option value="15:00">15</option>
+  <option value="16:00">16</option>
+  <option value="17:00">17</option>
+  <option value="18:00">18</option>
+  <option value="19:00">19</option>
+  <option value="20:00">20</option>
+ 
+</select>
+     </td>
+     </tr>
+     <tr>
+     <td>
+     <label> Vreme trajanja: </label>
+     </td>
+     <td>
+     <input type="number" min=1 max=4 class="form control" id="vremeTrajanja" ng-model="trajanje">
+     </td>
+     </tr>
+	<tr>
+	<td colspan="2">
+	 <a href="" class="btn btn-success" ng-click="rezervisi1()">Dalje >></a>
+	</td>
+	</tr>
+     
+     </table>
+     
+     <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+     
+     
+     <script>
+	$(document).ready(function(){
+		var date_input=$('input[name="date"]'); //our date input has the name "date"
+		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+		date_input.datepicker({
+			format: 'dd-mm-yyyy',
+			orientation:"auto top",
+			container: container,
+			todayHighlight: true,
+			autoclose: true,
+			startDate: '-0d'
+			    //endDate: '+2d'
+			}).on('changeDate', function(ev){
+			    $('#sDate1').text($('#datepicker').data('date'));
+			    $('#datepicker').datepicker('hide');
+			});
+		})
+	
+	
+</script>
+	
+	
+ </div>
+</div>
+
+
+ </div>
+</div>
+
+
+
+
+
+
+
+<div ng-show="prikazRasporeda">
+
+<div class="row">
+	&nbsp;
+	&nbsp;
+</div>
+<h1>{{jedanRestoran.stoloviURestoranu[0].status}}</h1>
+<div class="container center">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+		
+		<table>
+			<tr>
+				<td>
+					<table style="background-color: rgb(255, 255, 153);;">
+			<tr>
+				<td colspan="5" style="text-align: center;"><h2>PUSACKI DEO</h2></td>
+				<td>&nbsp;</td>
+			</tr>
+				<tr>
+					<td></td>
+					<td ng-hide="sviStolovi[0].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[0]" >Sto 1</button></td>
+					<td ng-show="sviStolovi[0].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[0]" ng-click="pritisnuto(sviStolovi[0].id)">Sto 1</button></td>
+					<td></td>
+					<td ng-hide="sviStolovi[1].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[1]" >Sto 2</button></td>
+					<td ng-show="sviStolovi[1].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[1]" ng-click="pritisnuto(sviStolovi[1].id)">Sto 2</button></td>
+					
+					<td></td>
+				</tr>
+				<tr>
+					<td ng-hide="sviStolovi[2].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[2]" >Sto 3</button></td>
+					<td ng-show="sviStolovi[2].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[2]" ng-click="pritisnuto(sviStolovi[2].id)">Sto 3</button></td>
+					
+					<td></td>
+					<td ng-hide="sviStolovi[3].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[3]" >Sto 4</button></td>
+					<td ng-show="sviStolovi[3].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[3]" ng-click="pritisnuto(sviStolovi[3].id)">Sto 4</button></td>
+				
+					<td></td>
+					<td ng-hide="sviStolovi[4].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[4]" >Sto 5</button></td>
+					<td ng-show="sviStolovi[4].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[4]" ng-click="pritisnuto(sviStolovi[4].id)">Sto 5</button></td>
+					
+				</tr>
+				<tr>
+					<td></td>
+				<td ng-hide="sviStolovi[5].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[5]" >Sto 6</button></td>
+					<td ng-show="sviStolovi[5].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[5]" ng-click="pritisnuto(sviStolovi[5].id)">Sto 6</button></td>
+					<td></td>
+					<td ng-hide="sviStolovi[6].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[6]" >Sto 7</button></td>
+					<td ng-show="sviStolovi[6].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[6]" ng-click="pritisnuto(sviStolovi[6].id)">Sto 7</button></td>
+					
+					<td></td>
+				</tr>
+				<tr>
+					<td ng-hide="sviStolovi[7].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[7]" >Sto 8</button></td>
+					<td ng-show="sviStolovi[7].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[7]" ng-click="pritisnuto(sviStolovi[7].id)">Sto 8</button></td>
+					
+					<td></td>
+					<td ng-hide="sviStolovi[8].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[8]" >Sto 9</button></td>
+					<td ng-show="sviStolovi[8].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[8]" ng-click="pritisnuto(sviStolovi[8].id)">Sto 9</button></td>
+					
+					<td></td>
+					<td ng-hide="sviStolovi[9].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[9]" >Sto 10</button></td>
+					<td ng-show="sviStolovi[9].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[9]" ng-click="pritisnuto(sviStolovi[9].id)">Sto 10</button></td>
+					
+				</tr>
+				<tr>
+					<td></td>
+					<td ng-hide="sviStolovi[10].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[10]" >Sto 11</button></td>
+					<td ng-show="sviStolovi[10].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[10]" ng-click="pritisnuto(sviStolovi[10].id)">Sto 11</button></td>
+					
+					<td></td>
+					<td ng-hide="sviStolovi[11].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[11]" >Sto 12</button></td>
+					<td ng-show="sviStolovi[11].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[11]" ng-click="pritisnuto(sviStolovi[11].id)">Sto 12</button></td>
+					
+					<td></td>
+				</tr>
+				<tr>
+					<td ng-hide="sviStolovi[12].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[12]" >Sto 13</button></td>
+					<td ng-show="sviStolovi[12].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[12]" ng-click="pritisnuto(sviStolovi[12].id)">Sto 13</button></td>
+					
+					<td></td>
+				<td ng-hide="sviStolovi[13].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[13]" >Sto 14</button></td>
+					<td ng-show="sviStolovi[13].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[13]" ng-click="pritisnuto(sviStolovi[13].id)">Sto 14</button></td>
+					
+					<td></td>
+				<td ng-hide="sviStolovi[14].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[14]" >Sto 15</button></td>
+					<td ng-show="sviStolovi[14].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[14]" ng-click="pritisnuto(sviStolovi[14].id)">Sto 15</button></td>
+					
+				</tr>
+				
+			</table>
+				</td>
+				<td><span >&nbsp;</span></td>
+				<td>
+					<table style="background-color: rgb(204, 255, 255);">
+			<tr>
+				<td colspan="5" style="text-align: center;"><h2>NEPUSACKI DEO</h2></td>
+				<td>&nbsp;</td>
+			</tr>
+				<tr>
+				<td ng-hide="sviStolovi[15].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[15]" >Sto 16</button></td>
+					<td ng-show="sviStolovi[15].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[15]" ng-click="pritisnuto(sviStolovi[15].id)">Sto 16</button></td>
+					
+					<td></td>
+					<td ng-hide="sviStolovi[16].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[16]" >Sto 17</button></td>
+					<td ng-show="sviStolovi[16].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[16]" ng-click="pritisnuto(sviStolovi[16].id)">Sto 17</button></td>
+					
+					<td></td>
+					<td ng-hide="sviStolovi[17].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[17]" >Sto 18</button></td>
+					<td ng-show="sviStolovi[17].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[17]" ng-click="pritisnuto(sviStolovi[17].id)">Sto 18</button></td>
+					
+				</tr>
+				<tr>
+					<td></td>
+					<td ng-hide="sviStolovi[18].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[18]" >Sto 19</button></td>
+					<td ng-show="sviStolovi[18].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[18]" ng-click="pritisnuto(sviStolovi[18].id)">Sto 19</button></td>
+					
+					<td></td>
+					<td ng-hide="sviStolovi[19].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[19]" >Sto 20</button></td>
+					<td ng-show="sviStolovi[19].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[19]" ng-click="pritisnuto(sviStolovi[19].id)">Sto 20</button></td>
+					
+					<td></td>
+				</tr>
+				<tr>
+				<td ng-hide="sviStolovi[20].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[20]" >Sto 21</button></td>
+					<td ng-show="sviStolovi[20].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[20]" ng-click="pritisnuto(sviStolovi[20].id)">Sto 21</button></td>
+					
+					<td></td>
+					<td ng-hide="sviStolovi[21].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[21]" >Sto 22</button></td>
+					<td ng-show="sviStolovi[21].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[21]" ng-click="pritisnuto(sviStolovi[21].id)">Sto 22</button></td>
+					
+					<td></td>
+					<td ng-hide="sviStolovi[22].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[22]" >Sto 23</button></td>
+					<td ng-show="sviStolovi[22].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[22]" ng-click="pritisnuto(sviStolovi[22].id)">Sto 23</button></td>
+					
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td ng-hide="sviStolovi[23].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[23]" >Sto 24</button></td>
+					<td ng-show="sviStolovi[23].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[23]" ng-click="pritisnuto(sviStolovi[23].id)">Sto 24</button></td>
+					
+					<td></td>
+					<td ng-hide="sviStolovi[24].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[24]" >Sto 25</button></td>
+					<td ng-show="sviStolovi[24].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[24]" ng-click="pritisnuto(sviStolovi[24].id)">Sto 25</button></td>
+					
+					<td></td>
+				</tr>
+				<tr>
+					<td ng-hide="sviStolovi[25].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[25]" >Sto 26</button></td>
+					<td ng-show="sviStolovi[25].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[25]" ng-click="pritisnuto(sviStolovi[25].id)">Sto 26</button></td>
+					
+					<td></td>
+				<td ng-hide="sviStolovi[26].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[26]" >Sto 27</button></td>
+					<td ng-show="sviStolovi[26].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[26]" ng-click="pritisnuto(sviStolovi[26].id)">Sto 27</button></td>
+					
+					<td></td>
+				<td ng-hide="sviStolovi[27].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[27]" >Sto 28</button></td>
+					<td ng-show="sviStolovi[27].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[27]" ng-click="pritisnuto(sviStolovi[27].id)">Sto 28</button></td>
+					
+				</tr>
+				<tr>
+					<td></td>
+				<td ng-hide="sviStolovi[28].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[28]" >Sto 29</button></td>
+					<td ng-show="sviStolovi[28].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[28]" ng-click="pritisnuto(sviStolovi[28].id)">Sto 29</button></td>
+					
+					<td></td>
+				<td ng-hide="sviStolovi[29].slobodan"><button  href="" class="btn btn-primary disabled"  ng-model="sviStolovi[29]" >Sto 30</button></td>
+					<td ng-show="sviStolovi[29].slobodan"><button  href="" class="btn btn-primary "  ng-model="sviStolovi[29]" ng-click="pritisnuto(sviStolovi[29].id)">Sto 30</button></td>
+					
+					<td></td>
+				</tr>
+				
+				
+			</table>
+				</td>
+				
+			</tr>
+		</table>
+		
+	</div>
+	</div>
+</div>
+</div>
+</div>

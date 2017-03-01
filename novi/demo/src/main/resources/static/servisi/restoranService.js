@@ -65,5 +65,9 @@ app.factory('restoranService',['$http', function($http){
     	return $http.post('ponudjac/dodajPonudjaca/'+id,ponudjac);
     }
     
+    restoran.izmiStolove=function(id){
+    	return $http.get('restoran/uzmiStolove/'+id);
+    }
+    
 	return restoran;
 }]);

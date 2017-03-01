@@ -94,4 +94,9 @@ $stateProvider.state('admin', {
 	templateUrl : 'stranice/istorijaPonuda.html',
 	controller : 'ponudjacController'
 })
+.state('rezervacijaStola', {
+	url : '/rezervacijaStola',
+	templateUrl : 'stranice/rasporedStolova.html',
+	controller : 'restoranController'
+})
 });

@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import com.example.enumeracije.StatusSto;
 import com.example.enumeracije.TipReona;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="stolovi")
@@ -45,16 +46,24 @@ public class Sto implements Serializable{
 	private int j;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch= FetchType.LAZY, mappedBy="rezervisanSto")
+	@JsonIgnore
 	private Set<Rezervacija> rezervacijeStola=new HashSet<Rezervacija>();
 	
 	//@ManyToMany(cascade=CascadeType.ALL, fetch= FetchType.LAZY)
 	//private Set<Konobar> konobari=new HashSet<Konobar>();
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch= FetchType.LAZY)
+	@JsonIgnore
 	private Restoran restoran;
 	
 	@Column(name="statusSto", unique=false, nullable=false)
 	private StatusSto status;
+	
+	@Column(name="slobodan", unique=false, nullable=true)
+	private boolean slobodan;
+	
+	@Column(name="aktivan", unique=false, nullable=true)
+	private boolean aktivan;
 	
 	
 	
@@ -78,7 +87,7 @@ public class Sto implements Serializable{
 
 
 
-	Sto(){}
+	public Sto(){}
 
 
 
@@ -178,6 +187,30 @@ public class Sto implements Serializable{
 
 	public void setStatus(StatusSto status) {
 		this.status = status;
+	}
+
+
+
+	public boolean isSlobodan() {
+		return slobodan;
+	}
+
+
+
+	public void setSlobodan(boolean slobodan) {
+		this.slobodan = slobodan;
+	}
+
+
+
+	public boolean isAktivan() {
+		return aktivan;
+	}
+
+
+
+	public void setAktivan(boolean aktivan) {
+		this.aktivan = aktivan;
 	}
 
 	

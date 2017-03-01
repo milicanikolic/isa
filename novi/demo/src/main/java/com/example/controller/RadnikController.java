@@ -20,7 +20,6 @@ import com.example.enumeracije.VrstaJela;
 import com.example.enumeracije.VrsteKorisnika;
 import com.example.model.GostNarudzbina;
 import com.example.model.Jelo;
-import com.example.model.Kuvar.vrstaKuvara;
 import com.example.model.Pice;
 import com.example.model.Radnik;
 import com.example.service.JeloService;
